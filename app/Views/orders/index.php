@@ -4,148 +4,149 @@
 
 <div class="main-content">
 
-<div class="container-fluid">
+<div class="page-content">
 
-<div class="card shadow border-0">
+      <div class="card shadow border-0">
 
-<div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
 
-<h4>
-<i class="fas fa-receipt"></i>
-Manage Orders
-</h4>
+      <h4>
+      <i class="fas fa-receipt"></i>
+      Manage Orders
+      </h4>
 
-<a href="index.php?page=create-order" class="btn btn-light">
-<i class="fas fa-plus"></i>
-New Order
-</a>
+      <a href="index.php?page=create-order" class="btn btn-light">
+      <i class="fas fa-plus"></i>
+      New Order
+      </a>
 
-</div>
+      </div>
 
-<div class="card-body">
+      <div class="card-body">
 
-<div class="table-responsive">
+      <div class="table-responsive">
 
-<table class="table table-hover align-middle">
+      <table class="table table-hover align-middle">
 
-<thead class="table-dark">
+      <thead class="table-dark">
 
-<tr>
+      <tr>
 
-<th>#</th>
-<th>Booking</th>
-<th>Customer</th>
-<th>Garment</th>
-<th>Delivery</th>
-<th>Status</th>
-<th>Balance</th>
-<th>Actions</th>
+      <th>#</th>
+      <th>Booking</th>
+      <th>Customer</th>
+      <th>Garment</th>
+      <th>Delivery</th>
+      <th>Status</th>
+      <th>Balance</th>
+      <th>Actions</th>
 
-</tr>
+      </tr>
 
-</thead>
+      </thead>
 
-<tbody>
+      <tbody>
 
-<?php foreach($orders as $index=>$row): ?>
+      <?php foreach($orders as $index=>$row): ?>
 
-<tr>
+      <tr>
 
-<td><?= $index+1 ?></td>
+      <td><?= $index+1 ?></td>
 
-<td><?= htmlspecialchars($row['booking_no']) ?></td>
+      <td><?= htmlspecialchars($row['booking_no']) ?></td>
 
-<td><?= htmlspecialchars($row['full_name']) ?></td>
+      <td><?= htmlspecialchars($row['full_name']) ?></td>
 
-<td><?= htmlspecialchars($row['garment_type']) ?></td>
+      <td><?= htmlspecialchars($row['garment_type']) ?></td>
 
-<td><?= htmlspecialchars($row['delivery_date']) ?></td>
+      <td><?= htmlspecialchars($row['delivery_date']) ?></td>
 
-<td>
+      <td>
 
-<?php
+      <?php
 
-$status = strtolower($row['status']);
+      $status = strtolower($row['status']);
 
-$badge = "secondary";
+      $badge = "secondary";
 
-if($status=="pending") $badge="warning";
-if($status=="ready") $badge="success";
-if($status=="delivered") $badge="primary";
+      if($status=="pending") $badge="warning";
+      if($status=="ready") $badge="success";
+      if($status=="delivered") $badge="primary";
 
-?>
+      ?>
 
-<span class="badge bg-<?= $badge ?>">
-<?= htmlspecialchars($row['status']) ?>
-</span>
+      <span class="badge bg-<?= $badge ?>">
+      <?= htmlspecialchars($row['status']) ?>
+      </span>
 
-</td>
+      </td>
 
-<td>
-Rs. <?= number_format($row['balance'] ?? 0) ?>
-</td>
+      <td>
+      Rs. <?= number_format($row['balance'] ?? 0) ?>
+      </td>
 
-<td>
+      <td>
 
-<a
-href="index.php?page=view-order&id=<?= $row['id'] ?>"
-class="btn btn-info btn-sm">
+      <a
+      href="index.php?page=view-order&id=<?= $row['id'] ?>"
+      class="btn btn-info btn-sm">
 
-<i class="fas fa-eye"></i>
+      <i class="fas fa-eye"></i>
 
-</a>
+      </a>
 
-<a
-href="index.php?page=edit-order&id=<?= $row['id'] ?>"
-class="btn btn-warning btn-sm">
+      <a
+      href="index.php?page=edit-order&id=<?= $row['id'] ?>"
+      class="btn btn-warning btn-sm">
 
-<i class="fas fa-edit"></i>
+      <i class="fas fa-edit"></i>
 
-</a>
+      </a>
 
-<a
-href="index.php?page=edit-measurement&order_id=<?= $row['id'] ?>"
-class="btn btn-primary btn-sm">
+      <a
+      href="index.php?page=edit-measurement&order_id=<?= $row['id'] ?>"
+      class="btn btn-primary btn-sm">
 
-<i class="fas fa-ruler"></i>
+      <i class="fas fa-ruler"></i>
 
-</a>
+      </a>
 
-<a
-href="index.php?page=print-measurement&id=<?= $row['id'] ?>"
-class="btn btn-success btn-sm">
+      <a
+      href="index.php?page=print-measurement&id=<?= $row['id'] ?>"
+      class="btn btn-success btn-sm">
 
-<i class="fas fa-print"></i>
+      <i class="fas fa-print"></i>
 
-</a>
+      </a>
 
-<a
-href="index.php?page=delete-order&id=<?= $row['id'] ?>"
-class="btn btn-danger btn-sm"
-onclick="return confirm('Delete this order?')">
+      <a
+      href="index.php?page=delete-order&id=<?= $row['id'] ?>"
+      class="btn btn-danger btn-sm"
+      onclick="return confirm('Delete this order?')">
 
-<i class="fas fa-trash"></i>
+      <i class="fas fa-trash"></i>
 
-</a>
+      </a>
 
-</td>
+      </td>
 
-</tr>
+      </tr>
 
-<?php endforeach; ?>
+      <?php endforeach; ?>
 
-</tbody>
+      </tbody>
 
-</table>
+      </table>
 
-</div>
+      </div>
 
-</div>
+      </div>
 
-</div>
+      </div>
 
-</div>
+ </div>
 
+  </div>
 </div>
 
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

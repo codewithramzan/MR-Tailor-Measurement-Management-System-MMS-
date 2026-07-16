@@ -4,177 +4,177 @@
 
 <div class="main-content">
 
-<div class="container-fluid">
+  <div class="page-content">
 
-<div class="card shadow border-0">
+      <div class="card shadow border-0">
 
-<div class="card-header bg-warning text-dark">
+      <div class="card-header bg-warning text-dark">
 
-<h4>
+      <h4>
 
-<i class="fas fa-edit"></i>
+      <i class="fas fa-edit"></i>
 
-Edit Order
+      Edit Order
 
-</h4>
+      </h4>
 
-</div>
+      </div>
 
-<div class="card-body">
+      <div class="card-body">
 
-<form method="POST" action="index.php?page=update-order">
+      <form method="POST" action="index.php?page=update-order">
 
-<input
-type="hidden"
-name="id"
-value="<?= $data['id'] ?? '' ?>">
+      <input
+      type="hidden"
+      name="id"
+      value="<?= $data['id'] ?? '' ?>">
 
-<div class="row">
+      <div class="row">
 
-<div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-3">
 
-<label>Garment Type</label>
+      <label>Garment Type</label>
 
-<input
-type="text"
-name="garment_type"
-class="form-control"
-value="<?= htmlspecialchars($data['garment_type'])  ?>">
+      <input
+      type="text"
+      name="garment_type"
+      class="form-control"
+      value="<?= htmlspecialchars($data['garment_type'])  ?>">
 
-</div>
+      </div>
 
-<div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-3">
 
-<label>Quantity</label>
+      <label>Quantity</label>
 
-<input
-type="number"
-name="quantity"
-class="form-control"
-value="<?= $data['quantity'] ?? 0 ?>">
+      <input
+      type="number"
+      name="quantity"
+      class="form-control"
+      value="<?= $data['quantity'] ?? 0 ?>">
 
-</div>
+      </div>
 
-<div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-3">
 
-<label>Delivery Date</label>
+      <label>Delivery Date</label>
 
-<input
-type="date"
-name="delivery_date"
-class="form-control"
-value="<?= $data['delivery_date']?? '' ?>">
+      <input
+      type="date"
+      name="delivery_date"
+      class="form-control"
+      value="<?= $data['delivery_date']?? '' ?>">
 
-</div>
+      </div>
 
-<div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-3">
 
-<label>Status</label>
+      <label>Status</label>
 
-<select
-name="status"
-class="form-select">
+      <select
+      name="status"
+      class="form-select">
 
-<option <?= $data['status']=="Pending"?"selected":"" ?>>
-Pending
-</option>
+      <option <?= $data['status']=="Pending"?"selected":"" ?>>
+      Pending
+      </option>
 
-<option <?= $data['status']=="Ready"?"selected":"" ?>>
-Ready
-</option>
+      <option <?= $data['status']=="Ready"?"selected":"" ?>>
+      Ready
+      </option>
 
-<option <?= $data['status']=="Delivered"?"selected":"" ?>>
-Delivered
-</option>
+      <option <?= $data['status']=="Delivered"?"selected":"" ?>>
+      Delivered
+      </option>
 
-</select>
+      </select>
 
-</div>
+      </div>
 
-<div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3">
 
-<label>Total Amount</label>
+      <label>Total Amount</label>
 
-<input
-type="number"
-name="total_amount"
-class="form-control"
-value="<?= $data['total_amount']?? 0 ?>">
+      <input
+      type="number"
+      name="total_amount"
+      class="form-control"
+      value="<?= $data['total_amount']?? 0 ?>">
 
-</div>
+      </div>
 
-<div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3">
 
-<label>Advance</label>
+      <label>Advance</label>
 
-<input
-type="number"
-name="advance"
-class="form-control"
-value="<?= $data['advance'] ?? 0 ?>">
+      <input
+      type="number"
+      name="advance"
+      class="form-control"
+      value="<?= $data['advance'] ?? 0 ?>">
 
-</div>
+      </div>
 
-<div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3">
 
-<label>Discount</label>
+      <label>Discount</label>
 
-<input
-type="number"
-name="discount"
-class="form-control"
-value="<?= $data['discount']?? 0 ?>">
+      <input
+      type="number"
+      name="discount"
+      class="form-control"
+      value="<?= $data['discount']?? 0 ?>">
 
-</div>
+      </div>
 
-<div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-3">
 
-<label>Balance</label>
+      <label>Balance</label>
 
-<input
-type="number"
-name="balance"
-class="form-control"
-value="<?= $data['balance']?? 0 ?>">
+      <input
+      type="number"
+      name="balance"
+      class="form-control"
+      value="<?= $data['balance']?? 0 ?>">
 
-</div>
+      </div>
 
-<div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-3">
 
-<label>Notes</label>
+      <label>Notes</label>
 
-<textarea
-name="notes"
-class="form-control"
-rows="3"><?= htmlspecialchars($data['notes']) ?></textarea>
+      <textarea
+      name="notes"
+      class="form-control"
+      rows="3"><?= htmlspecialchars($data['notes']) ?></textarea>
 
-</div>
+      </div>
 
-</div>
+      </div>
 
-<button class="btn btn-warning">
+      <button class="btn btn-warning">
 
-<i class="fas fa-save"></i>
+      <i class="fas fa-save"></i>
 
-Update Order
+      Update Order
 
-</button>
+      </button>
 
-<a
-href="index.php?page=orders"
-class="btn btn-secondary">
+      <a
+      href="index.php?page=orders"
+      class="btn btn-secondary">
 
-Back
+      Back
 
-</a>
+      </a>
 
-</form>
+      </form>
 
-</div>
+      </div>
 
-</div>
+      </div>
 
-</div>
+  </div>
 
 </div>
 

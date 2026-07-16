@@ -4,240 +4,239 @@
 
 <div class="main-content">
 
-<div class="container-fluid">
+ <div class="page-content">
 
-<div class="card shadow border-0">
+    <div class="card shadow border-0">
 
-<div class="card-header bg-primary text-white">
+    <div class="card-header bg-primary text-white">
 
-<h4>
+    <h4>
 
-<i class="fas fa-eye"></i>
+    <i class="fas fa-eye"></i>
 
-Order Details
+    Order Details
 
-</h4>
+    </h4>
 
-</div>
+    </div>
 
-<div class="card-body">
+    <div class="card-body">
 
-<h5 class="mb-3">
+    <h5 class="mb-3">
 
-Customer Information
+    Customer Information
 
-</h5>
+    </h5>
 
-<table class="table table-bordered">
+    <table class="table table-bordered">
 
-<tr>
+    <tr>
 
-<th width="200">Booking No</th>
+    <th width="200">Booking No</th>
 
-<td><?= $order['booking_no']?? 0 ?></td>
+    <td><?= $order['booking_no']?? 0 ?></td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Customer</th>
+    <th>Customer</th>
 
-<td><?= $order['full_name']?? '' ?></td>
+    <td><?= $order['full_name']?? '' ?></td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Father Name</th>
+    <th>Father Name</th>
 
-<td><?= $order['father_name'] ?? '' ?></td>
+    <td><?= $order['father_name'] ?? '' ?></td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Phone</th>
+    <th>Phone</th>
 
-<td><?= $order['phone']?? '' ?></td>
+    <td><?= $order['phone']?? '' ?></td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Village</th>
+    <th>Village</th>
 
-<td><?= $order['village'] ?? '' ?></td>
+    <td><?= $order['village'] ?? '' ?></td>
 
-</tr>
+    </tr>
 
-</table>
+    </table>
 
-<hr>
+    <hr>
 
-<h5 class="mb-3">
+    <h5 class="mb-3">
 
-Order Information
+    Order Information
 
-</h5>
+    </h5>
 
-<table class="table table-bordered">
+    <table class="table table-bordered">
 
-<tr>
+    <tr>
 
-<th width="200">Garment</th>
+    <th width="200">Garment</th>
 
-<td><?= $order['garment_type']?? '' ?></td>
+    <td><?= $order['garment_type']?? '' ?></td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Delivery Date</th>
+    <th>Delivery Date</th>
 
-<td><?= $order['delivery_date']?? '' ?></td>
+    <td><?= $order['delivery_date']?? '' ?></td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Status</th>
+    <th>Status</th>
 
-<td>
+    <td>
 
-<span class="badge bg-success">
+    <span class="badge bg-success">
 
-<?= $order['status']?? '' ?>
+    <?= $order['status']?? '' ?>
 
-</span>
+    </span>
 
-</td>
+    </td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Total Amount</th>
+    <th>Total Amount</th>
 
-<td>
+    <td>
 
-Rs. <?= number_format($order['total_amount'])?? 0 ?>
+    Rs. <?= number_format($order['total_amount'])?? 0 ?>
 
-</td>
+    </td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Advance</th>
+    <th>Advance</th>
 
-<td>
+    <td>
 
-Rs. <?= number_format($order['advance'])?? 0 ?>
+    Rs. <?= number_format($order['advance'])?? 0 ?>
 
-</td>
+    </td>
 
-</tr>
+    </tr>
 
-<tr>
+    <tr>
 
-<th>Remaining</th>
+    <th>Remaining</th>
 
-<td>
+    <td>
 
-Rs. <?= number_format($order['discount'])?? 0 ?>
+    Rs. <?= number_format($order['discount'])?? 0 ?>
 
-</td>
+    </td>
 
-</tr>
-<tr>
-<th>Quantity</th>
-<td><?= $order['quantity'] ?? 0 ?></td>
-</tr>
+    </tr>
+    <tr>
+    <th>Quantity</th>
+    <td><?= $order['quantity'] ?? 0 ?></td>
+    </tr>
 
-<tr>
-<th>Order Date</th>
-<td><?= $order['order_date']?? '' ?></td>
-</tr>
+    <tr>
+    <th>Order Date</th>
+    <td><?= $order['order_date']?? '' ?></td>
+    </tr>
 
-<tr>
-<th>Notes</th>
-<td><?= $order['notes'] ?: 'No Notes' ?></td>
-</tr>
+    <tr>
+    <th>Notes</th>
+    <td><?= $order['notes'] ?: 'No Notes' ?></td>
+    </tr>
 
-</table>
+    </table>
 
-<hr>
+    <hr>
 
-<h5>
+    <h5>
 
-Measurements
+    Measurements
 
-</h5>
+    </h5>
 
-<div class="row">
+    <div class="row">
 
-<?php foreach($measurements as $row): ?>
+    <?php foreach($measurements as $row): ?>
 
-<div class="col-md-3 mb-3">
+    <div class="col-md-3 mb-3">
 
-<label class="fw-bold">
+    <label class="fw-bold">
 
-<?= $row['name'] ?>
+    <?= $row['name'] ?>
 
-</label>
+    </label>
 
-<input
-type="text"
-class="form-control"
-value="<?= $row['measurement_value'] ?>"
-readonly>
+    <input
+    type="text"
+    class="form-control"
+    value="<?= $row['measurement_value'] ?>"
+    readonly>
 
-</div>
+    </div>
 
-<?php endforeach; ?>
+    <?php endforeach; ?>
 
-</div>
+    </div>
 
-<div class="mt-4">
+    <div class="mt-4">
 
-<a
-href="index.php?page=edit-order&id=<?= $order['id'] ?? '' ?>"
-class="btn btn-warning">
+    <a
+    href="index.php?page=edit-order&id=<?= $order['id'] ?? '' ?>"
+    class="btn btn-warning">
 
-<i class="fas fa-edit"></i>
+    <i class="fas fa-edit"></i>
 
-Edit Order
+    Edit Order
 
-</a>
+    </a>
 
-<a
-href="index.php?page=edit-measurement&order_id=<?= $order['id'] ?? '' ?>"
-class="btn btn-primary">
+    <a
+    href="index.php?page=edit-measurement&order_id=<?= $order['id'] ?? '' ?>"
+    class="btn btn-primary">
 
-<i class="fas fa-ruler"></i>
+    <i class="fas fa-ruler"></i>
 
-Edit Measurements
+    Edit Measurements
 
-</a>
+    </a>
 
-<a
-href="index.php?page=print-measurement&id=<?= $order['id'] ?? '' ?>"
-class="btn btn-success">
+    <a
+    href="index.php?page=print-measurement&id=<?= $order['id'] ?? '' ?>"
+    class="btn btn-success">
 
-<i class="fas fa-print"></i>
+    <i class="fas fa-print"></i>
 
-Print Urdu Slip
+    Print Urdu Slip
 
-</a>
+    </a>
 
-</div>
+    </div>
 
-</div>
+    </div>
 
-</div>
+    </div>
 
-</div>
-
+ </div>
 </div>
 
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>
