@@ -9,7 +9,7 @@
   <div class="page-content">
     <div class="card form-card shadow-sm">
 
-      <div class="card-header bg-primary text-white">
+      <div class="card-header bg-white border-0">
 
         <h4>
 

@@ -10,7 +10,7 @@
 
      <div class="card form-card shadow-sm">
 
-        <div class="card-header bg-warning border-0 py-3">
+        <div class="card-header bg-white py-3 border-0">
 
             <h4>
                 <i class="fas fa-user-edit"></i>

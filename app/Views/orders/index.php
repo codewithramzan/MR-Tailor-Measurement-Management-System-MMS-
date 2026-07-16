@@ -8,14 +8,14 @@
 
       <div class="card shadow-sm form-card">
 
-      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <div class="card-header bg-white text-white d-flex justify-content-between align-items-center border-0 py-3">
 
       <h4>
       <i class="fas fa-receipt"></i>
       Manage Orders
       </h4>
 
-      <a href="index.php?page=create-order" class="btn btn-light rounded-pill px-4">
+      <a href="index.php?page=create-order" class="btn btn-primary rounded-pill px-4">
       <i class="fas fa-plus"></i>
       New Order
       </a>

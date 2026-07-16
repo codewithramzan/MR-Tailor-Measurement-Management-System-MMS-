@@ -8,7 +8,7 @@
 
 	<div class="card shadow-sm form-card">
 
-	 <div class="card-header bg-primary text-white py-3">
+	 <div class="card-header bg-white py-3 border-0">
 
 	<h4>Create New Booking</h4>
 
