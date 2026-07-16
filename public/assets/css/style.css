@@ -1,0 +1,84 @@
+:root{
+
+--primary:#0F766E;
+
+--secondary:#2563EB;
+
+--success:#16A34A;
+
+--warning:#F59E0B;
+
+--danger:#DC2626;
+
+--dark:#1E293B;
+
+--light:#F8FAFC;
+
+--card:#FFFFFF;
+
+--text:#334155;
+
+--border:#E2E8F0;
+
+}
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+background:var(--light);
+
+overflow-x:hidden;
+
+color:var(--text);
+
+}
+
+a{
+
+text-decoration:none;
+
+}
+
+.card{
+
+border:none;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.main-content{
+
+    margin-left:280px;
+
+    margin-top:70px;
+
+    width:calc(100% - 280px);
+
+    min-height:100vh;
+
+    background:#f4f6f9;
+
+    transition:.3s;
+}
