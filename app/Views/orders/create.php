@@ -6,240 +6,240 @@
 <div class="main-content">
   <div class="page-content">
 
-    <div class="card shadow">
+	<div class="card shadow">
 
-     <div class="card-header bg-success text-white">
+	 <div class="card-header bg-primary text-white py-3">
 
-    <h4>Create New Booking</h4>
+	<h4>Create New Booking</h4>
 
-    </div>
+	</div>
 
-    <div class="card-body">
-        <form method="POST" action="index.php?page=save-order">
+	<div class="card-body">
+		<form method="POST" action="index.php?page=save-order">
 
-        <input
-        type="hidden"
-        name="customer_id"
-        value="<?= $customer['id'] ?? '' ?>">
+		<input
+		type="hidden"
+		name="customer_id"
+		value="<?= $customer['id'] ?? '' ?>">
 
-        <div class="row">
+		<div class="row">
 
-            <!-- Customer -->
+			<!-- Customer -->
 
-            <div class="col-md-4 mb-3">
+			<div class="col-md-4 mb-3">
 
-                <label class="form-label">Booking No</label>
+				<label class="form-label">Booking No</label>
 
-                <input
-                type="text"
-                name="booking_no"
-                class="form-control"
-                value="<?= $customer['booking_no'] ?? '' ?>"
-                readonly>
+				<input
+				type="text"
+				name="booking_no"
+				class="form-control"
+				value="<?= $customer['booking_no'] ?? '' ?>"
+				readonly>
 
-            </div>
+			</div>
 
-            <div class="col-md-4 mb-3">
+			<div class="col-md-4 mb-3">
 
-                <label class="form-label">Customer Name</label>
+				<label class="form-label">Customer Name</label>
 
-                <input
-                type="text"
-                class="form-control"
-                value="<?= $customer['full_name'] ?? '' ?>"
-                readonly>
+				<input
+				type="text"
+				class="form-control"
+				value="<?= $customer['full_name'] ?? '' ?>"
+				readonly>
 
-            </div>
+			</div>
 
-            <div class="col-md-4 mb-3">
+			<div class="col-md-4 mb-3">
 
-                <label class="form-label">Phone</label>
+				<label class="form-label">Phone</label>
 
-                <input
-                type="text"
-                class="form-control"
-                value="<?= $customer['phone'] ?? '' ?>"
-                readonly>
+				<input
+				type="text"
+				class="form-control"
+				value="<?= $customer['phone'] ?? '' ?>"
+				readonly>
 
-            </div>
+			</div>
 
-            <!-- Garment -->
+			<!-- Garment -->
 
-            <div class="col-md-4 mb-3">
+			<div class="col-md-4 mb-3">
 
-                <label>Garment Type</label>
+				<label>Garment Type</label>
 
-                <select
-                name="garment_type"
-                class="form-select"
-                required>
+				<select
+				name="garment_type"
+				class="form-select"
+				required>
 
-                    <option value="">Choose...</option>
+					<option value="">Choose...</option>
 
-                    <option>Shalwar Kameez</option>
+					<option>Shalwar Kameez</option>
 
-                    <option>Waist Coat</option>
+					<option>Waist Coat</option>
 
-                    <option>Coat</option>
+					<option>Coat</option>
 
-                    <option>Pant</option>
+					<option>Pant</option>
 
-                    <option>Shirt</option>
+					<option>Shirt</option>
 
-                    <option>Kurta</option>
+					<option>Kurta</option>
 
-                </select>
+				</select>
 
-                    </div>
+					</div>
 
-                <div class="col-md-2 mb-3">
+				<div class="col-md-2 mb-3">
 
-                    <label>Quantity</label>
+					<label>Quantity</label>
 
-                    <input
-                    type="number"
-                    name="quantity"
-                    value="1"
-                    min="1"
-                    class="form-control">
+					<input
+					type="number"
+					name="quantity"
+					value="1"
+					min="1"
+					class="form-control">
 
-                </div>
+				</div>
 
-                <div class="col-md-3 mb-3">
+				<div class="col-md-3 mb-3">
 
-                    <label>Order Date</label>
+					<label>Order Date</label>
 
-                    <input
-                    type="date"
-                    name="order_date"
-                    value="<?= date('Y-m-d') ?>"
-                    class="form-control">
+					<input
+					type="date"
+					name="order_date"
+					value="<?= date('Y-m-d') ?>"
+					class="form-control">
 
-                </div>
+				</div>
 
-                <div class="col-md-3 mb-3">
+				<div class="col-md-3 mb-3">
 
-                    <label>Delivery Date</label>
+					<label>Delivery Date</label>
 
-                    <input
-                    type="date"
-                    name="delivery_date"
-                    class="form-control">
+					<input
+					type="date"
+					name="delivery_date"
+					class="form-control">
 
-                </div>
+				</div>
 
-                <!-- Payment -->
+				<!-- Payment -->
 
-                <div class="col-md-3 mb-3">
+				<div class="col-md-3 mb-3">
 
-                    <label>Total Amount</label>
+					<label>Total Amount</label>
 
-                    <input
-                    id="total"
-                    type="number"
-                    name="total_amount"
-                    value="0"
-                    class="form-control">
+					<input
+					id="total"
+					type="number"
+					name="total_amount"
+					value="0"
+					class="form-control">
 
-                </div>
+				</div>
 
-                <div class="col-md-3 mb-3">
+				<div class="col-md-3 mb-3">
 
-                    <label>Advance</label>
+					<label>Advance</label>
 
-                    <input
-                    id="advance"
-                    type="number"
-                    name="advance"
-                    value="0"
-                    class="form-control">
+					<input
+					id="advance"
+					type="number"
+					name="advance"
+					value="0"
+					class="form-control">
 
-                </div>
+				</div>
 
-                <div class="col-md-3 mb-3">
+				<div class="col-md-3 mb-3">
 
-                    <label>Discount</label>
+					<label>Discount</label>
 
-                    <input
-                    id="discount"
-                    type="number"
-                    name="discount"
-                    value="0"
-                    class="form-control">
+					<input
+					id="discount"
+					type="number"
+					name="discount"
+					value="0"
+					class="form-control">
 
-                </div>
+				</div>
 
-                <div class="col-md-3 mb-3">
+				<div class="col-md-3 mb-3">
 
-                    <label>Remaining</label>
+					<label>Remaining</label>
 
-                    <input
-                    id="balance"
-                    type="number"
-                    name="balance"
-                    readonly
-                    class="form-control">
+					<input
+					id="balance"
+					type="number"
+					name="balance"
+					readonly
+					class="form-control">
 
-                </div>
+				</div>
 
-                <!-- Status -->
+				<!-- Status -->
 
-                <div class="col-md-4 mb-3">
+				<div class="col-md-4 mb-3">
 
-                    <label>Status</label>
+					<label>Status</label>
 
-                    <select
-                    name="status"
-                    class="form-select">
+					<select
+					name="status"
+					class="form-select">
 
-                        <option>Pending</option>
+						<option>Pending</option>
 
-                        <option>Cutting</option>
+						<option>Cutting</option>
 
-                        <option>Stitching</option>
+						<option>Stitching</option>
 
-                        <option>Ready</option>
+						<option>Ready</option>
 
-                        <option>Delivered</option>
+						<option>Delivered</option>
 
-                    </select>
+					</select>
 
-                </div>
+				</div>
 
-                <!-- Notes -->
+				<!-- Notes -->
 
-                <div class="col-md-8 mb-3">
+				<div class="col-md-8 mb-3">
 
-                    <label>Special Notes</label>
+					<label>Special Notes</label>
 
-                    <textarea
-                    name="notes"
-                    rows="2"
-                    class="form-control"></textarea>
+					<textarea
+					name="notes"
+					rows="2"
+					class="form-control"></textarea>
 
-                </div>
+				</div>
 
-                </div>
+				</div>
 
-                <button class="btn btn-success">
+				<button class="btn btn-primary rounded-pill px-4">
 
-                <i class="fas fa-save"></i>
+				<i class="fas fa-save"></i>
 
-                Save Booking
+				Save Booking
 
-                </button>
+				</button>
 
-                <a
-                href="index.php?page=customers"
-                class="btn btn-secondary">
+				<a
+				href="index.php?page=customers"
+				class="btn btn-secondary rounded-pill px-4">
 
-                Back
+				Back
 
-                </a>
+				</a>
 
-                </form>
+				</form>
 
-     </div>
+	 </div>
    </div>
 </div>
 

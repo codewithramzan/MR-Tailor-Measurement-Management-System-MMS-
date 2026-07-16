@@ -8,7 +8,7 @@
 
     <div class="card shadow border-0">
 
-    <div class="card-header bg-primary text-white">
+    <div class="card-header bg-primary text-white py-3">
 
     <h4>
 
@@ -202,7 +202,7 @@
 
     <a
     href="index.php?page=edit-order&id=<?= $order['id'] ?? '' ?>"
-    class="btn btn-warning">
+    class="btn btn-warning rounded-pill px-4">
 
     <i class="fas fa-edit"></i>
 
@@ -212,7 +212,7 @@
 
     <a
     href="index.php?page=edit-measurement&order_id=<?= $order['id'] ?? '' ?>"
-    class="btn btn-primary">
+    class="btn btn-primary rounded-pill px-4">
 
     <i class="fas fa-ruler"></i>
 
@@ -222,7 +222,7 @@
 
     <a
     href="index.php?page=print-measurement&id=<?= $order['id'] ?? '' ?>"
-    class="btn btn-success">
+    class="btn btn-success rounded-pill px-4">
 
     <i class="fas fa-print"></i>
 

@@ -6,9 +6,9 @@
 
   <div class="page-content">
 
-      <div class="card shadow border-0">
+      <div class="card shadow border-0 ">
 
-      <div class="card-header bg-warning text-dark">
+      <div class="card-header bg-warning text-dark py-3">
 
       <h4>
 
@@ -152,7 +152,7 @@
 
       </div>
 
-      <button class="btn btn-warning">
+      <button class="btn btn-warning rounded-pill px-4">
 
       <i class="fas fa-save"></i>
 
@@ -162,7 +162,7 @@
 
       <a
       href="index.php?page=orders"
-      class="btn btn-secondary">
+      class="btn btn-secondary rounded-pill px-4">
 
       Back
 

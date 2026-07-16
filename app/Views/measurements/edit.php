@@ -9,7 +9,7 @@
 
     <div class="card shadow border-0">
 
-    <div class="card-header bg-primary text-white">
+    <div class="card-header bg-primary text-white py-3">
 
     <h4>
 
@@ -187,7 +187,7 @@
     <?php endforeach; ?>
     <div class="text-end mt-4">
 
-    <button class="btn btn-success btn-lg">
+    <button class="btn btn-success btn-lg rounded-pill px-4">
 
     <i class="fas fa-save"></i>
 
