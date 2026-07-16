@@ -24,8 +24,9 @@ foreach($rows as $row){
 
 <title>Measurement Slip</title>
 
+<link rel="stylesheet" href="../../../public/assets/css/print.css">
 <style>
-
+    
 *{
 
 margin:0;
@@ -185,204 +186,206 @@ width:100%;
 }
 
 }
-
 </style>
 
 </head>
 
 <body>
 
-<div class="slip">
+        <div class="slip">
 
-<div class="title">
+            <div class="title">
 
-MR TAILOR
+            MR TAILOR
 
-</div>
+            </div>
 
-<div class="subtitle">
+            <div class="subtitle">
 
-پیمائش سلپ
+            پیمائش سلپ
 
-</div>
+            </div>
 
-<table class="info">
+            <table class="info">
 
-<tr>
+            <tr>
 
-<td><b>نام</b></td>
+            <td><b>نام</b></td>
 
-<td><?= $info['full_name'] ?></td>
+            <td><?= $info['full_name'] ?></td>
 
-<td><b>فون</b></td>
+            <td><b>فون</b></td>
 
-<td><?= $info['phone'] ?></td>
+            <td><?= $info['phone'] ?></td>
 
-</tr>
+            </tr>
 
-<tr>
+            <tr>
 
-<td><b>گاؤں</b></td>
+            <td><b>گاؤں</b></td>
 
-<td><?= $info['village'] ?></td>
+            <td><?= $info['village'] ?></td>
 
-<td><b>بکنگ</b></td>
+            <td><b>بکنگ</b></td>
 
-<td><?= $info['booking_no'] ?></td>
+            <td><?= $info['booking_no'] ?></td>
 
-</tr>
+            </tr>
 
-<tr>
+            <tr>
 
-<td><b>آرڈر</b></td>
+            <td><b>آرڈر</b></td>
 
-<td><?= $info['order_date'] ?></td>
+            <td><?= $info['order_date'] ?></td>
 
-<td><b>ڈیلیوری</b></td>
+            <td><b>ڈیلیوری</b></td>
 
-<td><?= $info['delivery_date'] ?></td>
+            <td><?= $info['delivery_date'] ?></td>
 
-</tr>
+            </tr>
 
-</table>
+            </table>
 
-<table class="measurements">
+            <table class="measurements">
 
 
 
 
 
-<?php
+            <?php
 
-$labels=array_keys($measurements);
+            $labels=array_keys($measurements);
 
-$values=array_values($measurements);
+            $values=array_values($measurements);
 
-$count=max(count($labels),10);
+            $count=max(count($labels),10);
 
-for($i=0;$i<$count;$i+=2){
+            for($i=0;$i<$count;$i+=2){
 
-?>
+            ?>
 
-<tr>
+            <tr>
 
-<td><?= $labels[$i]??'' ?></td>
+            <td><?= $labels[$i]??'' ?></td>
 
-<td><?= $values[$i]??'' ?></td>
+            <td><?= $values[$i]??'' ?></td>
 
-<td><?= $labels[$i+1]??'' ?></td>
+            <td><?= $labels[$i+1]??'' ?></td>
 
-<td><?= $values[$i+1]??'' ?></td>
+            <td><?= $values[$i+1]??'' ?></td>
 
-</tr>
+            </tr>
 
-<?php } ?>
+            <?php } ?>
 
-</table>
+            </table>
 
 
-<hr>
+            <hr>
 
-<h3 style="text-align:center;margin:20px 0;">
-خصوصی ہدایات
-</h3>
+            <h3 style="text-align:center;margin:20px 0;">
+            خصوصی ہدایات
+            </h3>
 
-<?php foreach($allOptions as $category=>$items): ?>
+            <?php foreach($allOptions as $category=>$items): ?>
 
-<div style="margin-bottom:18px;">
+            <div style="margin-bottom:18px;">
 
-<h4 style="border-bottom:1px solid #000;padding-bottom:5px;">
+            <h4 style="border-bottom:1px solid #000;padding-bottom:5px;">
 
-<?= htmlspecialchars($category) ?>
+            <?= htmlspecialchars($category) ?>
 
-</h4>
+            </h4>
 
-<div class="option-grid">
+            <div class="option-grid">
 
-<?php foreach($items as $item): ?>
+            <?php foreach($items as $item): ?>
 
-<div>
+            <div>
 
-<?= in_array($item['urdu_name'],$options) ? "☑" : "☐" ?>
+            <?= in_array($item['urdu_name'],$options) ? "☑" : "☐" ?>
 
-<?= htmlspecialchars($item['urdu_name']) ?>
+            <?= htmlspecialchars($item['urdu_name']) ?>
 
-</div>
+            </div>
 
-<?php endforeach; ?>
+            <?php endforeach; ?>
 
-</div>
+            </div>
 
-</div>
+            </div>
 
-<?php endforeach; ?>
+            <?php endforeach; ?>
 
-</div>
+            </div>
 
-<hr>
+            <hr>
 
-<table class="info">
+            <table class="info">
 
-<tr>
+            <tr>
 
-<td>کل رقم</td>
+            <td>کل رقم</td>
 
-<td><?= number_format($info['total_amount']) ?></td>
+            <td><?= number_format($info['total_amount']) ?></td>
 
-<td>ایڈوانس</td>
+            <td>ایڈوانس</td>
 
-<td><?= number_format($info['advance']) ?></td>
+            <td><?= number_format($info['advance']) ?></td>
 
-</tr>
+            </tr>
 
-<tr>
+            <tr>
 
-<td>رعایت</td>
+            <td>رعایت</td>
 
-<td><?= number_format($info['discount']) ?></td>
+            <td><?= number_format($info['discount']) ?></td>
 
-<td>بقایا</td>
+            <td>بقایا</td>
 
-<td><?= number_format($info['balance']) ?></td>
+            <td><?= number_format($info['balance']) ?></td>
 
-</tr>
+            </tr>
 
-</table>
+            </table>
 
 
-<div class="footer">
+            <div class="footer">
 
-MR Tailor
+            MR Tailor
 
-<br>
+            <br>
 
-Hisartang
+            Hisartang
 
-<br>
+            <br>
 
-0319-9516475
+            0319-9516475
 
-<br><br>
+            <br><br>
 
-____________________
+            ____________________
 
-<br>
+            <br>
 
-دستخط
+            دستخط
 
-</div>
+            </div>
 
-<div class="print">
+            <div class="print">
 
-<button onclick="window.print()">
+            <button onclick="window.print()">
 
-🖨 Print
+            🖨 Print
 
-</button>
+            </button>
 
-</div>
+            </div>
 
-</div>
+            </div>
+
+
+
 
 </body>
 
