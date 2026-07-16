@@ -6,7 +6,7 @@
 
 <div class="page-content">
 
-      <div class="card shadow border-0">
+      <div class="card shadow-sm form-card">
 
       <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
 
@@ -15,7 +15,7 @@
       Manage Orders
       </h4>
 
-      <a href="index.php?page=create-order" class="btn btn-light">
+      <a href="index.php?page=create-order" class="btn btn-light rounded-pill px-4">
       <i class="fas fa-plus"></i>
       New Order
       </a>

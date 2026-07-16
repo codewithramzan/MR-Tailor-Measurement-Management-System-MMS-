@@ -7,7 +7,7 @@
 <div class="main-content">
  <div class="page-content">
 
-    <div class="card shadow border-0">
+    <div class="card shadow form-card">
 
     <div class="card-header bg-primary text-white py-3">
 

@@ -7,196 +7,196 @@
 
 <div class="main-content">
   <div class="page-content">
-    <div class="card shadow-sm border-0 py-3">
+    <div class="card form-card shadow-sm">
 
-    <div class="card-header bg-primary text-white">
+      <div class="card-header bg-primary text-white">
 
-    <h4>
+        <h4>
 
-    <i class="fas fa-ruler-combined"></i>
+        <i class="fas fa-ruler-combined"></i>
 
-    Measurements
+        Measurements
 
-    </h4>
+        </h4>
 
-    </div>
+        </div>
 
-    <div class="card-body">
+        <div class="card-body">
 
-    <!-- Customer Information -->
+        <!-- Customer Information -->
 
-    <div class="row mb-4">
+        <div class="row mb-4">
 
-    <div class="col-md-3">
+        <div class="col-md-3">
 
-    <label class="fw-bold">
+        <label class="fw-bold">
 
-    Booking No
+        Booking No
 
-    </label>
+        </label>
 
-    <input
-    type="text"
-    class="form-control"
-    value="<?= $order['booking_no'] ?? '' ?>"
-    readonly>
+        <input
+        type="text"
+        class="form-control"
+        value="<?= $order['booking_no'] ?? '' ?>"
+        readonly>
 
-    </div>
+        </div>
 
-    <div class="col-md-3">
+        <div class="col-md-3">
 
-    <label class="fw-bold">
+        <label class="fw-bold">
 
-    Customer
+        Customer
 
-    </label>
+        </label>
 
-    <input
-    type="text"
-    class="form-control"
-    value="<?= $order['full_name'] ?? '' ?>"
-    readonly>
+        <input
+        type="text"
+        class="form-control"
+        value="<?= $order['full_name'] ?? '' ?>"
+        readonly>
 
-    </div>
+        </div>
 
-    <div class="col-md-3">
+        <div class="col-md-3">
 
-    <label class="fw-bold">
+        <label class="fw-bold">
 
-    Phone
+        Phone
 
-    </label>
+        </label>
 
-    <input
-    type="text"
-    class="form-control"
-    value="<?= $order['phone'] ?? '' ?>"
-    readonly>
+        <input
+        type="text"
+        class="form-control"
+        value="<?= $order['phone'] ?? '' ?>"
+        readonly>
 
-    </div>
+        </div>
 
-    <div class="col-md-3">
+        <div class="col-md-3">
 
-    <label class="fw-bold">
+        <label class="fw-bold">
 
-    Garment
+        Garment
 
-    </label>
+        </label>
 
-    <input
-    type="text"
-    class="form-control"
-    value="<?= $order['garment_type'] ?? '' ?>"
-    readonly>
+        <input
+        type="text"
+        class="form-control"
+        value="<?= $order['garment_type'] ?? '' ?>"
+        readonly>
 
-    </div>
+        </div>
 
-    </div>
+        </div>
 
-    <hr>
+        <hr>
 
-    <form method="POST" action="index.php?page=save-measurements">
+        <form method="POST" action="index.php?page=save-measurements">
 
-    <input
-    type="hidden"
-    name="order_id"
-    value="<?= $order['id'] ?? '' ?>">
+        <input
+        type="hidden"
+        name="order_id"
+        value="<?= $order['id'] ?? '' ?>">
 
-    <div class="row">
+        <div class="row">
 
-    <?php foreach($types as $type): ?>
+        <?php foreach($types as $type): ?>
 
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
 
-    <label class="form-label">
+        <label class="form-label">
 
-    <?= $type['name'] ?>
+        <?= $type['name'] ?>
 
-    </label>
+        </label>
 
-    <input
-    type="text"
-    name="measurements[<?= $type['id'] ?>]"
-    class="form-control"
-    placeholder="<?= $type['name'] ?>">
+        <input
+        type="text"
+        name="measurements[<?= $type['id'] ?>]"
+        class="form-control"
+        placeholder="<?= $type['name'] ?>">
 
-    </div>
+        </div>
 
-    <?php endforeach; ?>
+        <?php endforeach; ?>
 
-    </div>
-    <hr class="my-4">
+        </div>
+        <hr class="my-4">
 
-    <h4 class="mb-3">
-    <i class="fas fa-cut"></i>
-    Special Stitching Instructions
-    </h4>
+        <h4 class="mb-3">
+        <i class="fas fa-cut"></i>
+        Special Stitching Instructions
+        </h4>
 
-    <?php foreach($options as $category=>$items): ?>
+        <?php foreach($options as $category=>$items): ?>
 
-    <div class="card mb-3">
+        <div class="card mb-3">
 
-    <div class="card-header bg-light">
+        <div class="card-header bg-light">
 
-    <strong><?= $category ?></strong>
+        <strong><?= $category ?></strong>
 
-    </div>
+        </div>
 
-    <div class="card-body">
+        <div class="card-body">
 
-    <div class="row">
+        <div class="row">
 
-    <?php foreach($items as $item): ?>
+        <?php foreach($items as $item): ?>
 
-    <div class="col-md-4 mb-2">
+        <div class="col-md-4 mb-2">
 
-    <div class="form-check">
+        <div class="form-check">
 
-    <input
-    class="form-check-input"
-    type="checkbox"
-    name="options[]"
-    value="<?= $item['id'] ?>"
-    id="option<?= $item['id'] ?>">
+        <input
+        class="form-check-input"
+        type="checkbox"
+        name="options[]"
+        value="<?= $item['id'] ?>"
+        id="option<?= $item['id'] ?>">
 
-    <label
-    class="form-check-label"
-    for="option<?= $item['id'] ?>">
+        <label
+        class="form-check-label"
+        for="option<?= $item['id'] ?>">
 
-    <?= $item['urdu_name'] ?>
+        <?= $item['urdu_name'] ?>
 
-    </label>
+        </label>
 
-    </div>
+        </div>
 
-    </div>
+        </div>
 
-    <?php endforeach; ?>
+        <?php endforeach; ?>
 
-    </div>
+        </div>
 
-    </div>
+        </div>
 
-    </div>
+        </div>
 
-    <?php endforeach; ?>
-    <div class="text-end mt-4">
+        <?php endforeach; ?>
+        <div class="text-end mt-4">
 
-    <button class="btn btn-success btn-lg">
+        <button class="btn btn-success btn-lg">
 
-    <i class="fas fa-save"></i>
+        <i class="fas fa-save"></i>
 
-    Save Measurements
+        Save Measurements
 
-    </button>
+        </button>
 
-    </div>
+        </div>
 
-    </form>
+        </form>
 
-    </div>
+        </div>
 
-    </div>
+      </div>
 
     </div>
 

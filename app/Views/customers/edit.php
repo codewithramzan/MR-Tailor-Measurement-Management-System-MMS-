@@ -8,7 +8,7 @@
 
   <div class="page-content">
 
-     <div class="card shadow-sm border-0 rounded-4">
+     <div class="card form-card shadow-sm">
 
         <div class="card-header bg-warning border-0 py-3">
 

@@ -6,7 +6,7 @@
 
  <div class="page-content">
 
-    <div class="card shadow border-0">
+    <div class="card shadow-sm form-card">
 
     <div class="card-header bg-primary text-white py-3">
 
