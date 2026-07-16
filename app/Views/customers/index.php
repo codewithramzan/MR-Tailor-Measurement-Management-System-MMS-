@@ -20,7 +20,7 @@
                     </h4>
 
                     <a href="index.php?page=add-customer"
-                       class="btn btn-success">
+                       class="btn btn-success rounded-pill px-4">
 
                         <i class="fas fa-plus"></i>
 

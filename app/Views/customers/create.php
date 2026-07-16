@@ -5,112 +5,112 @@
 
 <div class="main-content">
 
-    <div class="page-content">
+	<div class="page-content">
 
-            <div class="card shadow border-0">
+			<div class="card shadow-sm border-0 rounded-4">
 
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">
-                        <i class="fas fa-user-plus"></i>
-                        Add New Customer
-                    </h4>
-                </div>
+				<div class="card-header bg-white border-0 py-3">
+					<h4 class="mb-0">
+						<i class="fas fa-users text-primary me-2"></i>
+						Add New Customer
+					</h4>
+				</div>
 
-                <div class="card-body">
+				<div class="card-body">
 
-                    <!-- Your Form Starts Here -->
+					<!-- Your Form Starts Here -->
 
-            <form method="POST" action="index.php?page=save-customer">
+			<form method="POST" action="index.php?page=save-customer">
 
-                <div class="row">
+				<div class="row">
 
-                    <div class="col-md-6 mb-3">
+					<div class="col-md-6 mb-3">
 
-                        <label>Booking Number</label>
+						<label>Booking Number</label>
 
-                        <input
-                          type="text"
-                          name="booking_no"
-                          class="form-control"
-                          value="<?php echo isset($bookingNo) ? $bookingNo : ''; ?>"
-                          readonly>
+						<input
+						  type="text"
+						  name="booking_no"
+						  class="form-control"
+						  value="<?php echo isset($bookingNo) ? $bookingNo : ''; ?>"
+						  readonly>
 
-                    </div>
+					</div>
 
-                    <div class="col-md-6 mb-3">
+					<div class="col-md-6 mb-3">
 
-                        <label>Phone Number</label>
+						<label>Phone Number</label>
 
-                        <input
-                            type="text"
-                            name="phone"
-                            class="form-control"
-                            required>
+						<input
+							type="text"
+							name="phone"
+							class="form-control"
+							required>
 
-                    </div>
+					</div>
 
-                    <div class="col-md-6 mb-3">
+					<div class="col-md-6 mb-3">
 
-                        <label>Full Name</label>
+						<label>Full Name</label>
 
-                        <input
-                            type="text"
-                            name="full_name"
-                            class="form-control"
-                            required>
+						<input
+							type="text"
+							name="full_name"
+							class="form-control"
+							required>
 
-                    </div>
+					</div>
 
-                    <div class="col-md-6 mb-3">
+					<div class="col-md-6 mb-3">
 
-                        <label>Father Name</label>
+						<label>Father Name</label>
 
-                        <input
-                            type="text"
-                            name="father_name"
-                            class="form-control"
-                            required>
+						<input
+							type="text"
+							name="father_name"
+							class="form-control"
+							required>
 
-                    </div>
+					</div>
 
-                    <div class="col-md-6 mb-3">
+					<div class="col-md-6 mb-3">
 
-                        <label>Mohalla</label>
+						<label>Mohalla</label>
 
-                        <input
-                            type="text"
-                            name="mohalla"
-                            class="form-control">
+						<input
+							type="text"
+							name="mohalla"
+							class="form-control">
 
-                    </div>
+					</div>
 
-                    <div class="col-md-6 mb-3">
+					<div class="col-md-6 mb-3">
 
-                        <label>Village</label>
+						<label>Village</label>
 
-                        <input
-                            type="text"
-                            name="village"
-                            class="form-control">
+						<input
+							type="text"
+							name="village"
+							class="form-control">
 
-                    </div>
+					</div>
 
-                </div>
+				</div>
 
-                <button class="btn btn-success">
+				<button class="btn btn-success rounded-pill px-4">
 
-                    Save & Continue
+					Save & Continue
 
-                </button>
+				</button>
 
-            </form>
-                </div>
+			</form>
+				</div>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 
 </div>
 

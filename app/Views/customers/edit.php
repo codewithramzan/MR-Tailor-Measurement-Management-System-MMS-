@@ -8,9 +8,9 @@
 
   <div class="page-content">
 
-     <div class="card shadow-sm border-0">
+     <div class="card shadow-sm border-0 rounded-4">
 
-        <div class="card-header bg-warning text-dark">
+        <div class="card-header bg-warning border-0 py-3">
 
             <h4>
                 <i class="fas fa-user-edit"></i>
@@ -117,7 +117,7 @@
 
                 <div class="mt-3">
 
-                    <button type="submit" class="btn btn-warning">
+                    <button type="submit" class="btn btn-warning rounded-pill px-4">
 
                         <i class="fas fa-save"></i>
 
@@ -125,7 +125,7 @@
 
                     </button>
 
-                    <a href="index.php?page=customers" class="btn btn-secondary">
+                    <a href="index.php?page=customers" class="btn btn-secondary rounded-pill px-4">
 
                         <i class="fas fa-arrow-left"></i>
 
