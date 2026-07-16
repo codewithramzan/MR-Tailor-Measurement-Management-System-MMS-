@@ -29,7 +29,7 @@
                     name="id"
                     value="<?= $customer['id'] ?? 0 ?>">
 
-                <div class="row">
+                <div class="row g-3">
 
                     <!-- Booking Number -->
                     <div class="col-md-6 mb-3">

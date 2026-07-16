@@ -25,7 +25,7 @@
 
         <!-- Customer Information -->
 
-        <div class="row mb-4">
+        <div class="row mb-4 g-3">
 
         <div class="col-md-3">
 
@@ -102,7 +102,7 @@
         name="order_id"
         value="<?= $order['id'] ?? '' ?>">
 
-        <div class="row">
+        <div class="row g-3">
 
         <?php foreach($types as $type): ?>
 
@@ -144,7 +144,7 @@
 
         <div class="card-body">
 
-        <div class="row">
+        <div class="row g-3">
 
         <?php foreach($items as $item): ?>
 

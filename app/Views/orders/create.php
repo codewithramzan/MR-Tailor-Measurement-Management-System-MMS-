@@ -22,7 +22,7 @@
 		name="customer_id"
 		value="<?= $customer['id'] ?? '' ?>">
 
-		<div class="row">
+		<div class="row g-3">
 
 			<!-- Customer -->
 

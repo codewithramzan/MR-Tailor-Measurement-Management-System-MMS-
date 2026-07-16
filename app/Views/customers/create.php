@@ -22,7 +22,7 @@
 
 			<form method="POST" action="index.php?page=save-customer">
 
-				<div class="row">
+				<div class="row g-3">
 
 					<div class="col-md-6 mb-3">
 

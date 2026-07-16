@@ -106,7 +106,7 @@
     </div>
 
     <!-- Charts -->
-    <div class="row mt-4">
+    <div class="row mt-4 g-3">
 
         <div class="col-lg-6 mb-4">
 
