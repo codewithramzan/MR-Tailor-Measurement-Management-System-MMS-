@@ -1,24 +1,22 @@
 .sidebar{
 
-position:fixed;
+    position:fixed;
 
-top:0;
+    left:0;
 
-left:0;
+    top:0;
 
-width:280px;
+    width:280px;
 
-height:100vh;
+    height:100vh;
 
-background:#0F172A;
+    background:#1e293b;
 
-color:white;
+    overflow-y:auto;
 
-overflow-y:auto;
+    transition:.3s;
 
-transition:.3s;
-
-z-index:1200;
+    z-index:1100;
 
 }
 

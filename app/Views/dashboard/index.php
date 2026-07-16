@@ -1,12 +1,9 @@
 <?php require dirname(__DIR__)."/layouts/header.php"; ?>
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
-
-<div class="d-flex">
-
 <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
-<div class="main-content flex-grow-1 p-4">
-
+<div class="main-content">
+<div class="page-content">
     <h3 class="fw-bold mb-4">
         Dashboard
     </h3>
@@ -252,7 +249,6 @@
     </div>
 
 </div>
-
 </div>
 
 <script>

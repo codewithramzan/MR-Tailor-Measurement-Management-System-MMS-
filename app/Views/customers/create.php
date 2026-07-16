@@ -1,13 +1,11 @@
 <?php require dirname(__DIR__)."/layouts/header.php"; ?>
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
+<?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
-<div class="d-flex">
 
-    <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
+<div class="main-content">
 
-    <div class="main-content flex-grow-1 p-4">
-
-        <div class="container-fluid">
+    <div class="page-content">
 
             <div class="card shadow border-0">
 

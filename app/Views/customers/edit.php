@@ -3,9 +3,12 @@
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
 <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
-<div class="container mt-4">
 
-    <div class="card shadow">
+<div class="main-content">
+
+  <div class="page-content">
+
+     <div class="card shadow-sm border-0">
 
         <div class="card-header bg-warning text-dark">
 

@@ -1,28 +1,30 @@
 .top-navbar{
 
-height:70px;
+    position:fixed;
 
-background:#fff;
+    left:280px;
 
-display:flex;
+    right:0;
 
-justify-content:space-between;
+    top:0;
 
-align-items:center;
+    height:70px;
 
-padding:0 25px;
+    background:#fff;
 
-position:fixed;
+    display:flex;
 
-left:280px;
+    justify-content:space-between;
 
-right:0;
+    align-items:center;
 
-top:0;
+    padding:0 25px;
 
-z-index:1000;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
 
-box-shadow:0 2px 20px rgba(0,0,0,.08);
+    z-index:1000;
+
+    transition:.3s;
 
 }
 

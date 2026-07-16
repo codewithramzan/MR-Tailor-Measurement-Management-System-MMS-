@@ -1,67 +1,63 @@
 <?php require dirname(__DIR__)."/layouts/header.php"; ?>
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
+<?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
-<div class="d-flex">
+<div class="main-content">
+    <div class="page-content">
 
-    <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
+   <div class="card shadow border-0">
 
-    <div class="main-content flex-grow-1 p-4">
+    <div class="card-header bg-primary text-white">
 
-        <div class="container-fluid">
+        <h4 class="mb-0">
+            <i class="fas fa-search"></i>
+            Search Customer
+        </h4>
 
-            <div class="card shadow border-0">
+    </div>
 
-                <div class="card-header bg-primary text-white">
+    <div class="card-body">
 
-                    <h4 class="mb-0">
-                        <i class="fas fa-search"></i>
-                        Search Customer
-                    </h4>
+        <!-- Search Form -->
+
+        <form method="GET" action="index.php">
+
+            <input
+                type="hidden"
+                name="page"
+                value="search-customer">
+
+            <div class="row g-3">
+
+                <div class="col-md-10">
+
+                    <input
+                        type="text"
+                        name="keyword"
+                        class="form-control"
+                        placeholder="Search by Name, Phone, Mohalla, Village">
 
                 </div>
 
-                <div class="card-body">
+                <div class="col-md-2">
 
-                    <!-- Search Form -->
+                    <button
+                        class="btn btn-success w-100"
+                        type="submit">
 
-                    <form method="GET" action="index.php">
+                        <i class="fas fa-search"></i>
 
-                        <input
-                            type="hidden"
-                            name="page"
-                            value="search-customer">
+                        Search
 
-                        <div class="row g-3">
+                    </button>
 
-                            <div class="col-md-10">
+                </div>
 
-                                <input
-                                    type="text"
-                                    name="keyword"
-                                    class="form-control"
-                                    placeholder="Search by Name, Phone, Mohalla, Village">
+            </div>
 
-                            </div>
+        </form>
 
-                            <div class="col-md-2">
-
-                                <button
-                                    class="btn btn-success w-100"
-                                    type="submit">
-
-                                    <i class="fas fa-search"></i>
-
-                                    Search
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </form>
-
-                    <hr>
+        <hr>
 
                     <div class="table-responsive">
 
@@ -143,6 +139,7 @@
 
     </div>
 
+  </div>
+ </div>
 </div>
-
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>
