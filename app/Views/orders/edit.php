@@ -33,7 +33,7 @@
 
       <div class="col-md-6 mb-3">
 
-      <label>Garment Type</label>
+      <label class="form-label">Garment Type</label>
 
       <input
       type="text"
@@ -45,7 +45,7 @@
 
       <div class="col-md-6 mb-3">
 
-      <label>Quantity</label>
+      <label class="form-label">Quantity</label>
 
       <input
       type="number"
@@ -57,7 +57,7 @@
 
       <div class="col-md-6 mb-3">
 
-      <label>Delivery Date</label>
+      <label class="form-label">Delivery Date</label>
 
       <input
       type="date"
@@ -69,7 +69,7 @@
 
       <div class="col-md-6 mb-3">
 
-      <label>Status</label>
+      <label class="form-label">Status</label>
 
       <select
       name="status"
@@ -93,7 +93,7 @@
 
       <div class="col-md-4 mb-3">
 
-      <label>Total Amount</label>
+      <label class="form-label">Total Amount</label>
 
       <input
       type="number"
@@ -105,7 +105,7 @@
 
       <div class="col-md-4 mb-3">
 
-      <label>Advance</label>
+      <label class="form-label">Advance</label>
 
       <input
       type="number"
@@ -117,7 +117,7 @@
 
       <div class="col-md-4 mb-3">
 
-      <label>Discount</label>
+      <label class="form-label">Discount</label>
 
       <input
       type="number"
@@ -129,7 +129,7 @@
 
       <div class="col-md-6 mb-3">
 
-      <label>Balance</label>
+      <label class="form-label">Balance</label>
 
       <input
       type="number"
@@ -141,7 +141,7 @@
 
       <div class="col-md-6 mb-3">
 
-      <label>Notes</label>
+      <label class="form-label">Notes</label>
 
       <textarea
       name="notes"

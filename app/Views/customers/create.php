@@ -26,7 +26,7 @@
 
 					<div class="col-md-6 mb-3">
 
-						<label>Booking Number</label>
+						<label class="form-label">Booking Number</label>
 
 						<input
 						  type="text"
@@ -39,7 +39,7 @@
 
 					<div class="col-md-6 mb-3">
 
-						<label>Phone Number</label>
+						<label class="form-label">Phone Number</label>
 
 						<input
 							type="text"
@@ -51,7 +51,7 @@
 
 					<div class="col-md-6 mb-3">
 
-						<label>Full Name</label>
+						<label class="form-label">Full Name</label>
 
 						<input
 							type="text"
@@ -63,7 +63,7 @@
 
 					<div class="col-md-6 mb-3">
 
-						<label>Father Name</label>
+						<label class="form-label">Father Name</label>
 
 						<input
 							type="text"
@@ -75,7 +75,7 @@
 
 					<div class="col-md-6 mb-3">
 
-						<label>Mohalla</label>
+						<label class="form-label">Mohalla</label>
 
 						<input
 							type="text"
@@ -86,7 +86,7 @@
 
 					<div class="col-md-6 mb-3">
 
-						<label>Village</label>
+						<label class="form-label">Village</label>
 
 						<input
 							type="text"

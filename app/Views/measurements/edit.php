@@ -29,7 +29,7 @@
 
     <div class="col-md-3">
 
-    <label class="fw-bold">
+    <label class="form-label">
 
     Booking No
 
@@ -45,7 +45,7 @@
 
     <div class="col-md-3">
 
-    <label class="fw-bold">
+    <label class="form-label">
 
     Customer
 
@@ -61,7 +61,7 @@
 
     <div class="col-md-3">
 
-    <label class="fw-bold">
+    <label class="form-label">
 
     Phone
 
@@ -77,7 +77,7 @@
 
     <div class="col-md-3">
 
-    <label class="fw-bold">
+    <label class="form-label">
 
     Garment
 
