@@ -28,7 +28,9 @@
 
 			<div class="col-md-4 mb-3">
 
-				<label class="form-label">Booking No</label>
+				<label class="form-label">Booking No
+					<span class="required">*</span>
+				</label>
 
 				<input
 				type="text"
@@ -41,7 +43,9 @@
 
 			<div class="col-md-4 mb-3">
 
-				<label class="form-label">Customer Name</label>
+				<label class="form-label">Customer Name
+					<span class="required">*</span>
+				</label>
 
 				<input
 				type="text"
@@ -53,7 +57,9 @@
 
 			<div class="col-md-4 mb-3">
 
-				<label class="form-label">Phone</label>
+				<label class="form-label">Phone
+					<span class="required">*</span>
+				</label>
 
 				<input
 				type="text"
@@ -67,7 +73,9 @@
 
 			<div class="col-md-4 mb-3">
 
-				<label>Garment Type</label>
+				<label>Garment Type
+					<span class="required">*</span>
+				</label>
 
 				<select
 				name="garment_type"
@@ -94,7 +102,9 @@
 
 				<div class="col-md-2 mb-3">
 
-					<label>Quantity</label>
+					<label class="form-label">Quantity
+						<span class="required">*</span>
+					</label>
 
 					<input
 					type="number"
@@ -107,7 +117,9 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label>Order Date</label>
+					<label class="form-label">Order Date
+						<span class="required">*</span>
+					</label>
 
 					<input
 					type="date"
@@ -119,7 +131,9 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label>Delivery Date</label>
+					<label class="form-label">Delivery Date
+						<span class="required">*</span>
+					</label>
 
 					<input
 					type="date"
@@ -132,7 +146,9 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label>Total Amount</label>
+					<label class="form-label">Total Amount
+						<span class="required">*</span>
+					</label>
 
 					<input
 					id="total"
@@ -145,7 +161,8 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label>Advance</label>
+					<label class="form-label">Advance
+					</label>
 
 					<input
 					id="advance"
@@ -158,7 +175,7 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label>Discount</label>
+					<label class="form-label">Discount</label>
 
 					<input
 					id="discount"
@@ -171,7 +188,7 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label>Remaining</label>
+					<label class="form-label">Remaining</label>
 
 					<input
 					id="balance"
@@ -186,7 +203,9 @@
 
 				<div class="col-md-4 mb-3">
 
-					<label>Status</label>
+					<label class="form-label">Status
+						<span class="required">*</span>
+					</label>
 
 					<select
 					name="status"

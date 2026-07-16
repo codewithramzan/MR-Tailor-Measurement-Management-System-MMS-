@@ -32,7 +32,7 @@
         <label class=" form-label">
 
         Booking No
-
+        <span class="required">*</span>
         </label>
 
         <input
@@ -48,7 +48,7 @@
         <label class=" form-label">
 
         Customer
-
+        <span class="required">*</span>
         </label>
 
         <input
@@ -64,7 +64,7 @@
         <label class="form-label">
 
         Phone
-
+        <span class="required">*</span>
         </label>
 
         <input
@@ -80,7 +80,7 @@
         <label class="form-label">
 
         Garment
-
+        <span class="required">*</span>
         </label>
 
         <input
