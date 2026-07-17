@@ -42,7 +42,7 @@
 
     <th>Customer</th>
 
-    <td><?= $order['full_name']?? '' ?></td>
+    <td><?= htmlspecialchars($order['full_name']?? '') ?></td>
 
     </tr>
 
@@ -50,7 +50,7 @@
 
     <th>Father Name</th>
 
-    <td><?= $order['father_name'] ?? '' ?></td>
+    <td><?= htmlspecialchars($order['father_name'] ?? '') ?></td>
 
     </tr>
 
@@ -58,7 +58,7 @@
 
     <th>Phone</th>
 
-    <td><?= $order['phone']?? '' ?></td>
+    <td><?= htmlspecialchars($order['phone']?? '') ?></td>
 
     </tr>
 
@@ -66,7 +66,7 @@
 
     <th>Village</th>
 
-    <td><?= $order['village'] ?? '' ?></td>
+    <td><?= htmlspecialchars($order['village'] ?? '') ?></td>
 
     </tr>
 
@@ -86,7 +86,7 @@
 
     <th width="200">Garment</th>
 
-    <td><?= $order['garment_type']?? '' ?></td>
+    <td><?= htmlspecialchars($order['garment_type']?? '') ?></td>
 
     </tr>
 
@@ -94,7 +94,7 @@
 
     <th>Delivery Date</th>
 
-    <td><?= $order['delivery_date']?? '' ?></td>
+    <td><?= htmlspecialchars($order['delivery_date']?? '') ?></td>
 
     </tr>
 
@@ -106,7 +106,7 @@
 
     <span class="badge bg-success">
 
-    <?= $order['status']?? '' ?>
+    <?= htmlspecialchars($order['status']?? '') ?>
 
     </span>
 
@@ -151,17 +151,17 @@
     </tr>
     <tr>
     <th>Quantity</th>
-    <td><?= $order['quantity'] ?? 0 ?></td>
+    <td><?= number_format($order['quantity'] ?? 0) ?></td>
     </tr>
 
     <tr>
     <th>Order Date</th>
-    <td><?= $order['order_date']?? '' ?></td>
+    <td><?= htmlspecialchars($order['order_date']?? '') ?></td>
     </tr>
 
     <tr>
     <th>Notes</th>
-    <td><?= $order['notes'] ?: 'No Notes' ?></td>
+    <td><?= htmlspecialchars($order['notes'] ?: 'No Notes') ?></td>
     </tr>
 
     </table>

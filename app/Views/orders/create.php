@@ -213,10 +213,6 @@
 
 						<option>Pending</option>
 
-						<option>Cutting</option>
-
-						<option>Stitching</option>
-
 						<option>Ready</option>
 
 						<option>Delivered</option>

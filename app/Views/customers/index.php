@@ -63,13 +63,13 @@
 
                                     <td><?= $row['booking_no'] ?></td>
 
-                                    <td><?= $row['full_name'] ?></td>
+                                    <td><?= htmlspecialchars($row['full_name']) ?></td>
 
-                                    <td><?= $row['phone'] ?></td>
+                                    <td><?= htmlspecialchars($row['phone']) ?></td>
 
-                                    <td><?= $row['village'] ?></td>
+                                    <td><?= htmlspecialchars($row['village']) ?></td>
 
-                                    <td>
+                                    <td class="text-nowrap">
 
                                         <!-- New Booking -->
                                         <a
@@ -118,8 +118,27 @@
 
                             <?php endforeach; ?>
 
-                        <?php endif; ?>
+                        <?php else: ?>
 
+                        <tr>
+
+                        <td colspan="6" class="text-center py-5">
+
+                        <i
+                        class="fas fa-users-slash fa-3x text-muted mb-3">
+                        </i>
+
+                        <h5 class="text-muted">
+
+                        No Customers Found
+
+                        </h5>
+
+                        </td>
+
+                        </tr>
+
+                         <?php endif; ?>
                         </tbody>
 
                     </table>
