@@ -2,8 +2,6 @@
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
 <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
-<div class="main-content">
-    <div class="page-content">
 
    <div class="card shadow-sm form-card ">
 
@@ -140,6 +138,4 @@
 </div>
 
   </div>
- </div>
-</div>
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

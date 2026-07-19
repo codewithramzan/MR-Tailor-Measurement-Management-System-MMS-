@@ -24,8 +24,11 @@ class OrderController extends Controller
     public function create()
     {
         if (!isset($_GET['customer_id'])) {
-
-            header("Location:index.php?page=customers");
+                Flash::set(
+                    "success",
+                    "📦 Order created successfully."
+                );
+                header("Location:index.php?page=customers");
             exit;
         }
 

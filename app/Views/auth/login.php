@@ -1,6 +1,6 @@
 <?php require "../app/Views/layouts/header.php"; ?>
 
-<div class="container vh-100 d-flex justify-content-center align-items-center">
+<div class="container vh-100 d-flex align-items-center justify-content-center">
 
     <div class="card shadow-lg p-5 rounded-4" style="width:450px;">
 

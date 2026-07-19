@@ -48,7 +48,7 @@
         <!-- Profile -->
         <div class="profile">
 
-            <img src="<?= BASE_URL ?>assets/images/avatar.png" alt="Admin">
+            <img src="<?= BASE_URL ?>assets/images/profile-logo.png" alt="Admin">
 
             <span>Admin</span>
 

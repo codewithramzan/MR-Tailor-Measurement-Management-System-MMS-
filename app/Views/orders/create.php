@@ -3,9 +3,6 @@
 <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
 
-<div class="main-content">
-  <div class="page-content">
-
 	<div class="card shadow-sm form-card">
 
 	 <div class="card-header bg-white py-3 border-0">
@@ -255,9 +252,6 @@
 				</form>
 
 	 </div>
-   </div>
-</div>
-
 
 
 <script>

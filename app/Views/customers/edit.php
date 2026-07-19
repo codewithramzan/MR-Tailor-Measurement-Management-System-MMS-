@@ -3,11 +3,6 @@
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
 <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
-
-<div class="main-content">
-
-  <div class="page-content">
-
      <div class="card form-card shadow-sm">
 
         <div class="card-header bg-white py-3 border-0">
@@ -138,9 +133,5 @@
             </form>
 
         </div>
-
-    </div>
-
-</div>
 
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

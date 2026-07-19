@@ -29,11 +29,23 @@ class CustomerController extends Controller
             $customer = new Customer();
 
             $id = $customer->create($_POST);
-
+             Flash::set(
+            "success",
+            "✅ Customer added successfully."
+            );
            // Temporary redirect
-          header("Location: index.php?page=add-customer");
+          header("Location: index.php?page=customers");
           exit;
+        } else{
+         Flash::set(
+            "danger",
+            "Phone number is required."
+            );
+
+            header("Location:index.php?page=add-customer");
+            exit;   
         }
+ 
     }
 
     public function search()
@@ -70,7 +82,10 @@ class CustomerController extends Controller
                 $_POST['id'],
                 $_POST
             );
-
+            Flash::set(
+                "success",
+                "✏️ Customer updated successfully."
+            );
             header("Location:index.php?page=customers");
 
             exit;
@@ -81,7 +96,10 @@ class CustomerController extends Controller
             $customer=new Customer();
 
             $customer->delete($_GET['id']);
-
+            Flash::set(
+                "danger",
+                "🗑 Customer deleted successfully."
+            );
             header("Location:index.php?page=customers");
 
             exit;

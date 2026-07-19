@@ -28,10 +28,14 @@ rel="stylesheet">
 <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/navbar.css">
 <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/dashboard.css">
 <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/responsive.css">
-<link rel="stylesheet" href="<?= BASE_URL ?>assets/css/forms.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>assets/css/form.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body>
+  <div class="main-content">
+
+    <div class="page-content">
+     <?php Flash::display(); ?>
