@@ -75,13 +75,11 @@
 
                                         </a>
 
-                                        <!-- View -->
-                                        <a
-                                            href="index.php?page=view-customer&id=<?= $row['id'] ?>"
-                                            class="btn btn-info btn-sm"
-                                            title="View">
+                                      <a href="index.php?page=customer-profile&id=<?= $row['id'] ?? '' ?>"
+                                        class="btn btn-info btn-sm"
+                                        title="Profile">
 
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-user"></i>
 
                                         </a>
 

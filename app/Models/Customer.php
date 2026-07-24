@@ -110,4 +110,51 @@ class Customer extends Model
 
                 return $stmt->execute([$id]);
             }
+        public function getProfile($id)
+            {
+                $sql = "SELECT *
+                        FROM customers
+                        WHERE id=?";
+
+                $stmt = $this->conn->prepare($sql);
+
+                $stmt->execute([$id]);
+
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            public function getOrders($customerId)
+            {
+                $sql = "SELECT *
+                        FROM orders
+                        WHERE customer_id=?
+                        ORDER BY id DESC";
+
+                $stmt = $this->conn->prepare($sql);
+
+                $stmt->execute([$customerId]);
+
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            public function getSummary($customerId)
+            {
+                $sql = "SELECT
+
+                        COUNT(*) AS total_orders,
+
+                        SUM(total_amount) AS total_amount,
+
+                        SUM(advance) AS total_advance,
+
+                        SUM(balance) AS total_balance
+
+                    FROM orders
+
+                    WHERE customer_id=?";
+
+                $stmt = $this->conn->prepare($sql);
+
+                $stmt->execute([$customerId]);
+
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
 }

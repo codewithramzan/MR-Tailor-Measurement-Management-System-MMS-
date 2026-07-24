@@ -111,4 +111,57 @@ class CustomerController extends Controller
             "🗑 Customer Deleted Successfully."
             );
         }
+
+        public function profile()
+        {
+            if (empty($_GET['id'])) {
+
+                $this->redirectWithMessage(
+
+                    "customers",
+
+                    "danger",
+
+                    "Customer not found."
+
+                );
+            }
+
+            $customer = new Customer();
+
+            $profile = $customer->getProfile($_GET['id']);
+
+            if (!$profile) {
+
+                $this->redirectWithMessage(
+
+                    "customers",
+
+                    "danger",
+
+                    "Customer not found."
+
+                );
+            }
+
+            $orders = $customer->getOrders($_GET['id']);
+
+            $summary = $customer->getSummary($_GET['id']);
+
+            $this->view(
+
+                "customers/profile",
+
+                compact(
+
+                    "profile",
+
+                    "orders",
+
+                    "summary"
+
+                )
+
+            );
+        }
 }

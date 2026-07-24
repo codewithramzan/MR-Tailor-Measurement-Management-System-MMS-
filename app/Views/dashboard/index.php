@@ -253,7 +253,7 @@
 
                         </a>
 
-                        <a href="index.php?page=print-measurement&order_id=<?= $row['id'] ?>"
+                        <a href="index.php?page=print-measurement&id=<?= $row['id'] ?>"
                         class="btn btn-success btn-sm"
                         title="Print">
 

@@ -92,6 +92,11 @@ switch($page){
            (new CustomerController())->update();
 
         break;
+    case "customer-profile":
+
+           (new CustomerController())->profile();
+
+        break; 
 
     case "delete-customer":
 
