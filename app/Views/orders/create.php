@@ -74,26 +74,21 @@
 					<span class="required">*</span>
 				</label>
 
-				<select
-				name="garment_type"
-				class="form-select"
-				required>
+					<select name="garment_type" class="form-select">
 
-					<option value="">Choose...</option>
+					<option value="">Select Garment</option>
 
-					<option>Shalwar Kameez</option>
+					<option value="Shalwar Kameez"
+							<?= OldInput::get('garment_type') == "Shalwar Kameez" ? "selected" : "" ?>>
+							Shalwar Kameez
+					</option>
 
-					<option>Waist Coat</option>
+					<option value="Pant"
+							<?= OldInput::get('garment_type') == "Pant" ? "selected" : "" ?>>
+							Pant
+					</option>
 
-					<option>Coat</option>
-
-					<option>Pant</option>
-
-					<option>Shirt</option>
-
-					<option>Kurta</option>
-
-				</select>
+			</select>
 
 					</div>
 
@@ -103,13 +98,11 @@
 						<span class="required">*</span>
 					</label>
 
-					<input
-					type="number"
-					name="quantity"
-					value="1"
-					min="1"
-					class="form-control"
-					required>
+				<input
+				type="number"
+				name="quantity"
+				class="form-control"
+				value="<?= htmlspecialchars(OldInput::get('quantity')) ?>">
 
 				</div>
 
@@ -132,12 +125,11 @@
 					<label class="form-label">Delivery Date
 						<span class="required">*</span>
 					</label>
-
 					<input
 					type="date"
 					name="delivery_date"
 					class="form-control"
-					required>
+					value="<?= htmlspecialchars(OldInput::get('delivery_date')) ?>">
 
 				</div>
 
@@ -149,13 +141,11 @@
 						<span class="required">*</span>
 					</label>
 
-					<input
-					id="total"
-					type="number"
-					name="total_amount"
-					value="0"
-					class="form-control"
-					required>
+				<input
+				type="number"
+				name="total_amount"
+				class="form-control"
+				value="<?= htmlspecialchars(OldInput::get('total_amount')) ?>">
 
 				</div>
 
@@ -165,11 +155,10 @@
 					</label>
 
 					<input
-					id="advance"
 					type="number"
 					name="advance"
-					value="0"
-					class="form-control">
+					class="form-control"
+					value="<?= htmlspecialchars(OldInput::get('advance')) ?>">
 
 				</div>
 
@@ -178,11 +167,10 @@
 					<label class="form-label">Discount</label>
 
 					<input
-					id="discount"
 					type="number"
 					name="discount"
-					value="0"
-					class="form-control">
+					class="form-control"
+					value="<?= htmlspecialchars(OldInput::get('discount')) ?>">
 
 				</div>
 
@@ -229,8 +217,7 @@
 
 					<textarea
 					name="notes"
-					rows="2"
-					class="form-control"></textarea>
+					class="form-control"><?= htmlspecialchars(OldInput::get('notes')) ?></textarea>
 
 				</div>
 
@@ -288,4 +275,6 @@ discount.addEventListener("input",calculate);
 calculate();
 
 </script>
+
+<?php OldInput::clear(); ?>
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

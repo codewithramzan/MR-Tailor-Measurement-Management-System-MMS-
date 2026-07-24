@@ -2,50 +2,72 @@
 
 class AuthController extends Controller
 {
-
     public function login()
     {
+        if ($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            $validator = new Validator();
 
-        if($_SERVER['REQUEST_METHOD']=="POST"){
+            $validator
+                ->required("username", $_POST['username'], "Username")
+                ->required("password", $_POST['password'], "Password");
+
+            if ($validator->hasErrors())
+            {
+                OldInput::set($_POST);
+
+                $this->redirectWithMessage(
+
+                    "login",
+
+                    "danger",
+
+                    $validator->first()
+
+                );
+            }
 
             $userModel = new User();
 
             $user = $userModel->login($_POST['username']);
 
-            if(
-
+            if (
                 $user &&
-
                 password_verify(
-
                     $_POST['password'],
-
                     $user['password']
-
                 )
-
-            ){
-
+            )
+            {
                 session_start();
 
-                $_SESSION['admin']=$user['username'];
+                $_SESSION['admin'] = $user['username'];
+
+                OldInput::clear();
 
                 $this->redirect("dashboard");
+            }
+            else
+            {
+                OldInput::set($_POST);
 
-            }else{
+                $this->redirectWithMessage(
 
-                echo "Invalid Username or Password";
+                    "login",
 
+                    "danger",
+
+                    "Invalid Username or Password."
+
+                );
             }
 
             return;
-
         }
-        
 
         $this->view('auth/login');
-
     }
+
 
     public function logout()
         {

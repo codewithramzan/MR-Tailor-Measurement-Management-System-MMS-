@@ -30,34 +30,94 @@ class MeasurementController extends Controller
     );
 }
 
-    public function store()
+   public function store()
     {
-        $measurement = new Measurement();
+        if ($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            $validator = new Validator();
 
-        $measurement->save(
+            $validator
+                ->required(
+                    "order_id",
+                    $_POST['order_id'],
+                    "Order"
+                );
 
-            $_POST['order_id'],
+            // Check if at least one measurement is entered
+            $hasMeasurement = false;
 
-            $_POST['measurements']
+            if (!empty($_POST['measurements']) && is_array($_POST['measurements']))
+            {
+                foreach ($_POST['measurements'] as $value)
+                {
+                    if (trim($value) !== "")
+                    {
+                        $hasMeasurement = true;
+                        break;
+                    }
+                }
+            }
 
-        );
-        $measurement->saveOptions(
+            if (!$hasMeasurement)
+            {
+                OldInput::set($_POST);
 
-        $_POST['order_id'],
+                $this->redirectWithMessage(
 
-        $_POST['options'] ?? []
+                    "measurement-create&order_id=" . $_POST['order_id'],
 
-    );
+                    "danger",
 
-        $this->redirectWithMessage(
+                    "Please enter at least one measurement."
 
-        "customers",
+                );
+            }
 
-        "success",
+            if ($validator->hasErrors())
+            {
+                OldInput::set($_POST);
 
-        "📏 Measurements saved successfully."
+                $this->redirectWithMessage(
 
-    );
+                    "measurement-create&order_id=" . $_POST['order_id'],
+
+                    "danger",
+
+                    $validator->first()
+
+                );
+            }
+
+            $measurement = new Measurement();
+
+            $measurement->save(
+
+                $_POST['order_id'],
+
+                $_POST['measurements']
+
+            );
+
+            $measurement->saveOptions(
+
+                $_POST['order_id'],
+
+                $_POST['options'] ?? []
+
+            );
+
+            OldInput::clear();
+
+            $this->redirectWithMessage(
+
+                "customers",
+
+                "success",
+
+                "📏 Measurements saved successfully."
+
+            );
+        }
     }
 
 
@@ -99,29 +159,93 @@ class MeasurementController extends Controller
     }
 
 
-   public function update()
+    public function update()
     {
-        $measurement=new Measurement();
+        if ($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            $validator = new Validator();
 
-        $measurement->updateMeasurements(
-            $_POST['order_id'],
-            $_POST['measurements']
-        );
+            $validator->required(
+                "order_id",
+                $_POST['order_id'],
+                "Order"
+            );
 
-        $measurement->saveOptions(
-            $_POST['order_id'],
-            $_POST['options'] ?? []
+            // Check if at least one measurement is entered
+            $hasMeasurement = false;
 
-        );
-        $this->redirectWithMessage(
+            if (!empty($_POST['measurements']) && is_array($_POST['measurements']))
+            {
+                foreach ($_POST['measurements'] as $value)
+                {
+                    if (trim($value) !== "")
+                    {
+                        $hasMeasurement = true;
+                        break;
+                    }
+                }
+            }
 
-            "view-order&id=" . $_POST['order_id'],
+            if (!$hasMeasurement)
+            {
+                OldInput::set($_POST);
 
-            "success",
+                $this->redirectWithMessage(
 
-            "✅ Measurement updated successfully."
+                    "edit-measurement&order_id=" . $_POST['order_id'],
 
-        );
+                    "danger",
+
+                    "Please enter at least one measurement."
+
+                );
+            }
+
+            if ($validator->hasErrors())
+            {
+                OldInput::set($_POST);
+
+                $this->redirectWithMessage(
+
+                    "edit-measurement&order_id=" . $_POST['order_id'],
+
+                    "danger",
+
+                    $validator->first()
+
+                );
+            }
+
+            $measurement = new Measurement();
+
+            $measurement->update(
+
+                $_POST['order_id'],
+
+                $_POST['measurements']
+
+            );
+
+            $measurement->updateOptions(
+
+                $_POST['order_id'],
+
+                $_POST['options'] ?? []
+
+            );
+
+            OldInput::clear();
+
+            $this->redirectWithMessage(
+
+                "view-order&id=" . $_POST['order_id'],
+
+                "success",
+
+                "✅ Measurement updated successfully."
+
+            );
+        }
     }
 
     public function printSlip()

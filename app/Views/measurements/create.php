@@ -110,11 +110,11 @@
 
         </label>
 
-        <input
+       <input
         type="text"
         name="measurements[<?= $type['id'] ?>]"
         class="form-control"
-        placeholder="<?= $type['name'] ?>">
+        value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>">
 
         </div>
 
@@ -148,12 +148,11 @@
 
         <div class="form-check">
 
-        <input
-        class="form-check-input"
+       <input
         type="checkbox"
         name="options[]"
-        value="<?= $item['id'] ?>"
-        id="option<?= $item['id'] ?>">
+        value="<?= $option['id'] ?>"
+        <?= in_array($option['id'], OldInput::get('options', [])) ? 'checked' : '' ?>>
 
         <label
         class="form-check-label"
@@ -197,4 +196,5 @@
     </div>
 
     </div>
+    <?php OldInput::clear(); ?>
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

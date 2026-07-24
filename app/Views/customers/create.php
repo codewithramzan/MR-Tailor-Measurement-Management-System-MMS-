@@ -42,10 +42,10 @@
 						</label>
 
 						<input
-							type="text"
-							name="phone"
-							class="form-control"
-							required>
+						type="text"
+						name="phone"
+						class="form-control"
+						value="<?= htmlspecialchars(OldInput::get('phone')) ?>">
 
 					</div>
 
@@ -56,10 +56,10 @@
 						</label>
 
 						<input
-							type="text"
-							name="full_name"
-							class="form-control"
-							required>
+						type="text"
+						name="full_name"
+						class="form-control"
+						value="<?= htmlspecialchars(OldInput::get('full_name')) ?>">
 
 					</div>
 
@@ -70,10 +70,10 @@
 						</label>
 
 						<input
-							type="text"
-							name="father_name"
-							class="form-control"
-							required>
+						type="text"
+						name="father_name"
+						class="form-control"
+						value="<?= htmlspecialchars(OldInput::get('father_name')) ?>">
 
 					</div>
 
@@ -84,9 +84,10 @@
 						</label>
 
 						<input
-							type="text"
-							name="mohalla"
-							class="form-control">
+						type="text"
+						name="mohalla"
+						class="form-control"
+						value="<?= htmlspecialchars(OldInput::get('mohalla')) ?>">
 
 					</div>
 
@@ -96,10 +97,11 @@
 							<span class="required">*</span>
 						</label>
 
-						<input
-							type="text"
-							name="village"
-							class="form-control">
+					<input
+					type="text"
+					name="village"
+					class="form-control"
+					value="<?= htmlspecialchars(OldInput::get('village')) ?>">
 
 					</div>
 
@@ -117,5 +119,5 @@
 			</div>
 
 		</div>
-
+<?php OldInput::clear(); ?>
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

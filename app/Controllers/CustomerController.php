@@ -22,19 +22,41 @@ class CustomerController extends Controller
           ]);
     }
 
-  public function store()
+    public function store()
     {
-        if($_SERVER['REQUEST_METHOD']=="POST"){
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            $validator = new Validator();
+
+            $validator
+                ->required("booking_no", $_POST['booking_no'], "Booking Number")
+                ->required("phone", $_POST['phone'], "Phone Number")
+                ->required("full_name", $_POST['full_name'], "Full Name")
+                ->required("father_name", $_POST['father_name'], "Father Name")
+                ->phone("phone", $_POST['phone']);
+
+            if($validator->hasErrors())
+                {
+                    OldInput::set($_POST);
+
+                    $this->redirectWithMessage(
+                        "add-customer",
+                        "danger",
+                        $validator->first()
+                    );
+                }
 
             $customer = new Customer();
 
-            $id = $customer->create($_POST);
-             $this->redirectWithMessage(
+             $id= $customer->create($_POST);
+             OldInput::clear();
+
+            $this->redirectWithMessage(
                 "customers",
                 "success",
                 "✅ Customer Added Successfully."
             );
-        } 
+        }
     }
 
     public function search()

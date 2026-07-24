@@ -22,10 +22,11 @@
 
                 </label>
 
-                <input
-                name="username"
+               <input
                 type="text"
-                class="form-control">
+                name="username"
+                class="form-control"
+                value="<?= htmlspecialchars(OldInput::get('username')) ?>">
 
             </div>
 
@@ -56,5 +57,5 @@
     </div>
 
 </div>
-
+<?php OldInput::clear(); ?>
 <?php require "../app/Views/layouts/footer.php"; ?>

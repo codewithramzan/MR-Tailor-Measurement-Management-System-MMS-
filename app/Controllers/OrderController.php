@@ -41,15 +41,59 @@ class OrderController extends Controller
 
     public function store()
     {
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if ($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            $validator = new Validator();
+
+            $validator
+                ->required("customer_id", $_POST['customer_id'], "Customer")
+                ->required("garment_type", $_POST['garment_type'], "Garment Type")
+                ->required("quantity", $_POST['quantity'], "Quantity")
+                ->required("booking_no", $_POST['booking_no'], "Booking Number")
+                ->required("order_date", $_POST['order_date'], "Order Date")
+                ->required("delivery_date", $_POST['delivery_date'], "Delivery Date")
+                ->required("total_amount", $_POST['total_amount'], "Total Amount")
+
+                ->numeric("quantity", $_POST['quantity'], "Quantity")
+                ->numeric("total_amount", $_POST['total_amount'], "Total Amount")
+
+                ->min("quantity", $_POST['quantity'], 1, "Quantity")
+                ->min("total_amount", $_POST['total_amount'], 1, "Total Amount");
+
+            // Optional Fields
+            if (!empty($_POST['advance'])) {
+                $validator
+                    ->numeric("advance", $_POST['advance'], "Advance")
+                    ->min("advance", $_POST['advance'], 0, "Advance");
+            }
+
+            if (!empty($_POST['discount'])) {
+                $validator
+                    ->numeric("discount", $_POST['discount'], "Discount")
+                    ->min("discount", $_POST['discount'], 0, "Discount");
+            }
+
+            if ($validator->hasErrors())
+            {
+                OldInput::set($_POST);
+
+                $this->redirectWithMessage(
+                    "create-order&customer_id=" . $_POST['customer_id'],
+                    "danger",
+                    $validator->first()
+                );
+            }
 
             $order = new Order();
 
             $orderId = $order->create($_POST);
-           $this->redirectWithMessage(
-            "orders",
-            "success",
-            "📦 Order Created Successfully."
+
+            OldInput::clear();
+
+            $this->redirectWithMessage(
+                "orders",
+                "success",
+                "📦 Order Created Successfully."
             );
         }
     }
