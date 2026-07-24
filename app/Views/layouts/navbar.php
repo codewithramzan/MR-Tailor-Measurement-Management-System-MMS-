@@ -6,7 +6,7 @@
             <i class="fas fa-bars"></i>
         </button>
 
-        <h4>MR Tailor</h4>
+        <h4><?= Config::get("shop_name") ?></h4>
 
     </div>
 

@@ -3,7 +3,7 @@
     <!-- Logo -->
     <div class="sidebar-logo">
         <i class="fas fa-cut"></i>
-        <span>MR Tailor</span>
+        <span><?= Config::get("shop_name") ?></span>
     </div>
 
     <!-- Navigation -->

@@ -196,8 +196,7 @@ width:100%;
 
             <div class="title">
 
-            MR TAILOR
-
+            <?= Config::get("shop_name") ?>
             </div>
 
             <div class="subtitle">
@@ -352,15 +351,15 @@ width:100%;
 
             <div class="footer">
 
-            MR Tailor
+            <?= Config::get("shop_name") ?>
 
             <br>
 
-            Hisartang
+            <?= Config::get("village") ?>
 
             <br>
 
-            0319-9516475
+            <?= Config::get("phone") ?>
 
             <br><br>
 
