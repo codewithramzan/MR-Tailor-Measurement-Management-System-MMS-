@@ -18,6 +18,7 @@ class Customer extends Model
           $data['mohalla'],
           $data['village']
       ]);
+    
 
       return $this->conn->lastInsertId();
   }

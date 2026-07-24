@@ -65,7 +65,9 @@
 
 					<div class="col-md-6 mb-3">
 
-						<label class="form-label">Father Name</label>
+						<label class="form-label">Father Name
+							<span class="required">*</span>
+						</label>
 
 						<input
 							type="text"

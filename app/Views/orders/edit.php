@@ -125,7 +125,7 @@
 
       <div class="col-md-6 mb-3">
 
-      <label class="form-label">Balance</label>
+      <label class="form-label">Amount</label>
 
       <input
       type="number"

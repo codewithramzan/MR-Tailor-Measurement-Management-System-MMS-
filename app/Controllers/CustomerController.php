@@ -29,23 +29,12 @@ class CustomerController extends Controller
             $customer = new Customer();
 
             $id = $customer->create($_POST);
-             Flash::set(
-            "success",
-            "✅ Customer added successfully."
+             $this->redirectWithMessage(
+                "customers",
+                "success",
+                "✅ Customer Added Successfully."
             );
-           // Temporary redirect
-          header("Location: index.php?page=customers");
-          exit;
-        } else{
-         Flash::set(
-            "danger",
-            "Phone number is required."
-            );
-
-            header("Location:index.php?page=add-customer");
-            exit;   
-        }
- 
+        } 
     }
 
     public function search()
@@ -82,13 +71,11 @@ class CustomerController extends Controller
                 $_POST['id'],
                 $_POST
             );
-            Flash::set(
+          $this->redirectWithMessage(
+                "customers",
                 "success",
-                "✏️ Customer updated successfully."
+                "✏ Customer Updated Successfully."
             );
-            header("Location:index.php?page=customers");
-
-            exit;
         }
 
         public function delete()
@@ -96,12 +83,10 @@ class CustomerController extends Controller
             $customer=new Customer();
 
             $customer->delete($_GET['id']);
-            Flash::set(
-                "danger",
-                "🗑 Customer deleted successfully."
+          $this->redirectWithMessage(
+            "customers",
+            "danger",
+            "🗑 Customer Deleted Successfully."
             );
-            header("Location:index.php?page=customers");
-
-            exit;
         }
 }

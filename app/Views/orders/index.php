@@ -35,7 +35,7 @@
       <th>Garment</th>
       <th>Delivery</th>
       <th>Status</th>
-      <th>Balance</th>
+      <th>Amount</th>
       <th>Actions</th>
 
       </tr>

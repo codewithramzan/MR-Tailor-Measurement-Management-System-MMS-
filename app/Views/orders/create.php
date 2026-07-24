@@ -108,7 +108,8 @@
 					name="quantity"
 					value="1"
 					min="1"
-					class="form-control">
+					class="form-control"
+					required>
 
 				</div>
 
@@ -135,7 +136,8 @@
 					<input
 					type="date"
 					name="delivery_date"
-					class="form-control">
+					class="form-control"
+					required>
 
 				</div>
 
@@ -152,7 +154,8 @@
 					type="number"
 					name="total_amount"
 					value="0"
-					class="form-control">
+					class="form-control"
+					required>
 
 				</div>
 

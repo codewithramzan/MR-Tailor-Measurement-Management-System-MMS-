@@ -2,10 +2,25 @@
 
 class Controller
 {
-    public function view($view, $variables = [])
+    protected function view($view, $variables = [])
     {
         extract($variables);
 
-        require dirname(__DIR__) . "/Views/" . $view . ".php";
+        require "../app/Views/".$view.".php";
+    }
+
+    protected function redirect($page)
+    {
+        header("Location: index.php?page=".$page);
+        exit;
+    }
+
+    protected function redirectWithMessage($page, $type, $message)
+    {
+        Flash::set($type, $message);
+
+        header("Location: index.php?page=".$page);
+
+        exit;
     }
 }

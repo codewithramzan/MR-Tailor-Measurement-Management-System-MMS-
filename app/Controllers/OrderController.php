@@ -24,10 +24,6 @@ class OrderController extends Controller
     public function create()
     {
         if (!isset($_GET['customer_id'])) {
-                Flash::set(
-                    "success",
-                    "📦 Order created successfully."
-                );
                 header("Location:index.php?page=customers");
             exit;
         }
@@ -50,10 +46,11 @@ class OrderController extends Controller
             $order = new Order();
 
             $orderId = $order->create($_POST);
-
-            header("Location:index.php?page=measurement-create&order_id=".$orderId);
-
-            exit;
+           $this->redirectWithMessage(
+            "orders",
+            "success",
+            "📦 Order Created Successfully."
+            );
         }
     }
    public function index()
@@ -87,10 +84,11 @@ class OrderController extends Controller
             $_POST['id'],
             $_POST
         );
-
-        header("Location:index.php?page=orders");
-
-        exit;
+      $this->redirectWithMessage(
+        "orders",
+        "success",
+        "📦 Order Updated Successfully."
+        );
     }
 
     public function delete()
@@ -99,9 +97,11 @@ class OrderController extends Controller
 
         $order->delete($_GET['id']);
 
-        header("Location:index.php?page=orders");
-
-        exit;
-    }
+      $this->redirectWithMessage(
+        "orders",
+        "danger",
+        "🗑 Order delelted Successfully."
+        );
         
+}
 }

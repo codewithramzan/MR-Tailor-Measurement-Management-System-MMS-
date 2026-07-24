@@ -11,15 +11,10 @@ class MeasurementController extends Controller
 
     }
     $optionModel = new StitchingOption();
-
     $orderModel = new Order();
-
     $measurementModel = new Measurement();
-
     $options = $optionModel->getGrouped();
-
     $order = $orderModel->find($_GET['order_id']);
-
     if (!$order) {
 
         header("Location:index.php?page=customers");
@@ -54,9 +49,15 @@ class MeasurementController extends Controller
 
     );
 
-        header("Location:index.php?page=dashboard");
+        $this->redirectWithMessage(
 
-        exit;
+        "customers",
+
+        "success",
+
+        "📏 Measurements saved successfully."
+
+    );
     }
 
 
@@ -75,39 +76,23 @@ class MeasurementController extends Controller
         $types=$measurement->getTypes(
 
             $order['garment_type']
-
         );
-
         $values=$measurement->getMeasurements(
-
             $orderId
-
         );
-
         $selected=$measurement->getSelectedOptions(
-
-            $orderId
-
+           $orderId
         );
-
         $options=$stitching->getGrouped();
-
         $this->view(
-
             'measurements/edit',
 
             compact(
-
                 'order',
-
                 'types',
-
                 'values',
-
                 'selected',
-
                 'options'
-
             )
 
         );
@@ -119,28 +104,24 @@ class MeasurementController extends Controller
         $measurement=new Measurement();
 
         $measurement->updateMeasurements(
-
             $_POST['order_id'],
-
             $_POST['measurements']
-
         );
 
         $measurement->saveOptions(
-
             $_POST['order_id'],
-
             $_POST['options'] ?? []
 
         );
+        $this->redirectWithMessage(
 
-        header(
+            "view-order&id=" . $_POST['order_id'],
 
-            "Location:index.php?page=view-order&id=".$_POST['order_id']
+            "success",
+
+            "✅ Measurement updated successfully."
 
         );
-
-        exit;
     }
 
     public function printSlip()

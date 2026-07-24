@@ -3,7 +3,6 @@ const menu = document.getElementById("menu-toggle");
 const sidebar = document.getElementById("sidebar");
 
 if (menu && sidebar) {
-
     menu.addEventListener("click", () => {
 
         sidebar.classList.toggle("active");
@@ -12,25 +11,21 @@ if (menu && sidebar) {
 
 }
 document.addEventListener("DOMContentLoaded", function () {
-   
-    const flash = document.querySelector(".alert");
 
-    if (flash) {
+    const flash = document.getElementById("flash-message");
 
-        setTimeout(function () {
+    if (!flash) return;
 
-            flash.classList.remove("show");
+    setTimeout(() => {
 
-            flash.classList.add("fade");
+        flash.classList.remove("show");
 
-            setTimeout(function () {
+        setTimeout(() => {
 
-                flash.remove();
+            flash.remove();
 
-            }, 300);
+        }, 300);
 
-        }, 3000);
-
-    }
+    }, 3000);
 
 });

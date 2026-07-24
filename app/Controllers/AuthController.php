@@ -30,9 +30,7 @@ class AuthController extends Controller
 
                 $_SESSION['admin']=$user['username'];
 
-                header("Location: index.php?page=dashboard");
-
-                exit;
+                $this->redirect("dashboard");
 
             }else{
 
