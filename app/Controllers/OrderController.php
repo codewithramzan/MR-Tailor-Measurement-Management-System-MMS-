@@ -97,16 +97,22 @@ class OrderController extends Controller
             );
         }
     }
-   public function index()
+
+    public function index()
     {
         $order = new Order();
 
-        $orders = $order->getAll();
+        if (!empty($_GET['status'])) {
 
-        parent::view(
-            'orders/index',
-            compact('orders')
-        );
+            $orders = $order->getByStatus($_GET['status']);
+
+        } else {
+
+            $orders = $order->getAll();
+
+        }
+
+        $this->view('orders/index', compact('orders'));
     }
 
     public function edit()

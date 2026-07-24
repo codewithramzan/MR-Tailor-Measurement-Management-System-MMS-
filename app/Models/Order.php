@@ -146,4 +146,22 @@ class Order extends Database
 
             return $stmt->execute([$id]);
         }
+
+        public function getByStatus($status)
+        {
+            $sql = "SELECT
+                        orders.*,
+                        customers.full_name
+                    FROM orders
+                    INNER JOIN customers
+                        ON customers.id = orders.customer_id
+                    WHERE orders.status = ?
+                    ORDER BY orders.id DESC";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([$status]);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 }

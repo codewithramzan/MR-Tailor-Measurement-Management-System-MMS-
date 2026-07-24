@@ -67,4 +67,54 @@ class Dashboard extends Model
 
     }
 
+
+// Monthly Bookings Chart
+
+    public function monthlyBookings()
+    {
+        $sql = "SELECT
+                    MONTH(order_date) AS month,
+                    COUNT(*) AS total
+                FROM orders
+                WHERE YEAR(order_date) = YEAR(CURDATE())
+                GROUP BY MONTH(order_date)
+                ORDER BY MONTH(order_date)";
+
+        $result = $this->conn
+            ->query($sql)
+            ->fetchAll(PDO::FETCH_ASSOC);
+
+        $months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+        $data = array_fill(0, 12, 0);
+
+        foreach($result as $row)
+        {
+            $data[$row['month'] - 1] = (int)$row['total'];
+        }
+
+        return [
+
+            'labels' => $months,
+
+            'data' => $data
+
+        ];
+    }
+
+    // Order Status Chart
+
+    public function orderStatusChart()
+    {
+        return [
+
+            'Pending' => $this->pendingBookings(),
+
+            'Ready' => $this->readyBookings(),
+
+            'Delivered' => $this->deliveredBookings()
+
+        ];
+    }
+
 }

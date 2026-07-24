@@ -22,7 +22,11 @@ class DashboardController extends Controller
 
             'income'=>$dashboard->totalIncome(),
 
-            'recent'=>$dashboard->recentBookings()
+            'recent' => $dashboard->recentBookings(),
+
+            'monthlyChart' => $dashboard->monthlyBookings(),
+
+            'statusChart' => $dashboard->orderStatusChart()
 
         ];
 
