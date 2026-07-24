@@ -112,11 +112,13 @@
 
     <tr>
 
-    <th>Total Amount</th>
+    <th>Total Amount
+   
+    </th>
 
     <td>
 
-    Rs. <?= number_format($order['total_amount'])?? 0 ?>
+    <?= Config::get("currency") ?> <?= number_format($order['total_amount'])?? 0 ?>
 
     </td>
 
@@ -128,7 +130,7 @@
 
     <td>
 
-    Rs. <?= number_format($order['advance'])?? 0 ?>
+    <?= Config::get("currency") ?> <?= number_format($order['advance'])?? 0 ?>
 
     </td>
 
@@ -140,7 +142,7 @@
 
     <td>
 
-    Rs. <?= number_format($order['discount'])?? 0 ?>
+    <?= Config::get("currency") ?> <?= number_format($order['discount'])?? 0 ?>
 
     </td>
 

@@ -89,7 +89,9 @@
 
       <div class="col-md-4 mb-3">
 
-      <label class="form-label">Total Amount</label>
+      <label class="form-label">Total Amount
+      (<?= Config::get("currency") ?>) 
+      </label>
 
       <input
       type="number"
@@ -101,7 +103,9 @@
 
       <div class="col-md-4 mb-3">
 
-      <label class="form-label">Advance</label>
+      <label class="form-label">Advance
+      (<?= Config::get("currency") ?>)
+      </label>
 
       <input
       type="number"
@@ -113,7 +117,9 @@
 
       <div class="col-md-4 mb-3">
 
-      <label class="form-label">Discount</label>
+      <label class="form-label">Discount
+      (<?= Config::get("currency") ?>)
+      </label>
 
       <input
       type="number"
@@ -125,7 +131,9 @@
 
       <div class="col-md-6 mb-3">
 
-      <label class="form-label">Amount</label>
+      <label class="form-label">Amount
+      (<?= Config::get("currency") ?>)
+      </label>
 
       <input
       type="number"

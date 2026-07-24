@@ -138,6 +138,7 @@
 				<div class="col-md-3 mb-3">
 
 					<label class="form-label">Total Amount
+						(<?= Config::get("currency") ?>)
 						<span class="required">*</span>
 					</label>
 
@@ -152,6 +153,7 @@
 				<div class="col-md-3 mb-3">
 
 					<label class="form-label">Advance
+						(<?= Config::get("currency") ?>)
 					</label>
 
 					<input
@@ -164,7 +166,9 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label class="form-label">Discount</label>
+					<label class="form-label">Discount(
+						<?= Config::get("currency") ?>)
+					</label>
 
 					<input
 					type="number"
@@ -176,7 +180,9 @@
 
 				<div class="col-md-3 mb-3">
 
-					<label class="form-label">Remaining</label>
+					<label class="form-label">Remaining
+						(<?= Config::get("currency") ?>)
+					</label>
 
 					<input
 					id="balance"

@@ -79,7 +79,8 @@
       </td>
 
       <td>
-      Rs. <?= number_format($row['balance'] ?? 0) ?>
+      <?= Config::get("currency") ?>
+       <?= number_format($row['balance'] ?? 0) ?>
       </td>
 
       <td>

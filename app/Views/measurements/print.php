@@ -325,12 +325,17 @@ width:100%;
             <tr>
 
             <td>کل رقم</td>
-
-            <td><?= number_format($info['total_amount']) ?></td>
+            
+            <td>
+            <?= Config::get("currency") ?>  
+            <?= number_format($info['total_amount']) ?>
+            </td>
 
             <td>ایڈوانس</td>
 
-            <td><?= number_format($info['advance']) ?></td>
+            <td>
+                <?= Config::get("currency") ?>
+                <?= number_format($info['advance']) ?></td>
 
             </tr>
 
@@ -338,11 +343,15 @@ width:100%;
 
             <td>رعایت</td>
 
-            <td><?= number_format($info['discount']) ?></td>
+            <td>
+            <?= Config::get("currency") ?>
+            <?= number_format($info['discount']) ?></td>
 
             <td>بقایا</td>
 
-            <td><?= number_format($info['balance']) ?></td>
+            <td>
+            <?= Config::get("currency") ?>    
+            <?= number_format($info['balance']) ?></td>
 
             </tr>
 
