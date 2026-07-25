@@ -2,44 +2,59 @@
 
 class Order extends Database
 {
-   public function create($data)
-        {
-            $stmt = $this->conn->prepare("
-                INSERT INTO orders(
-                    customer_id,
-                    garment_type,
-                    quantity,
-                    booking_no,
-                    order_date,
-                    delivery_date,
-                    total_amount,
-                    advance,
-                    discount,
-                    balance,
-                    status,
-                    notes
-                )
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?)
-            ");
+    public function create($data)
+    {
+        // Default values
+        $data['advance'] = !empty($data['advance']) ? $data['advance'] : 0;
+        $data['discount'] = !empty($data['discount']) ? $data['discount'] : 0;
 
-            $stmt->execute([
-                $data['customer_id'],
-                $data['garment_type'],
-                $data['quantity'],
-                $data['booking_no'],
-                $data['order_date'],
-                $data['delivery_date'],
-                $data['total_amount'],
-                $data['advance'],
-                $data['discount'],
-                $data['balance'],
-                $data['status'],
-                $data['notes']
-            ]);
+        $data['balance'] = $data['total_amount']
+                            - $data['advance']
+                            - $data['discount'];
 
-            return $this->conn->lastInsertId();
+        $data['status'] = !empty($data['status'])
+                            ? $data['status']
+                            : "Pending";
+
+        $data['notes'] = !empty($data['notes'])
+                            ? trim($data['notes'])
+                            : "";
+
+        $stmt = $this->conn->prepare("
+            INSERT INTO orders(
+                customer_id,
+                garment_type,
+                quantity,
+                booking_no,
+                order_date,
+                delivery_date,
+                total_amount,
+                advance,
+                discount,
+                balance,
+                status,
+                notes
+            )
+            VALUES(?,?,?,?,?,?,?,?,?,?,?,?)
+        ");
+
+        $stmt->execute([
+            $data['customer_id'],
+            $data['garment_type'],
+            $data['quantity'],
+            $data['booking_no'],
+            $data['order_date'],
+            $data['delivery_date'],
+            $data['total_amount'],
+            $data['advance'],
+            $data['discount'],
+            $data['balance'],
+            $data['status'],
+            $data['notes']
+        ]);
+
+        return $this->conn->lastInsertId();
     }
-
         public function getAll()
         {
             $stmt = $this->conn->query("

@@ -94,7 +94,7 @@ class MeasurementController extends Controller
 
                 $_POST['order_id'],
 
-                $_POST['measurements']
+                $_POST['measurements'] ?? []
 
             );
 

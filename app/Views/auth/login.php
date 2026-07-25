@@ -8,7 +8,7 @@
 
             <i class="bi bi-scissors"></i>
 
-            MR Tailor
+            <?= Config::get("shop_name") ?>
 
         </h2>
 

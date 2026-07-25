@@ -99,7 +99,16 @@
         value="<?= $order['id'] ?? '' ?>">
 
         <div class="row g-3">
+        <?php if(empty($types)): ?>
 
+        <div class="alert alert-warning">
+
+            No measurement types found for
+            <strong><?= htmlspecialchars($order['garment_type']) ?></strong>
+
+        </div>
+
+        <?php endif; ?>
         <?php foreach($types as $type): ?>
 
         <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
@@ -148,19 +157,21 @@
 
         <div class="form-check">
 
-       <input
+      <input
+        class="form-check-input"
         type="checkbox"
+        id="option<?= $item['id'] ?>"
         name="options[]"
-        value="<?= $option['id'] ?>"
-        <?= in_array($option['id'], OldInput::get('options', [])) ? 'checked' : '' ?>>
+        value="<?= $item['id'] ?>"
+        <?= in_array($item['id'], OldInput::get('options', [])) ? 'checked' : '' ?>>
 
-        <label
-        class="form-check-label"
-        for="option<?= $item['id'] ?>">
+       <label
+          class="form-check-label"
+          for="option<?= $item['id'] ?>">
 
-        <?= $item['urdu_name'] ?>
+          <?= htmlspecialchars($item['urdu_name']) ?>
 
-        </label>
+      </label>
 
         </div>
 

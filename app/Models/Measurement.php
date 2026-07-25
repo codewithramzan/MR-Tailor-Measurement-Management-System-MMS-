@@ -5,16 +5,36 @@ class Measurement extends Model
     protected $table = "measurements";
 
     // Get measurement fields by garment category
-    public function getTypes($category)
+   public function getTypes($garmentType)
     {
-        $stmt = $this->conn->prepare("
+        // Map garment types to measurement categories
+        $categoryMap = [
+
+            "Shalwar Kameez" => ["Shirt", "Trouser"],
+
+            "Shirt"          => ["Shirt"],
+
+            "Trouser"        => ["Trouser"],
+
+            "Pant"           => ["Trouser"],
+
+        ];
+
+        // Default: use garment type itself
+        $categories = $categoryMap[$garmentType] ?? [$garmentType];
+
+        $placeholders = implode(',', array_fill(0, count($categories), '?'));
+
+        $sql = "
             SELECT *
             FROM measurement_types
-            WHERE category = ?
-            ORDER BY id
-        ");
+            WHERE category IN ($placeholders)
+            ORDER BY print_order ASC, id ASC
+        ";
 
-        $stmt->execute([$category]);
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->execute($categories);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -22,6 +42,18 @@ class Measurement extends Model
     // Save measurements
     public function save($orderId, $measurements)
     {
+        // Remove old measurements
+        $delete = $this->conn->prepare("
+            DELETE FROM measurements
+            WHERE order_id = ?
+        ");
+
+        $delete->execute([$orderId]);
+
+        if (empty($measurements)) {
+            return true;
+        }
+
         $stmt = $this->conn->prepare("
             INSERT INTO measurements
             (
@@ -29,17 +61,22 @@ class Measurement extends Model
                 measurement_type_id,
                 measurement_value
             )
-            VALUES(?,?,?)
+            VALUES (?, ?, ?)
         ");
 
-        foreach($measurements as $typeId => $value){
+        foreach ($measurements as $typeId => $value) {
+
+            $value = trim($value);
+
+            if ($value === '') {
+                continue;
+            }
 
             $stmt->execute([
                 $orderId,
                 $typeId,
                 $value
             ]);
-
         }
 
         return true;

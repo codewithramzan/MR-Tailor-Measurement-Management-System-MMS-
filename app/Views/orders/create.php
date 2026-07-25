@@ -102,7 +102,7 @@
 				type="number"
 				name="quantity"
 				class="form-control"
-				value="<?= htmlspecialchars(OldInput::get('quantity')) ?>">
+				value="<?= htmlspecialchars(OldInput::get('quantity')) ?? 1 ?>">
 
 				</div>
 
@@ -146,7 +146,7 @@
 				type="number"
 				name="total_amount"
 				class="form-control"
-				value="<?= htmlspecialchars(OldInput::get('total_amount')) ?>">
+				value="<?= htmlspecialchars(OldInput::get('total_amount')) ?? 0 ?>">
 
 				</div>
 
@@ -160,7 +160,7 @@
 					type="number"
 					name="advance"
 					class="form-control"
-					value="<?= htmlspecialchars(OldInput::get('advance')) ?>">
+					value="<?= htmlspecialchars(OldInput::get('advance')) ?? 0?>">
 
 				</div>
 
@@ -174,7 +174,7 @@
 					type="number"
 					name="discount"
 					class="form-control"
-					value="<?= htmlspecialchars(OldInput::get('discount')) ?>">
+					value="<?= htmlspecialchars(OldInput::get('discount'))??0 ?>">
 
 				</div>
 

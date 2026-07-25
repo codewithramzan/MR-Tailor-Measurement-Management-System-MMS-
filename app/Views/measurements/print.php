@@ -1,7 +1,6 @@
 <?php
 
 $info = $rows[0];
-
 $measurements = [];
 
 foreach($rows as $row){

@@ -60,7 +60,7 @@ switch($page){
             (new OrderController())->index();
 
         break;
-    case 'measurement-create':
+    case 'create-measurement':
 
             $controller = new MeasurementController();
             $controller->create();

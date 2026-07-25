@@ -91,9 +91,9 @@ class OrderController extends Controller
             OldInput::clear();
 
             $this->redirectWithMessage(
-                "orders",
+                "create-measurement&order_id=" . $orderId,
                 "success",
-                "📦 Order Created Successfully."
+                "📦 Order Created Successfully. Please take measurements."
             );
         }
     }
