@@ -7,13 +7,19 @@
 
       <div class="card-header bg-white border-0">
 
-        <h4>
+        <h4 class="mb-0">
 
-        <i class="fas fa-ruler-combined"></i>
+          <i class="fas fa-ruler-combined text-success"></i>
 
-        Measurements
+          Take Measurements
 
         </h4>
+
+        <small class="text-muted">
+
+          Enter customer measurements and stitching instructions.
+
+        </small>
 
         </div>
 
@@ -98,82 +104,167 @@
         name="order_id"
         value="<?= $order['id'] ?? '' ?>">
 
-        <div class="row g-3">
-        <?php if(empty($types)): ?>
+            <!-- ===========================
+          QAMEES MEASUREMENTS
+      =========================== -->
 
-        <div class="alert alert-warning">
+      <div class="card shadow-sm border-0 mb-4">
 
-            No measurement types found for
-            <strong><?= htmlspecialchars($order['garment_type']) ?></strong>
+          <div class="card-header bg-primary text-white">
 
-        </div>
+              <i class="fas fa-shirt"></i>
 
-        <?php endif; ?>
-        <?php foreach($types as $type): ?>
+              Qamees Measurements
 
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+          </div>
 
-        <label class="form-label">
+          <div class="card-body">
 
-        <?= $type['name'] ?>
+              <div class="row">
 
-        </label>
+              <?php foreach($qameesMeasurements as $type): ?>
 
-       <input
-        type="text"
-        name="measurements[<?= $type['id'] ?>]"
-        class="form-control"
-        value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>">
+                  <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
 
-        </div>
+                      <label class="form-label fw-semibold">
 
-        <?php endforeach; ?>
+                          <?= htmlspecialchars($type['urdu_name'] ?: $type['name']) ?>
 
-        </div>
+                      </label>
+
+                      <input
+                          type="text"
+                          class="form-control"
+                          name="measurements[<?= $type['id'] ?>]"
+                          value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>"
+                          placeholder="<?= htmlspecialchars($type['name'])?? '' ?>">
+
+                  </div>
+
+              <?php endforeach; ?>
+
+              </div>
+
+          </div>
+
+      </div>
+      <!-- ===========================
+          SHALWAR MEASUREMENTS
+      =========================== -->
+
+      <div class="card shadow-sm border-0 mb-4">
+
+          <div class="card-header bg-success text-white">
+
+              <i class="fas fa-ruler"></i>
+
+              Shalwar Measurements
+
+          </div>
+
+          <div class="card-body">
+
+              <div class="row">
+
+              <?php foreach($shalwarMeasurements as $type): ?>
+
+                  <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
+
+                      <label class="form-label fw-semibold">
+
+                          <?= htmlspecialchars($type['urdu_name']?: $type['name']) ?>
+
+                      </label>
+
+                      <input
+                          type="text"
+                          class="form-control"
+                          name="measurements[<?= $type['id'] ?>]"
+                          value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>"
+                          placeholder="<?= htmlspecialchars($type['name']) ?>">
+
+                  </div>
+
+              <?php endforeach; ?>
+
+              </div>
+
+          </div>
+
+      </div>
         <hr class="my-4">
 
-        <h4 class="mb-3">
-        <i class="fas fa-cut"></i>
-        Special Stitching Instructions
-        </h4>
+        <div class="card shadow-sm border-0 mb-4">
 
-        <?php foreach($options as $category=>$items): ?>
+            <div class="card-header bg-warning text-dark">
 
-        <div class="card mb-3">
+                <h5 class="mb-0">
 
-        <div class="card-header bg-light">
+                    <i class="fas fa-cut me-2"></i>
 
-        <strong><?= $category ?></strong>
+                    Special Stitching Instructions
 
-        </div>
+                </h5>
 
-        <div class="card-body">
+            </div>
 
-        <div class="row g-3">
+            <div class="card-body">
+        <div class="row">
 
-        <?php foreach($items as $item): ?>
+        <?php foreach($options as $category => $items): ?>
 
-        <div class="col-md-4 mb-2">
+        <div class="col-lg-6 mb-4">
 
-        <div class="form-check">
+            <div class="card border-0 shadow-sm h-100">
 
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="option<?= $item['id'] ?>"
-        name="options[]"
-        value="<?= $item['id'] ?>"
-        <?= in_array($item['id'], OldInput::get('options', [])) ? 'checked' : '' ?>>
+                <div class="card-header bg-light">
 
-       <label
-          class="form-check-label"
-          for="option<?= $item['id'] ?>">
+                    <h6 class="mb-0">
 
-          <?= htmlspecialchars($item['urdu_name']) ?>
+                        <i class="fas fa-cut text-success me-2"></i>
 
-      </label>
+                        <?= htmlspecialchars($category) ?>
 
-        </div>
+                    </h6>
+
+                </div>
+
+                <div class="card-body">
+
+                    <?php foreach($items as $item): ?>
+                        <?php
+
+                            $name = $item['selection_type'] == 'radio'
+                                ? "options_radio[".$category."]"
+                                : "options[]";
+
+                            ?>
+
+                        <div class="form-check mb-2">
+
+                            <input
+                                class="form-check-input"
+                                type="<?= $item['selection_type'] ?>"
+                                id="option<?= $item['id'] ?>"
+                                name="<?= $name ?>"
+                                value="<?= $item['id'] ?>"
+                                <?= in_array($item['id'], OldInput::get('options', [])) ? 'checked' : '' ?>>
+
+                            <label
+                                class="form-check-label"
+                                for="option<?= $item['id'] ?>">
+
+                                <?= htmlspecialchars($item['urdu_name'] ?: $item['name']) ?>
+
+                            </label>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -185,7 +276,8 @@
 
         </div>
 
-        <?php endforeach; ?>
+        </div>
+    </div>
         <div class="text-end mt-4">
 
         <button class="btn btn-success btn-lg">

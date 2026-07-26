@@ -52,3 +52,28 @@ textarea.form-control{
     margin-left:4px;
 
 }
+/* ===== Measurement Cards ===== */
+
+.card-header h6{
+    font-weight:600;
+}
+
+.form-check{
+    padding:8px 10px;
+    border-radius:8px;
+    transition:.2s;
+}
+
+.form-check:hover{
+    background:#f8f9fa;
+}
+
+.form-check-input{
+    cursor:pointer;
+}
+
+.form-check-label{
+    cursor:pointer;
+    font-weight:500;
+    width:100%;
+}

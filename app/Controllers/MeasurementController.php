@@ -2,33 +2,55 @@
 
 class MeasurementController extends Controller
 {
-   public function create()
-{
-    if (!isset($_GET['order_id'])) {
+    public function create()
+    {
+        if (!isset($_GET['order_id'])) {
 
-        header("Location:index.php?page=customers");
-        exit;
+            header("Location:index.php?page=customers");
+            exit;
 
+        }
+        $optionModel = new StitchingOption();
+        $orderModel = new Order();
+        $measurementModel = new Measurement();
+        $options = $optionModel->getGrouped();
+        $order = $orderModel->find($_GET['order_id']);
+        if (!$order) {
+
+            header("Location:index.php?page=customers");
+            exit;
+
+        }
+        $types = $measurementModel->getTypes($order['garment_type']);
+
+        // Separate measurements by category
+        $qameesMeasurements = [];
+        $shalwarMeasurements = [];
+
+        foreach ($types as $type) {
+
+            switch ($type['category']) {
+
+            case 'Shirt':
+                $qameesMeasurements[] = $type;
+                break;
+
+            case 'Trouser':
+                $shalwarMeasurements[] = $type;
+                break;
+        }
     }
-    $optionModel = new StitchingOption();
-    $orderModel = new Order();
-    $measurementModel = new Measurement();
-    $options = $optionModel->getGrouped();
-    $order = $orderModel->find($_GET['order_id']);
-    if (!$order) {
-
-        header("Location:index.php?page=customers");
-        exit;
-
-    }
-
-    $types = $measurementModel->getTypes($order['garment_type']);
 
     $this->view(
         'measurements/create',
-        compact('order', 'types','options')
+        compact(
+            'order',
+            'qameesMeasurements',
+            'shalwarMeasurements',
+            'options'
+        )
     );
-}
+    }
 
    public function store()
     {
@@ -98,12 +120,20 @@ class MeasurementController extends Controller
 
             );
 
+            $options = $_POST['options'] ?? [];
+
+            if (!empty($_POST['options_radio'])) {
+
+                foreach ($_POST['options_radio'] as $value) {
+
+                    $options[] = $value;
+
+                }
+            }
+
             $measurement->saveOptions(
-
                 $_POST['order_id'],
-
-                $_POST['options'] ?? []
-
+                $options
             );
 
             OldInput::clear();
