@@ -548,7 +548,7 @@ FOOTER
 
 <h3>
 
-<?= htmlspecialchars(Config::get("shop_name")) ?>
+<?= htmlspecialchars(Config::get("shop_name") ?? '') ?>
 
 </h3>
 
@@ -560,7 +560,7 @@ FOOTER
 
 <div>
 
-<?= htmlspecialchars(Config::get("phone")) ?>
+<?= htmlspecialchars(Config::get("phone") ?? '') ?>
 
 </div>
 

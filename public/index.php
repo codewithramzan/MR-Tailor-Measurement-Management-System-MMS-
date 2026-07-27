@@ -149,8 +149,19 @@ switch($page){
     case "update-order":
 
     (new OrderController())->update();
+ 
+        break;
+    case 'invoices':
+        (new InvoiceController())->index();
+        break;
 
-   break;
+    case 'view-invoice':
+        (new InvoiceController())->show();
+        break;
+
+    case 'print-invoice':
+        (new InvoiceController())->print();
+        break;
 
     default:
 

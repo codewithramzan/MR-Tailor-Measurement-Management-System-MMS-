@@ -107,7 +107,19 @@
             </a>
 
         </li>
-                <!-- Reports -->
+        <!-- Invoices -->
+        <li class="nav-item">
+
+            <a href="index.php?page=invoices" class="nav-link">
+
+                <i class="fas fa-file-invoice"></i>
+
+                <span>Invoices</span>
+
+            </a>
+
+        </li>
+                        <!-- Reports -->
         <li>
 
             <a href="#">
