@@ -78,9 +78,9 @@
 
 					<option value="">Select Garment</option>
 
-					<option value="Shalwar Kameez"
-							<?= OldInput::get('garment_type') == "Shalwar Kameez" ? "selected" : "" ?>>
-							Shalwar Kameez
+					<option value="Shalwar Qamees"
+							<?= OldInput::get('garment_type') == "Shalwar Qamees" ? "selected" : "" ?>>
+							Shalwar Qamees
 					</option>
 
 					<option value="Pant"

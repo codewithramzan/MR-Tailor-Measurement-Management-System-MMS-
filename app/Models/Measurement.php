@@ -4,43 +4,23 @@ class Measurement extends Model
 {
     protected $table = "measurements";
 
-    // Get measurement fields by garment category
+    // Get measurement fields by garment type
    public function getTypes($garmentType)
     {
-        // Map garment types to measurement categories
-        $categoryMap = [
-
-            "Shalwar Kameez" => ["Shirt", "Trouser"],
-
-            "Shirt"          => ["Shirt"],
-
-            "Trouser"        => ["Trouser"],
-
-            "Pant"           => ["Trouser"],
-
-        ];
-
-        // Default: use garment type itself
-        $categories = $categoryMap[$garmentType] ?? [$garmentType];
-
-        $placeholders = implode(',', array_fill(0, count($categories), '?'));
-
-        $sql = "
+        $stmt = $this->conn->prepare("
             SELECT *
             FROM measurement_types
-            WHERE category IN ($placeholders)
-            ORDER BY print_order ASC, id ASC
-        ";
+            WHERE garment_type = ?
+            ORDER BY section, print_order, id
+        ");
 
-        $stmt = $this->conn->prepare($sql);
-
-        $stmt->execute($categories);
+        $stmt->execute([$garmentType]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     // Save measurements
-    public function save($orderId, $measurements)
+    public
+     function save($orderId, $measurements)
     {
         // Remove old measurements
         $delete = $this->conn->prepare("
@@ -87,7 +67,7 @@ class Measurement extends Model
     {
         $stmt = $this->conn->prepare("
             SELECT
-                measurement_types.name,
+                measurement_types.option_name,
                 measurements.measurement_value
             FROM measurements
             JOIN measurement_types
@@ -177,80 +157,89 @@ class Measurement extends Model
         }
     }
 
+public function getOptions($orderId)
+{
+    $sql = "
+        SELECT
+            s.id,
+            s.option_name,
+            s.urdu_name,
+            s.category,
+            s.selection_type,
+            s.print_order
+        FROM order_stitching_options os
 
-    public function getSlip($orderId)
+        INNER JOIN stitching_options s
+            ON s.id = os.option_id
+
+        WHERE os.order_id = ?
+
+        ORDER BY
+            s.category ASC,
+            s.print_order ASC,
+            s.id ASC
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$orderId]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+   public function getSlip($orderId)
     {
         $sql = "
         SELECT
 
-        o.id,
-        o.booking_no,
-        o.order_date,
-        o.delivery_date,
-        o.garment_type,
-        o.total_amount,
-        o.advance,
-        o.discount,
-        o.balance,
+            o.id,
+            o.booking_no,
+            o.order_date,
+            o.delivery_date,
+            o.garment_type,
+            o.total_amount,
+            o.advance,
+            o.discount,
+            o.balance,
 
-        c.full_name,
-        c.phone,
-        c.village,
+            c.full_name,
+            c.phone,
+            c.village,
 
-        mt.name,
-        mt.urdu_name,
-        mt.print_order,
+            mt.id AS measurement_type_id,
+            mt.option_name,
+            mt.urdu_name,
+            mt.section,
+            mt.garment_type,
+            mt.print_order,
 
-        m.measurement_value
+            m.measurement_value
 
         FROM orders o
 
         INNER JOIN customers c
-        ON c.id=o.customer_id
+            ON c.id = o.customer_id
+
+        INNER JOIN measurement_types mt
+            ON mt.garment_type = o.garment_type
 
         LEFT JOIN measurements m
-        ON o.id=m.order_id
+            ON m.order_id = o.id
+            AND m.measurement_type_id = mt.id
 
-        LEFT JOIN measurement_types mt
-        ON mt.id=m.measurement_type_id
+        WHERE o.id = ?
 
-        WHERE o.id=?
-
-        ORDER BY mt.print_order ASC
+        ORDER BY
+            mt.section,
+            mt.print_order,
+            mt.id
         ";
 
-        $stmt=$this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
         $stmt->execute([$orderId]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getOptions($orderId)
-    {
-        $sql="
-
-        SELECT
-
-        s.urdu_name
-
-        FROM order_stitching_options o
-
-        INNER JOIN stitching_options s
-
-        ON s.id=o.option_id
-
-        WHERE o.order_id=?
-
-        ";
-
-        $stmt=$this->conn->prepare($sql);
-
-        $stmt->execute([$orderId]);
-
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }
-
     public function saveOptions($orderId,$options)
     {
         $delete=$this->conn->prepare(
@@ -287,26 +276,16 @@ class Measurement extends Model
             ]);
         }
     }
-
-
-    public function getSelectedOptions($orderId)
+    public function getSelectedOptionIds($orderId)
     {
-        $stmt=$this->conn->prepare(
-
-            "SELECT option_id
-
+        $stmt = $this->conn->prepare("
+            SELECT option_id
             FROM order_stitching_options
-
-            WHERE order_id=?"
-
-        );
+            WHERE order_id = ?
+        ");
 
         $stmt->execute([$orderId]);
 
-        return $stmt->fetchAll(
-
-            PDO::FETCH_COLUMN
-
-        );
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 }

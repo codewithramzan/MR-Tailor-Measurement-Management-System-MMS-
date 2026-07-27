@@ -4,54 +4,79 @@ class MeasurementController extends Controller
 {
     public function create()
     {
-        if (!isset($_GET['order_id'])) {
+        // -----------------------------
+        // Validate Order ID
+        // -----------------------------
+        $orderId = filter_input(INPUT_GET, 'order_id', FILTER_VALIDATE_INT);
 
-            header("Location:index.php?page=customers");
-            exit;
+        if (!$orderId) {
 
+            return $this->redirectWithMessage(
+                "orders",
+                "danger",
+                "Invalid order selected."
+            );
         }
-        $optionModel = new StitchingOption();
-        $orderModel = new Order();
-        $measurementModel = new Measurement();
-        $options = $optionModel->getGrouped();
-        $order = $orderModel->find($_GET['order_id']);
+
+        // -----------------------------
+        // Load Models
+        // -----------------------------
+        $orderModel        = new Order();
+        $measurementModel  = new Measurement();
+        $stitchingModel    = new StitchingOption();
+
+        // -----------------------------
+        // Fetch Order
+        // -----------------------------
+        $order = $orderModel->find($orderId);
+
         if (!$order) {
 
-            header("Location:index.php?page=customers");
-            exit;
-
+            return $this->redirectWithMessage(
+                "orders",
+                "danger",
+                "Order not found."
+            );
         }
+
+        // -----------------------------
+        // Fetch Measurement Types
+        // -----------------------------
         $types = $measurementModel->getTypes($order['garment_type']);
 
-        // Separate measurements by category
-        $qameesMeasurements = [];
-        $shalwarMeasurements = [];
+        // -----------------------------
+        // Group Measurements by Section
+        // -----------------------------
+        $sections = [];
 
         foreach ($types as $type) {
 
-            switch ($type['category']) {
+            $section = trim($type['section'] ?? '');
 
-            case 'Shirt':
-                $qameesMeasurements[] = $type;
-                break;
+            if ($section === '') {
+                $section = 'General';
+            }
 
-            case 'Trouser':
-                $shalwarMeasurements[] = $type;
-                break;
+            $sections[$section][] = $type;
         }
-    }
 
-    $this->view(
-        'measurements/create',
-        compact(
-            'order',
-            'qameesMeasurements',
-            'shalwarMeasurements',
-            'options'
-        )
-    );
-    }
+        // -----------------------------
+        // Fetch Stitching Options
+        // -----------------------------
+        $options = $stitchingModel->getGrouped();
 
+        // -----------------------------
+        // Render View
+        // -----------------------------
+        $this->view(
+            'measurements/create',
+            [
+                'order'    => $order,
+                'sections' => $sections,
+                'options'  => $options
+            ]
+        );
+    }
    public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST")
@@ -140,7 +165,7 @@ class MeasurementController extends Controller
 
             $this->redirectWithMessage(
 
-                "customers",
+                "orders",
 
                 "success",
 
@@ -153,40 +178,71 @@ class MeasurementController extends Controller
 
    public function edit()
     {
-        $orderId=$_GET['order_id'];
+        $orderId = filter_input(INPUT_GET, 'order_id', FILTER_VALIDATE_INT);
 
-        $measurement=new Measurement();
+        if (!$orderId) {
 
-        $orderModel=new Order();
+            return $this->redirectWithMessage(
+                "orders",
+                "danger",
+                "Invalid order selected."
+            );
+        }
 
-        $stitching=new StitchingOption();
+        $orderModel = new Order();
+        $measurementModel = new Measurement();
+        $stitchingModel = new StitchingOption();
 
-        $order=$orderModel->find($orderId);
+        // Order
+        $order = $orderModel->find($orderId);
 
-        $types=$measurement->getTypes(
+        if (!$order) {
 
-            $order['garment_type']
-        );
-        $values=$measurement->getMeasurements(
-            $orderId
-        );
-        $selected=$measurement->getSelectedOptions(
-           $orderId
-        );
-        $options=$stitching->getGrouped();
+            return $this->redirectWithMessage(
+                "orders",
+                "danger",
+                "Order not found."
+            );
+        }
+
+        // Measurement fields
+        $types = $measurementModel->getTypes($order['garment_type']);
+
+        // Existing measurements
+        $savedMeasurements = $measurementModel->getMeasurements($orderId);
+
+        // Selected stitching options
+        $selectedOptions = $measurementModel->getSelectedOptionIds($orderId);
+
+        // Group by section
+        $sections = [];
+
+        foreach ($types as $type) {
+
+            $section = trim($type['section'] ?? '');
+
+            if ($section === '') {
+                $section = 'General';
+            }
+
+            $sections[$section][] = $type;
+        }
+
+        // All stitching options
+        $options = $stitchingModel->getGrouped();
+
         $this->view(
             'measurements/edit',
-
-            compact(
-                'order',
-                'types',
-                'values',
-                'selected',
-                'options'
-            )
-
+            [
+                'order' => $order,
+                'sections' => $sections,
+                'savedMeasurements' => $savedMeasurements,
+                'selectedOptions' => $selectedOptions,
+                'options' => $options
+            ]
         );
     }
+    
 
 
     public function update()
@@ -278,31 +334,24 @@ class MeasurementController extends Controller
         }
     }
 
-    public function printSlip()
-        {
-            $measurement = new Measurement();
+   public function printSlip()
+    {
+        $measurement = new Measurement();
 
-            $rows = $measurement->getSlip($_GET['id']);
+        $rows = $measurement->getSlip($_GET['id']);
 
-            if(empty($rows)){
-                die("No data found.");
-            }
-
-            // Selected options for this order
-            $options = $measurement->getOptions($_GET['id']);
-
-            // All available options
-            $stitching = new StitchingOption();
-
-            $allOptions = $stitching->getGrouped();
-
-            $this->view(
-                'measurements/print',
-                compact(
-                    'rows',
-                    'options',
-                    'allOptions'
-                )
-            );
+        if (empty($rows)) {
+            die("No data found.");
         }
+
+        $options = $measurement->getOptions($_GET['id']);
+
+        $this->view(
+            'measurements/print',
+            compact(
+                'rows',
+                'options'
+            )
+        );
+    }
 }

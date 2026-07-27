@@ -1,398 +1,591 @@
 <?php
 
 $info = $rows[0];
+
+/*
+|--------------------------------------------------------------------------
+| Build Measurement Array
+|--------------------------------------------------------------------------
+*/
+
 $measurements = [];
 
-foreach($rows as $row){
+foreach ($rows as $row) {
 
-    if(!empty($row['urdu_name'])){
+    $section = trim($row['section'] ?? '');
 
-        $measurements[$row['urdu_name']] = $row['measurement_value'];
-
+    if ($section == '') {
+        $section = 'General';
     }
 
+    $label = trim($row['urdu_name'] ?? '');
+
+    if ($label == '') {
+        $label = $row['option_name'];
+    }
+
+    $measurements[$section][] = [
+        'label' => $label,
+        'value' => $row['measurement_value']
+    ];
 }
+
 ?>
 <!DOCTYPE html>
-
 <html lang="ur" dir="rtl">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>Measurement Slip</title>
-
-<link rel="stylesheet" href="../../../public/assets/css/print.css">
-<style>
-    
-*{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
-}
-
-body{
-
-background:#eee;
-
-font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif;
-
-padding:20px;
-
-}
-
-.slip{
-
-width:820px;
-
-margin:auto;
-
-background:#fff;
-
-border:2px solid #000;
-
-padding:20px;
-
-}
-
-.title{
-
-text-align:center;
-
-font-size:34px;
-
-font-weight:bold;
-
-letter-spacing:2px;
-
-}
-
-.subtitle{
-
-text-align:center;
-
-font-size:18px;
-
-margin-bottom:15px;
-
-}
-
-.info{
-
-width:100%;
-
-border-collapse:collapse;
-
-margin-bottom:15px;
-
-}
-
-.info td{
-
-padding:8px;
-
-font-size:20px;
-
-}
-
-.measurements{
-
-width:100%;
-
-border-collapse:collapse;
-
-}
-
-.measurements td{
-
-border:1px solid #000;
-
-padding:8px;
-
-font-size:20px;
-
-height:40px;
-
-}
-
-.option-grid{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:10px;
-
-margin-top:25px;
-
-font-size:20px;
-
-}
-
-.footer{
-
-margin-top:25px;
-
-text-align:center;
-
-font-size:18px;
-
-}
-
-.print{
-
-margin-top:20px;
-
-text-align:center;
-
-}
-
-button{
-
-padding:12px 40px;
-
-font-size:18px;
-
-cursor:pointer;
-
-}
-
-@media print{
-
-button{
-
-display:none;
-
-}
-
-body{
-
-background:#fff;
-
-padding:0;
-
-}
-
-.slip{
-
-border:none;
-
-width:100%;
-
-}
-
-}
-</style>
+<title>
+<?= htmlspecialchars(Config::get("shop_name")) ?>
+</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/print.css">
 
 </head>
 
 <body>
 
-        <div class="slip">
+<div class="print-wrapper">
 
-            <div class="title">
+<div class="slip">
 
-            <?= Config::get("shop_name") ?>
-            </div>
+<!-- ===========================
+HEADER
+=========================== -->
 
-            <div class="subtitle">
+<div class="header">
 
-            پیمائش سلپ
+<div class="logo">
 
-            </div>
+✂
 
-            <table class="info">
+</div>
 
-            <tr>
+<div class="shop">
 
-            <td><b>نام</b></td>
+<h1>
 
-            <td><?= $info['full_name'] ?></td>
+<?= htmlspecialchars(Config::get("shop_name")) ?>
 
-            <td><b>فون</b></td>
+</h1>
 
-            <td><?= $info['phone'] ?></td>
+<p>
 
-            </tr>
+پیمائش سلپ
 
-            <tr>
+</p>
 
-            <td><b>گاؤں</b></td>
+<small>
 
-            <td><?= $info['village'] ?></td>
+Professional Tailoring Management System
 
-            <td><b>بکنگ</b></td>
+</small>
 
-            <td><?= $info['booking_no'] ?></td>
+</div>
 
-            </tr>
+</div>
 
-            <tr>
+<!-- ===========================
+CUSTOMER + ORDER INFO
+=========================== -->
 
-            <td><b>آرڈر</b></td>
+<div class="info-grid">
 
-            <td><?= $info['order_date'] ?></td>
+<!-- Customer -->
 
-            <td><b>ڈیلیوری</b></td>
+<div class="card">
 
-            <td><?= $info['delivery_date'] ?></td>
+<div class="card-header">
 
-            </tr>
+کسٹمر کی معلومات
 
-            </table>
+</div>
 
-            <table class="measurements">
+<div class="card-body">
 
+<table class="info-table">
 
+<tr>
 
+<td>نام</td>
 
+<td><?= htmlspecialchars($info['full_name']) ?></td>
 
-            <?php
+</tr>
 
-            $labels=array_keys($measurements);
+<tr>
 
-            $values=array_values($measurements);
+<td>فون</td>
 
-            $count=max(count($labels),10);
+<td><?= htmlspecialchars($info['phone']) ?></td>
 
-            for($i=0;$i<$count;$i+=2){
+</tr>
 
-            ?>
+<tr>
 
-            <tr>
+<td>گاؤں</td>
 
-            <td><?= $labels[$i]??'' ?></td>
+<td><?= htmlspecialchars($info['village']) ?></td>
 
-            <td><?= $values[$i]??'' ?></td>
+</tr>
 
-            <td><?= $labels[$i+1]??'' ?></td>
+<tr>
 
-            <td><?= $values[$i+1]??'' ?></td>
+<td>لباس</td>
 
-            </tr>
+<td><?= htmlspecialchars($info['garment_type']) ?></td>
 
-            <?php } ?>
+</tr>
 
-            </table>
+</table>
 
+</div>
 
-            <hr>
+</div>
 
-            <h3 style="text-align:center;margin:20px 0;">
-            خصوصی ہدایات
-            </h3>
+<!-- Order -->
 
-            <?php foreach($allOptions as $category=>$items): ?>
+<div class="card">
 
-            <div style="margin-bottom:18px;">
+<div class="card-header">
 
-            <h4 style="border-bottom:1px solid #000;padding-bottom:5px;">
+آرڈر کی معلومات
 
-            <?= htmlspecialchars($category) ?>
+</div>
 
-            </h4>
+<div class="card-body">
 
-            <div class="option-grid">
+<table class="info-table">
 
-            <?php foreach($items as $item): ?>
+<tr>
 
-            <div>
+<td>بکنگ</td>
 
-            <?= in_array($item['urdu_name'],$options) ? "☑" : "☐" ?>
+<td><?= htmlspecialchars($info['booking_no']) ?></td>
 
-            <?= htmlspecialchars($item['urdu_name']) ?>
+</tr>
 
-            </div>
+<tr>
 
-            <?php endforeach; ?>
+<td>آرڈر</td>
 
-            </div>
+<td><?= htmlspecialchars($info['order_date']) ?></td>
 
-            </div>
+</tr>
 
-            <?php endforeach; ?>
+<tr>
 
-            </div>
+<td>ڈیلیوری</td>
 
-            <hr>
+<td><?= htmlspecialchars($info['delivery_date']) ?></td>
 
-            <table class="info">
+</tr>
 
-            <tr>
+<tr>
 
-            <td>کل رقم</td>
-            
-            <td>
-            <?= Config::get("currency") ?>  
-            <?= number_format($info['total_amount']) ?>
-            </td>
+<td>حالت</td>
 
-            <td>ایڈوانس</td>
+<td><?= htmlspecialchars($info['status'] ?? '') ?></td>
 
-            <td>
-                <?= Config::get("currency") ?>
-                <?= number_format($info['advance']) ?></td>
+</tr>
 
-            </tr>
+</table>
 
-            <tr>
+</div>
 
-            <td>رعایت</td>
+</div>
 
-            <td>
-            <?= Config::get("currency") ?>
-            <?= number_format($info['discount']) ?></td>
+</div>
 
-            <td>بقایا</td>
+<!-- ===========================
+MEASUREMENTS
+=========================== -->
 
-            <td>
-            <?= Config::get("currency") ?>    
-            <?= number_format($info['balance']) ?></td>
+<div class="section-title">
 
-            </tr>
+    <h2>
 
-            </table>
+        پیمائش
 
+    </h2>
 
-            <div class="footer">
+</div>
 
-            <?= Config::get("shop_name") ?>
+<div class="measurement-wrapper">
 
-            <br>
+<?php
 
-            <?= Config::get("village") ?>
+/*
+|--------------------------------------------------------------------------
+| Split Sections into Two Columns
+|--------------------------------------------------------------------------
+*/
 
-            <br>
+$sectionNames = array_keys($measurements);
 
-            <?= Config::get("phone") ?>
+$totalSections = count($sectionNames);
 
-            <br><br>
+$leftCount = ceil($totalSections / 2);
 
-            ____________________
+$leftSections = array_slice($sectionNames, 0, $leftCount);
 
-            <br>
+$rightSections = array_slice($sectionNames, $leftCount);
 
-            دستخط
+?>
 
-            </div>
+<div class="measurement-column">
 
-            <div class="print">
+<?php foreach($leftSections as $section): ?>
 
-            <button onclick="window.print()">
+<div class="measurement-card">
 
-            🖨 Print
+<div class="measurement-header">
 
-            </button>
+<?= htmlspecialchars($section) ?>
 
-            </div>
+</div>
 
-            </div>
+<table class="measurement-table">
 
+<tbody>
 
+<?php foreach($measurements[$section] as $item): ?>
 
+<tr>
+
+<td class="label">
+
+<?= htmlspecialchars($item['label']) ?>
+
+</td>
+
+<td class="value">
+
+<?= htmlspecialchars($item['value']) ?>
+
+</td>
+
+</tr>
+
+<?php endforeach; ?>
+
+</tbody>
+
+</table>
+
+</div>
+
+<?php endforeach; ?>
+
+</div>
+
+<div class="measurement-column">
+
+<?php foreach($rightSections as $section): ?>
+
+<div class="measurement-card">
+
+<div class="measurement-header">
+
+<?= htmlspecialchars($section) ?>
+
+</div>
+
+<table class="measurement-table">
+
+<tbody>
+
+<?php foreach($measurements[$section] as $item): ?>
+
+<tr>
+
+<td class="label">
+
+<?= htmlspecialchars($item['label']) ?>
+
+</td>
+
+<td class="value">
+
+<?= htmlspecialchars($item['value']) ?>
+
+</td>
+
+</tr>
+
+<?php endforeach; ?>
+
+</tbody>
+
+</table>
+
+</div>
+
+<?php endforeach; ?>
+
+</div>
+
+</div>
+
+
+<!-- ===========================
+SPECIAL STITCHING INSTRUCTIONS
+=========================== -->
+
+<?php if(!empty($allOptions)): ?>
+
+<div class="section-title">
+
+    <h2>
+
+        خصوصی سلائی ہدایات
+
+    </h2>
+
+</div>
+
+<div class="options-wrapper">
+
+<?php foreach($allOptions as $category=>$items): ?>
+
+<?php
+
+$selected=[];
+
+foreach($items as $item){
+
+    if(in_array($item['urdu_name'],$options) || in_array($item['name'],$options)){
+
+        $selected[]=$item;
+
+    }
+
+}
+
+if(empty($selected)){
+    continue;
+}
+
+?>
+
+<div class="option-card">
+
+<div class="option-header">
+
+<?= htmlspecialchars($category) ?>
+
+</div>
+
+<div class="option-body">
+
+<?php foreach($selected as $item): ?>
+
+<div class="option-item">
+
+✓ <?= htmlspecialchars($item['urdu_name'] ?: $item['name']) ?>
+
+</div>
+
+<?php endforeach; ?>
+
+</div>
+
+</div>
+
+<?php endforeach; ?>
+
+</div>
+
+<?php endif; ?>
+
+
+<!-- ===========================
+PAYMENT SUMMARY
+=========================== -->
+
+<div class="section-title">
+
+<h2>
+
+Payment Summary
+
+</h2>
+
+</div>
+
+<div class="payment-card">
+
+<table>
+
+<tr>
+
+<td>Total</td>
+
+<td>
+
+<?= Config::get("currency") ?>
+
+<?= number_format($info['total_amount']) ?>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Advance</td>
+
+<td>
+
+<?= Config::get("currency") ?>
+
+<?= number_format($info['advance']) ?>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Discount</td>
+
+<td>
+
+<?= Config::get("currency") ?>
+
+<?= number_format($info['discount']) ?>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Balance</strong></td>
+
+<td>
+
+<strong>
+
+<?= Config::get("currency") ?>
+
+<?= number_format($info['balance']) ?>
+
+</strong>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- ===========================
+TAILOR NOTES
+=========================== -->
+
+<div class="section-title">
+
+<h2>
+
+Notes
+
+</h2>
+
+</div>
+
+<div class="notes-box">
+
+<div></div>
+
+<div></div>
+
+<div></div>
+
+</div>
+
+
+<!-- ===========================
+SIGNATURE
+=========================== -->
+
+<div class="signature-row">
+
+<div>
+
+_________________________
+
+<br>
+
+Customer Signature
+
+</div>
+
+<div>
+
+_________________________
+
+<br>
+
+Tailor Signature
+
+</div>
+
+</div>
+
+
+<!-- ===========================
+FOOTER
+=========================== -->
+
+<div class="footer">
+
+<h3>
+
+<?= htmlspecialchars(Config::get("shop_name")) ?>
+
+</h3>
+
+<div>
+
+<?= htmlspecialchars(Config::get("village") ?? '') ?>
+
+</div>
+
+<div>
+
+<?= htmlspecialchars(Config::get("phone")) ?>
+
+</div>
+
+<div>
+
+Thank You For Visiting
+
+</div>
+
+</div>
+
+
+<div class="print-btn">
+
+<button onclick="window.print()">
+
+🖨 Print Slip
+
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </body>
 

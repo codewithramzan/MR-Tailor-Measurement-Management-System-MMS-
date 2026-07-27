@@ -180,7 +180,7 @@
 
     <label class="fw-bold">
 
-    <?= $row['name'] ?>
+    <?= $row['option_name'] ?>
 
     </label>
 

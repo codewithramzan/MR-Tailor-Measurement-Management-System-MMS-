@@ -2,302 +2,300 @@
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
 <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
+<div class="card form-card shadow-sm">
 
-    <div class="card form-card shadow-sm">
-
-      <div class="card-header bg-white border-0">
+    <div class="card-header bg-white border-0">
 
         <h4 class="mb-0">
-
-          <i class="fas fa-ruler-combined text-success"></i>
-
-          Take Measurements
-
+            <i class="fas fa-ruler-combined text-success"></i>
+            Take Measurements
         </h4>
 
         <small class="text-muted">
-
-          Enter customer measurements and stitching instructions.
-
+            Enter customer measurements and stitching instructions.
         </small>
 
-        </div>
+    </div>
 
-        <div class="card-body">
+    <div class="card-body">
 
         <!-- Customer Information -->
 
-        <div class="row mb-4 g-3">
+        <div class="row mb-4">
 
-        <div class="col-md-3">
+            <div class="col-md-3">
 
-        <label class=" form-label">
+                <label class="form-label fw-bold">Booking No</label>
 
-        Booking No
-        <span class="required">*</span>
-        </label>
-
-        <input
-        type="text"
-        class="form-control"
-        value="<?= $order['booking_no'] ?? '' ?>"
-        readonly>
-
-        </div>
-
-        <div class="col-md-3">
-
-        <label class=" form-label">
-
-        Customer
-        <span class="required">*</span>
-        </label>
-
-        <input
-        type="text"
-        class="form-control"
-        value="<?= $order['full_name'] ?? '' ?>"
-        readonly>
-
-        </div>
-
-        <div class="col-md-3">
-
-        <label class="form-label">
-
-        Phone
-        <span class="required">*</span>
-        </label>
-
-        <input
-        type="text"
-        class="form-control"
-        value="<?= $order['phone'] ?? '' ?>"
-        readonly>
-
-        </div>
-
-        <div class="col-md-3">
-
-        <label class="form-label">
-
-        Garment
-        <span class="required">*</span>
-        </label>
-
-        <input
-        type="text"
-        class="form-control"
-        value="<?= $order['garment_type'] ?? '' ?>"
-        readonly>
-
-        </div>
-
-        </div>
-
-        <hr>
-
-        <form method="POST" action="index.php?page=save-measurements">
-
-        <input
-        type="hidden"
-        name="order_id"
-        value="<?= $order['id'] ?? '' ?>">
-
-            <!-- ===========================
-          QAMEES MEASUREMENTS
-      =========================== -->
-
-      <div class="card shadow-sm border-0 mb-4">
-
-          <div class="card-header bg-primary text-white">
-
-              <i class="fas fa-shirt"></i>
-
-              Qamees Measurements
-
-          </div>
-
-          <div class="card-body">
-
-              <div class="row">
-
-              <?php foreach($qameesMeasurements as $type): ?>
-
-                  <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
-
-                      <label class="form-label fw-semibold">
-
-                          <?= htmlspecialchars($type['urdu_name'] ?: $type['name']) ?>
-
-                      </label>
-
-                      <input
-                          type="text"
-                          class="form-control"
-                          name="measurements[<?= $type['id'] ?>]"
-                          value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>"
-                          placeholder="<?= htmlspecialchars($type['name'])?? '' ?>">
-
-                  </div>
-
-              <?php endforeach; ?>
-
-              </div>
-
-          </div>
-
-      </div>
-      <!-- ===========================
-          SHALWAR MEASUREMENTS
-      =========================== -->
-
-      <div class="card shadow-sm border-0 mb-4">
-
-          <div class="card-header bg-success text-white">
-
-              <i class="fas fa-ruler"></i>
-
-              Shalwar Measurements
-
-          </div>
-
-          <div class="card-body">
-
-              <div class="row">
-
-              <?php foreach($shalwarMeasurements as $type): ?>
-
-                  <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
-
-                      <label class="form-label fw-semibold">
-
-                          <?= htmlspecialchars($type['urdu_name']?: $type['name']) ?>
-
-                      </label>
-
-                      <input
-                          type="text"
-                          class="form-control"
-                          name="measurements[<?= $type['id'] ?>]"
-                          value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>"
-                          placeholder="<?= htmlspecialchars($type['name']) ?>">
-
-                  </div>
-
-              <?php endforeach; ?>
-
-              </div>
-
-          </div>
-
-      </div>
-        <hr class="my-4">
-
-        <div class="card shadow-sm border-0 mb-4">
-
-            <div class="card-header bg-warning text-dark">
-
-                <h5 class="mb-0">
-
-                    <i class="fas fa-cut me-2"></i>
-
-                    Special Stitching Instructions
-
-                </h5>
+                <input
+                    type="text"
+                    class="form-control"
+                    readonly
+                    value="<?= htmlspecialchars($order['booking_no'] ?? '') ?>">
 
             </div>
 
-            <div class="card-body">
-        <div class="row">
+            <div class="col-md-3">
 
-        <?php foreach($options as $category => $items): ?>
+                <label class="form-label fw-bold">Customer</label>
 
-        <div class="col-lg-6 mb-4">
+                <input
+                    type="text"
+                    class="form-control"
+                    readonly
+                    value="<?= htmlspecialchars($order['full_name'] ?? '') ?>">
 
-            <div class="card border-0 shadow-sm h-100">
+            </div>
 
-                <div class="card-header bg-light">
+            <div class="col-md-3">
 
-                    <h6 class="mb-0">
+                <label class="form-label fw-bold">Phone</label>
 
-                        <i class="fas fa-cut text-success me-2"></i>
+                <input
+                    type="text"
+                    class="form-control"
+                    readonly
+                    value="<?= htmlspecialchars($order['phone'] ?? '') ?>">
 
-                        <?= htmlspecialchars($category) ?>
+            </div>
 
-                    </h6>
+            <div class="col-md-3">
+
+                <label class="form-label fw-bold">Garment</label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    readonly
+                    value="<?= htmlspecialchars($order['garment_type'] ?? '') ?>">
+
+            </div>
+
+        </div>
+
+        <form method="POST" action="index.php?page=save-measurements">
+
+            <input
+                type="hidden"
+                name="order_id"
+                value="<?= $order['id'] ?? '' ?>">
+
+            <!-- ========================= -->
+            <!-- Dynamic Measurement Groups -->
+            <!-- ========================= -->
+
+            <?php foreach($sections as $section => $items): ?>
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-primary text-white">
+
+                        <h5 class="mb-0">
+
+                            <i class="fas fa-ruler me-2"></i>
+
+                            <?= htmlspecialchars($section) ?>
+
+                        </h5>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <?php foreach($items as $type): ?>
+
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
+
+                                    <label class="form-label fw-semibold">
+
+                                        <?php
+                                        $label = trim((string)($type['urdu_name'] ?? ''));
+
+                                        if ($label === '') {
+                                            $label = $type['option_name'] ?? '';
+                                        }
+                                        ?>
+
+                                        <?= htmlspecialchars($label) ?>
+
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="measurements[<?= $type['id'] ?>]"
+                                        value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>"
+                                        placeholder="<?= htmlspecialchars($type['option_name'] ?? '') ?>">
+
+                                </div>
+
+                            <?php endforeach; ?>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <?php endforeach; ?>
+
+            <!-- ========================= -->
+            <!-- Stitching Instructions -->
+            <!-- ========================= -->
+
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-warning">
+
+                    <h5 class="mb-0">
+
+                        <i class="fas fa-cut me-2"></i>
+
+                        Special Stitching Instructions
+
+                    </h5>
 
                 </div>
 
                 <div class="card-body">
 
-                    <?php foreach($items as $item): ?>
-                        <?php
+                    <div class="row">
 
-                            $name = $item['selection_type'] == 'radio'
-                                ? "options_radio[".$category."]"
-                                : "options[]";
+                        <?php foreach($options as $category=>$items): ?>
 
-                            ?>
+                            <div class="col-lg-6 mb-4">
 
-                        <div class="form-check mb-2">
+                                <div class="card h-100">
 
-                            <input
-                                class="form-check-input"
-                                type="<?= $item['selection_type'] ?>"
-                                id="option<?= $item['id'] ?>"
-                                name="<?= $name ?>"
-                                value="<?= $item['id'] ?>"
-                                <?= in_array($item['id'], OldInput::get('options', [])) ? 'checked' : '' ?>>
+                                    <div class="card-header bg-light">
 
-                            <label
-                                class="form-check-label"
-                                for="option<?= $item['id'] ?>">
+                                        <strong>
 
-                                <?= htmlspecialchars($item['urdu_name'] ?: $item['name']) ?>
+                                            <?= htmlspecialchars($category) ?>
 
-                            </label>
+                                        </strong>
 
-                        </div>
+                                    </div>
 
-                    <?php endforeach; ?>
+                                    <div class="card-body">
+
+                                <?php foreach($items as $item): ?>
+
+                                <?php
+
+                                /*
+                                |--------------------------------------------------------------------------
+                                | Field Name
+                                |--------------------------------------------------------------------------
+                                */
+
+                                if ($item['selection_type'] === 'radio') {
+
+                                    $name = "options_radio[$category]";
+
+                                } else {
+
+                                    $name = "options[]";
+
+                                }
+
+                                /*
+                                |--------------------------------------------------------------------------
+                                | Restore Old Values
+                                |--------------------------------------------------------------------------
+                                */
+
+                                $oldOptions = OldInput::get('options', []);
+                                $oldRadio   = OldInput::get('options_radio', []);
+
+                                /*
+                                |--------------------------------------------------------------------------
+                                | Checked State
+                                |--------------------------------------------------------------------------
+                                */
+
+                                if ($item['selection_type'] === 'radio') {
+
+                                    $checked =
+                                        isset($oldRadio[$category]) &&
+                                        (int)$oldRadio[$category] === (int)$item['id'];
+
+                                } else {
+
+                                    $checked = in_array((int)$item['id'], array_map('intval', $oldOptions), true);
+
+                                }
+
+                                /*
+                                |--------------------------------------------------------------------------
+                                | Label
+                                |--------------------------------------------------------------------------
+                                */
+
+                                $label = trim((string)($item['urdu_name'] ?? ''));
+
+                                if ($label === '') {
+                                    $label = $item['name'] ?? '';
+                                }
+
+                                ?>
+
+                                <div class="form-check mb-2">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="<?= htmlspecialchars($item['selection_type']) ?>"
+                                        id="option<?= (int)$item['id'] ?>"
+                                        name="<?= htmlspecialchars($name) ?>"
+                                        value="<?= (int)$item['id'] ?>"
+                                        <?= $checked ? 'checked' : '' ?>
+                                    >
+
+                                    <label
+                                        class="form-check-label"
+                                        for="option<?= (int)$item['id'] ?>">
+
+                                        <?= htmlspecialchars($label) ?>
+
+                                    </label>
+
+                                </div>
+
+                            <?php endforeach; ?>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        <?php endforeach; ?>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+            <div class="text-end">
 
-        <?php endforeach; ?>
+                <button class="btn btn-success btn-lg">
 
-        </div>
+                    <i class="fas fa-save"></i>
 
-        </div>
+                    Save Measurements
 
-        </div>
+                </button>
 
-        </div>
-    </div>
-        <div class="text-end mt-4">
-
-        <button class="btn btn-success btn-lg">
-
-        <i class="fas fa-save"></i>
-
-        Save Measurements
-
-        </button>
-
-        </div>
+            </div>
 
         </form>
 
-        </div>
-
-      </div>
-
     </div>
 
-    </div>
-    <?php OldInput::clear(); ?>
+</div>
+
+<?php OldInput::clear(); ?>
+
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>
