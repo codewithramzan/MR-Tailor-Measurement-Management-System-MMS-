@@ -1,25 +1,17 @@
-document.querySelectorAll(".menu-toggle").forEach(item=>{
+document.querySelectorAll(".menu-toggle").forEach(menu => {
 
-item.addEventListener("click",function(e){
+    menu.addEventListener("click", function (e) {
 
-e.preventDefault();
+        e.preventDefault();
 
-const parent=this.parentElement;
+        const parent = this.parentElement;
 
-parent.classList.toggle("open");
+        const submenu = parent.querySelector(".submenu");
 
-const submenu=parent.querySelector(".submenu");
+        parent.classList.toggle("open");
 
-if(submenu.style.display==="block"){
+        submenu.classList.toggle("show");
 
-submenu.style.display="none";
-
-}else{
-
-submenu.style.display="block";
-
-}
-
-});
+    });
 
 });
