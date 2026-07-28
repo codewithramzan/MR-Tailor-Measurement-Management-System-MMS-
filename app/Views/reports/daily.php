@@ -213,15 +213,39 @@ foreach($reports as $row){
 
             <div>
 
+             <div class="btn-group">
+
                 <button
                     onclick="window.print()"
-                    class="btn btn-success btn-sm">
+                    class="btn btn-secondary btn-sm">
 
                     <i class="fas fa-print"></i>
 
                     Print
 
                 </button>
+
+                <a
+                   href="index.php?page=export&type=daily&format=pdf&date=<?= urlencode($date) ?>"
+                    class="btn btn-danger btn-sm">
+
+                    <i class="fas fa-file-pdf"></i>
+
+                    PDF
+
+                </a>
+
+                <a
+                   href="index.php?page=export&type=daily&format=excel&date=<?= urlencode($date) ?>"
+                    class="btn btn-success btn-sm">
+
+                    <i class="fas fa-file-excel"></i>
+
+                    Excel
+
+                </a>
+
+            </div>
 
             </div>
 

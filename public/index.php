@@ -1,4 +1,5 @@
 <?php
+require_once "../vendor/autoload.php";
 require_once "../config/config.php";
 require_once "../app/Core/Autoload.php";
 
@@ -215,6 +216,16 @@ switch($page){
     case 'invoice-report':
 
         (new ReportController())->invoices();
+
+        break;
+
+    case 'export':
+
+        require_once "../app/Controllers/ExportController.php";
+
+        $controller = new ExportController();
+
+        $controller->export();
 
         break;
 

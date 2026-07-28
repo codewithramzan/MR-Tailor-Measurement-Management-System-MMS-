@@ -155,15 +155,39 @@ foreach($reports as $row){
 
             </strong>
 
-            <button
-                onclick="window.print()"
-                class="btn btn-success btn-sm">
+            <div class="btn-group">
 
-                <i class="fas fa-print"></i>
+                <button
+                    onclick="window.print()"
+                    class="btn btn-secondary btn-sm">
 
-                Print
+                    <i class="fas fa-print"></i>
 
-            </button>
+                    Print
+
+                </button>
+
+                <a
+                    href="index.php?page=export&type=ready&format=pdf"
+                    class="btn btn-danger btn-sm">
+
+                    <i class="fas fa-file-pdf"></i>
+
+                    PDF
+
+                </a>
+
+                <a
+                   href="index.php?page=export&type=ready&format=excel"
+                    class="btn btn-success btn-sm">
+
+                    <i class="fas fa-file-excel"></i>
+
+                    Excel
+
+                </a>
+
+            </div>
 
         </div>
 

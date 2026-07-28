@@ -285,15 +285,39 @@ foreach($reports as $row){
 
             </strong>
 
-            <button
-                onclick="window.print()"
-                class="btn btn-success btn-sm">
+            <div class="btn-group">
 
-                <i class="fas fa-print"></i>
+                <button
+                    onclick="window.print()"
+                    class="btn btn-secondary btn-sm">
 
-                Print Report
+                    <i class="fas fa-print"></i>
 
-            </button>
+                    Print
+
+                </button>
+
+                <a
+                 href="index.php?page=export&type=invoice&format=pdf&from=<?= urlencode($from) ?>&to=<?= urlencode($to) ?>&status=<?= urlencode($status) ?>"
+                    class="btn btn-danger btn-sm">
+
+                    <i class="fas fa-file-pdf"></i>
+
+                    PDF
+
+                </a>
+
+                <a
+                 href="index.php?page=export&type=invoice&format=excel&from=<?= urlencode($from) ?>&to=<?= urlencode($to) ?>&status=<?= urlencode($status) ?>"
+                    class="btn btn-success btn-sm">
+
+                    <i class="fas fa-file-excel"></i>
+
+                    Excel
+
+                </a>
+
+            </div>
 
         </div>
 

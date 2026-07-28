@@ -4,40 +4,40 @@
 
 <div class="container-fluid">
 
-    <!-- =======================================
-            Page Header
-    ======================================== -->
+	<!-- =======================================
+			Page Header
+	======================================== -->
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+	<div class="d-flex justify-content-between align-items-center mb-4">
 
-        <div>
+		<div>
 
-            <h3 class="fw-bold">
+			<h3 class="fw-bold">
 
-                <i class="fas fa-users text-primary"></i>
+				<i class="fas fa-users text-primary"></i>
 
-                Customer Report
+				Customer Report
 
-            </h3>
+			</h3>
 
-            <small class="text-muted">
+			<small class="text-muted">
 
-                Customer business summary and outstanding balances.
+				Customer business summary and outstanding balances.
 
-            </small>
+			</small>
 
-        </div>
+		</div>
 
-        <a href="index.php?page=reports"
-           class="btn btn-secondary">
+		<a href="index.php?page=reports"
+		   class="btn btn-secondary">
 
-            <i class="fas fa-arrow-left"></i>
+			<i class="fas fa-arrow-left"></i>
 
-            Back
+			Back
 
-        </a>
+		</a>
 
-    </div>
+	</div>
 
 <?php
 
@@ -50,276 +50,301 @@ $totalBalance = 0;
 
 foreach($reports as $row){
 
-    $totalOrders += $row['total_orders'];
-    $totalBusiness += $row['total_amount'];
-    $totalAdvance += $row['advance'];
-    $totalBalance += $row['balance'];
+	$totalOrders += $row['total_orders'];
+	$totalBusiness += $row['total_amount'];
+	$totalAdvance += $row['advance'];
+	$totalBalance += $row['balance'];
 
 }
 
 ?>
 
-    <!-- =======================================
-            Summary Cards
-    ======================================== -->
+	<!-- =======================================
+			Summary Cards
+	======================================== -->
 
-    <div class="row g-3 mb-4">
+	<div class="row g-3 mb-4">
 
-        <div class="col-lg-3">
+		<div class="col-lg-3">
 
-            <div class="card shadow-sm border-0">
+			<div class="card shadow-sm border-0">
 
-                <div class="card-body text-center">
+				<div class="card-body text-center">
 
-                    <small>Total Customers</small>
+					<small>Total Customers</small>
 
-                    <h3><?= $totalCustomers ?></h3>
+					<h3><?= $totalCustomers ?></h3>
 
-                </div>
+				</div>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-        <div class="col-lg-3">
+		<div class="col-lg-3">
 
-            <div class="card shadow-sm border-success">
+			<div class="card shadow-sm border-success">
 
-                <div class="card-body text-center">
+				<div class="card-body text-center">
 
-                    <small>Total Orders</small>
+					<small>Total Orders</small>
 
-                    <h3 class="text-success">
+					<h3 class="text-success">
 
-                        <?= $totalOrders ?>
+						<?= $totalOrders ?>
 
-                    </h3>
+					</h3>
 
-                </div>
+				</div>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-        <div class="col-lg-3">
+		<div class="col-lg-3">
 
-            <div class="card shadow-sm border-primary">
+			<div class="card shadow-sm border-primary">
 
-                <div class="card-body text-center">
+				<div class="card-body text-center">
 
-                    <small>Total Business</small>
+					<small>Total Business</small>
 
-                    <h4 class="text-primary">
+					<h4 class="text-primary">
 
-                        Rs. <?= number_format($totalBusiness,2) ?>
+						Rs. <?= number_format($totalBusiness,2) ?>
 
-                    </h4>
+					</h4>
 
-                </div>
+				</div>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-        <div class="col-lg-3">
+		<div class="col-lg-3">
 
-            <div class="card shadow-sm border-danger">
+			<div class="card shadow-sm border-danger">
 
-                <div class="card-body text-center">
+				<div class="card-body text-center">
 
-                    <small>Outstanding Balance</small>
+					<small>Outstanding Balance</small>
 
-                    <h4 class="text-danger">
+					<h4 class="text-danger">
 
-                        Rs. <?= number_format($totalBalance,2) ?>
+						Rs. <?= number_format($totalBalance,2) ?>
 
-                    </h4>
+					</h4>
 
-                </div>
+				</div>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 
-    <!-- =======================================
-            Customer Table
-    ======================================== -->
+	<!-- =======================================
+			Customer Table
+	======================================== -->
 
-    <div class="card shadow-sm">
+	<div class="card shadow-sm">
 
-        <div class="card-header d-flex justify-content-between align-items-center">
+		<div class="card-header d-flex justify-content-between align-items-center">
 
-            <strong>
+			<strong>
 
-                Customer Summary
+				Customer Summary
 
-            </strong>
+			</strong>
 
-            <button
-                class="btn btn-success btn-sm"
-                onclick="window.print()">
+		<div class="btn-group ms-2">
 
-                <i class="fas fa-print"></i>
+			<button
+				onclick="window.print()"
+				class="btn btn-secondary btn-sm">
 
-                Print
+				<i class="fas fa-print"></i>
 
-            </button>
+				Print
 
-        </div>
+			</button>
 
-        <div class="card-body">
+			<a
+				href="index.php?page=export&type=customers&format=pdf"
+				class="btn btn-danger btn-sm">
 
-            <div class="table-responsive">
+				<i class="fas fa-file-pdf"></i>
 
-                <table class="table table-bordered table-hover align-middle">
+				PDF
 
-                    <thead class="table-primary">
+			</a>
 
-                        <tr>
+			<a
 
-                            <th>#</th>
+				href="index.php?page=export&type=customers&format=excel"
+				class="btn btn-success btn-sm">
 
-                            <th>Customer</th>
+				<i class="fas fa-file-excel"></i>
 
-                            <th>Phone</th>
+				Excel
 
-                            <th>Village</th>
+			</a>
 
-                            <th>Total Orders</th>
+		</div>
 
-                            <th>Total Amount</th>
+		</div>
 
-                            <th>Advance</th>
+		<div class="card-body">
 
-                            <th>Balance</th>
+			<div class="table-responsive">
 
-                            <th width="140">
+				<table class="table table-bordered table-hover align-middle">
 
-                                Action
+					<thead class="table-primary">
 
-                            </th>
+						<tr>
 
-                        </tr>
+							<th>#</th>
 
-                    </thead>
+							<th>Customer</th>
 
-                    <tbody>
+							<th>Phone</th>
 
-                    <?php if(empty($reports)): ?>
+							<th>Village</th>
 
-                        <tr>
+							<th>Total Orders</th>
 
-                            <td colspan="9"
-                                class="text-center text-muted">
+							<th>Total Amount</th>
 
-                                No customers found.
+							<th>Advance</th>
 
-                            </td>
+							<th>Balance</th>
 
-                        </tr>
+							<th width="140">
 
-                    <?php endif; ?>
+								Action
 
-                    <?php foreach($reports as $i=>$row): ?>
+							</th>
 
-                        <tr>
+						</tr>
 
-                            <td>
+					</thead>
 
-                                <?= $i+1 ?>
+					<tbody>
 
-                            </td>
+					<?php if(empty($reports)): ?>
 
-                            <td>
+						<tr>
 
-                                <?= htmlspecialchars($row['full_name']) ?>
+							<td colspan="9"
+								class="text-center text-muted">
 
-                            </td>
+								No customers found.
 
-                            <td>
+							</td>
 
-                                <?= htmlspecialchars($row['phone']) ?>
+						</tr>
 
-                            </td>
+					<?php endif; ?>
 
-                            <td>
+					<?php foreach($reports as $i=>$row): ?>
 
-                                <?= htmlspecialchars($row['village']) ?>
+						<tr>
 
-                            </td>
+							<td>
 
-                            <td>
+								<?= $i+1 ?>
 
-                                <?= $row['total_orders'] ?>
+							</td>
 
-                            </td>
+							<td>
 
-                            <td>
+								<?= htmlspecialchars($row['full_name']) ?>
 
-                                Rs.
-                                <?= number_format($row['total_amount'],2) ?>
+							</td>
 
-                            </td>
+							<td>
 
-                            <td>
+								<?= htmlspecialchars($row['phone']) ?>
 
-                                Rs.
-                                <?= number_format($row['advance'],2) ?>
+							</td>
 
-                            </td>
+							<td>
 
-                            <td>
+								<?= htmlspecialchars($row['village']) ?>
 
-                                <?php if($row['balance']>0): ?>
+							</td>
 
-                                    <span class="badge bg-danger">
+							<td>
 
-                                        Rs.
-                                        <?= number_format($row['balance'],2) ?>
+								<?= $row['total_orders'] ?>
 
-                                    </span>
+							</td>
 
-                                <?php else: ?>
+							<td>
 
-                                    <span class="badge bg-success">
+								Rs.
+								<?= number_format($row['total_amount'],2) ?>
 
-                                        Paid
+							</td>
 
-                                    </span>
+							<td>
 
-                                <?php endif; ?>
+								Rs.
+								<?= number_format($row['advance'],2) ?>
 
-                            </td>
+							</td>
 
-                            <td>
+							<td>
 
-                                <a
-                                   href="index.php?page=customer-profile&id=<?= $row['id'] ?>"
-                                   class="btn btn-primary btn-sm">
+								<?php if($row['balance']>0): ?>
 
-                                    <i class="fas fa-user"></i>
+									<span class="badge bg-danger">
 
-                                    Profile
+										Rs.
+										<?= number_format($row['balance'],2) ?>
 
-                                </a>
+									</span>
 
-                            </td>
+								<?php else: ?>
 
-                        </tr>
+									<span class="badge bg-success">
 
-                    <?php endforeach; ?>
+										Paid
 
-                    </tbody>
+									</span>
 
-                </table>
+								<?php endif; ?>
 
-            </div>
+							</td>
 
-        </div>
+							<td>
 
-    </div>
+								<a
+								   href="index.php?page=customer-profile&id=<?= $row['id'] ?>"
+								   class="btn btn-primary btn-sm">
+
+									<i class="fas fa-user"></i>
+
+									Profile
+
+								</a>
+
+							</td>
+
+						</tr>
+
+					<?php endforeach; ?>
+
+					</tbody>
+
+				</table>
+
+			</div>
+
+		</div>
+
+	</div>
 
 </div>
 
