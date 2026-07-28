@@ -229,6 +229,29 @@ switch($page){
 
         break;
 
+    case "backup":
+
+            (new BackupController())->index();
+
+            break;
+
+    case "backup-download":
+
+            (new BackupController())->backup();
+
+            break;
+    
+    case "restore":
+            (new BackupController())->restorePage();
+
+            break;
+
+    case "restore-database":
+
+            (new BackupController())->restore();
+
+            break;
+
     default:
 
         $controller = new AuthController();
