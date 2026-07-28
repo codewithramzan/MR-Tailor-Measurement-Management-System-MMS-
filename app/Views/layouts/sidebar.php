@@ -120,12 +120,52 @@
 
         </li>
                         <!-- Reports -->
-        <li>
+     
+        <li class="menu-item">
 
-            <a href="#">
-                <i class="fas fa-chart-line"></i>
-                <span>Reports</span>
+            <a href="#" class="menu-toggle">
+                <div>
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reports</span>
+                </div>
+
+                <i class="fas fa-chevron-down arrow"></i>
             </a>
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="index.php?page=reports">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="index.php?page=daily-report">Daily Report</a>
+                </li>
+
+                <li>
+                    <a href="index.php?page=monthly-report">Monthly Report</a>
+                </li>
+
+                <li>
+                    <a href="index.php?page=customer-report"> Customer Report</a>
+                </li>
+                <li>
+                    <a href="index.php?page=income-report"> Income Report</a>
+                </li>
+                <li>
+                    <a href="index.php?page=pending-report"> Pending Orders</a>
+                </li>
+                <li>
+                    <a href="index.php?page=ready-report">Ready Orders</a>
+                </li>
+                <li>
+                    <a href="index.php?page=delivered-report"> Delivered Orders</a>
+                </li>
+                <li>
+                    <a href="index.php?page=invoice-report"> Invoice Report</a>
+                </li>
+
+            </ul>
 
         </li>
 

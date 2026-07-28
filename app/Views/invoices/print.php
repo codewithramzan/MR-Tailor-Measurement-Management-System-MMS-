@@ -339,7 +339,7 @@ INVOICE
 
 <h5 class="text-muted">
 
-<?= htmlspecialchars($invoice['invoice_no']) ?>
+<?= htmlspecialchars($invoice['invoice_no'] ?? '') ?>
 
 </h5>
 
@@ -369,7 +369,7 @@ Customer Information
 
 <td>Name</td>
 
-<td><?= htmlspecialchars($invoice['full_name']) ?></td>
+<td><?= htmlspecialchars($invoice['full_name'] ?? 'undefined') ?></td>
 
 </tr>
 
@@ -377,7 +377,7 @@ Customer Information
 
 <td>Father</td>
 
-<td><?= htmlspecialchars($invoice['father_name']) ?></td>
+<td><?= htmlspecialchars($invoice['father_name'] ?? 'undefined') ?></td>
 
 </tr>
 
@@ -385,7 +385,7 @@ Customer Information
 
 <td>Phone</td>
 
-<td><?= htmlspecialchars($invoice['phone']) ?></td>
+<td><?= htmlspecialchars($invoice['phone'] ?? 'undefined') ?></td>
 
 </tr>
 
@@ -393,7 +393,7 @@ Customer Information
 
 <td>Village</td>
 
-<td><?= htmlspecialchars($invoice['village']) ?></td>
+<td><?= htmlspecialchars($invoice['village'] ?? 'undefined') ?></td>
 
 </tr>
 
@@ -401,7 +401,7 @@ Customer Information
 
 <td>Mohalla</td>
 
-<td><?= htmlspecialchars($invoice['mohalla']) ?></td>
+<td><?= htmlspecialchars($invoice['mohalla'] ?? 'undefined') ?></td>
 
 </tr>
 
@@ -427,7 +427,7 @@ Order Information
 
 <td>Booking</td>
 
-<td><?= htmlspecialchars($invoice['booking_no']) ?></td>
+<td><?= htmlspecialchars($invoice['booking_no'] ?? '') ?></td>
 
 </tr>
 
@@ -690,35 +690,6 @@ foreach ($measurements as $row) {
 
 </div>
 
-<!-- ==========================================
-     Payment Summary
-========================================== -->
-
-<div class="section">
-
-    <div class="section-title">
-
-        <i class="fas fa-money-bill-wave me-2"></i>
-
-        Payment Summary
-
-    </div>
-
-    <?php
-
-    $badgeClass = 'danger';
-
-    if ($paymentStatus === 'Paid') {
-
-        $badgeClass = 'success';
-
-    } elseif ($paymentStatus === 'Partial') {
-
-        $badgeClass = 'warning';
-    }
-
-    ?>
-
     <div class="row">
 
         <div class="col-md-7">
@@ -781,23 +752,7 @@ foreach ($measurements as $row) {
                             <td class="text-end fw-bold">
 
                                 Rs.
-                                <?= number_format($invoice['balance'],2) ?>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <th>Payment Status</th>
-
-                            <td class="text-center">
-
-                                <span class="badge bg-<?= $badgeClass ?> px-3 py-2">
-
-                                    <?= htmlspecialchars($paymentStatus) ?>
-
-                                </span>
+                                <?= number_format($invoice['balance']??'undefined',2) ?>
 
                             </td>
 
@@ -831,7 +786,7 @@ foreach ($measurements as $row) {
 
                             <td class="text-end">
 
-                                <?= htmlspecialchars($invoice['invoice_no']) ?>
+                                <?= htmlspecialchars($invoice['invoice_no'] ?? '') ?>
 
                             </td>
 
@@ -843,7 +798,7 @@ foreach ($measurements as $row) {
 
                             <td class="text-end">
 
-                                <?= htmlspecialchars($invoice['booking_no']) ?>
+                                <?= htmlspecialchars($invoice['booking_no'] ?? '') ?>
 
                             </td>
 
@@ -855,7 +810,7 @@ foreach ($measurements as $row) {
 
                             <td class="text-end">
 
-                                <?= htmlspecialchars($invoice['garment_type']) ?>
+                                <?= htmlspecialchars($invoice['garment_type'] ?? '') ?>
 
                             </td>
 
@@ -867,7 +822,7 @@ foreach ($measurements as $row) {
 
                             <td class="text-end">
 
-                                <?= htmlspecialchars($invoice['quantity']) ?>
+                                <?= htmlspecialchars($invoice['quantity'] ?? '') ?>
 
                             </td>
 
@@ -879,7 +834,7 @@ foreach ($measurements as $row) {
 
                             <td class="text-end">
 
-                                <?= date("d M Y", strtotime($invoice['delivery_date'])) ?>
+                                <?= date("d M Y", strtotime($invoice['delivery_date'] ?? '')) ?>
 
                             </td>
 

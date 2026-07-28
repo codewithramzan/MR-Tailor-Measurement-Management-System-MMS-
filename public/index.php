@@ -161,6 +161,61 @@ switch($page){
 
     case 'print-invoice':
         (new InvoiceController())->print();
+        
+        break;
+
+    case 'reports':
+
+        (new ReportController())->index();
+
+        break;
+
+    case 'daily-report':
+
+        (new ReportController())->daily();
+
+        break;
+
+    case 'monthly-report':
+
+        (new ReportController())->monthly();
+
+        break;
+
+    case 'customer-report':
+
+        (new ReportController())->customers();
+
+        break;
+
+    case 'income-report':
+
+        (new ReportController())->income();
+
+        break;
+
+    case 'pending-report':
+
+        (new ReportController())->pending();
+
+        break;
+
+    case 'ready-report':
+
+        (new ReportController())->ready();
+
+        break;
+
+    case 'delivered-report':
+
+        (new ReportController())->delivered();
+
+        break;
+
+    case 'invoice-report':
+
+        (new ReportController())->invoices();
+
         break;
 
     default:
