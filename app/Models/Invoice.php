@@ -126,24 +126,6 @@ class Invoice extends Model
 
     /**
      * -------------------------------------------------------
-     * Payment Status
-     * -------------------------------------------------------
-     */
-    public function getPaymentStatus($order)
-    {
-        if ($order['balance'] <= 0) {
-            return 'Paid';
-        }
-
-        if ($order['advance'] > 0) {
-            return 'Partial';
-        }
-
-        return 'Pending';
-    }
-
-    /**
-     * -------------------------------------------------------
      * Measurements
      * -------------------------------------------------------
      */

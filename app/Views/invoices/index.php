@@ -94,22 +94,26 @@
 
                         <?php foreach($invoices as $index=>$row): ?>
 
-                        <?php
+                       <?php
 
-                        if($row['balance']<=0){
+                        $status = $row['status'];
 
-                            $paymentBadge='success';
-                            $paymentText='Paid';
+                        $badge = "secondary";
 
-                        }elseif($row['advance']>0){
+                        switch($status){
 
-                            $paymentBadge='warning';
-                            $paymentText='Partial';
+                            case "Pending":
+                                $badge = "warning";
+                                break;
 
-                        }else{
+                            case "Ready":
+                                $badge = "primary";
+                                break;
 
-                            $paymentBadge='danger';
-                            $paymentText='Pending';
+                            case "Delivered":
+                                $badge = "success";
+                                break;
+
                         }
 
                         ?>
@@ -178,9 +182,9 @@
 
                             <td>
 
-                                <span class="badge bg-<?= $paymentBadge ?>">
+                                <span class="badge bg-<?= $badge ?>">
 
-                                    <?= $paymentText ?>
+                                    <?= $row['status'] ?>
 
                                 </span>
 

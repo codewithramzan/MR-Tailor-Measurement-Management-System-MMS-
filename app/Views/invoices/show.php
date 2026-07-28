@@ -307,26 +307,24 @@ Payment
 </th>
 
 <td>
-
 <?php
 
-$badge='danger';
+$status = $invoice['status'] ?? '';
 
-if($paymentStatus=='Paid'){
+$badge = "secondary";
 
-    $badge='success';
-
-}elseif($paymentStatus=='Partial'){
-
-    $badge='warning';
+if ($status == "Pending") {
+    $badge = "warning";
+} elseif ($status == "Ready") {
+    $badge = "primary";
+} elseif ($status == "Delivered") {
+    $badge = "success";
 }
 
 ?>
 
 <span class="badge bg-<?= $badge ?>">
-
-<?= $paymentStatus ?? '' ?>
-
+    <?= htmlspecialchars($status) ?>
 </span>
 
 </td>
@@ -459,7 +457,7 @@ Discount
 
 <td>
 
-<?= number_format($invoice['discount'],2) ?>
+<?= number_format($invoice['discount']?? 0 ,2) ?>
 
 </td>
 
@@ -475,7 +473,7 @@ Advance
 
 <td>
 
-<?= number_format($invoice['advance'],2) ?>
+<?= number_format($invoice['advance'] ?? 0,2) ?>
 
 </td>
 
@@ -493,7 +491,7 @@ Balance
 
 <strong>
 
-<?= number_format($invoice['balance'],2) ?>
+<?= number_format($invoice['balance']?? 0,2) ?>
 
 </strong>
 
