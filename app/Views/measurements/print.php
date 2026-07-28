@@ -113,7 +113,7 @@ CUSTOMER + ORDER INFO
 
 <td>نام</td>
 
-<td><?= htmlspecialchars($info['full_name']) ?></td>
+<td><?= htmlspecialchars($info['full_name'] ?? 'Undefined') ?></td>
 
 </tr>
 
@@ -121,7 +121,7 @@ CUSTOMER + ORDER INFO
 
 <td>فون</td>
 
-<td><?= htmlspecialchars($info['phone']) ?></td>
+<td><?= htmlspecialchars($info['phone'] ?? 'Undefined') ?></td>
 
 </tr>
 
@@ -129,7 +129,7 @@ CUSTOMER + ORDER INFO
 
 <td>گاؤں</td>
 
-<td><?= htmlspecialchars($info['village']) ?></td>
+<td><?= htmlspecialchars($info['village'] ?? 'Village') ?? 'Undefined' ?></td>
 
 </tr>
 
@@ -137,7 +137,7 @@ CUSTOMER + ORDER INFO
 
 <td>لباس</td>
 
-<td><?= htmlspecialchars($info['garment_type']) ?></td>
+<td><?= htmlspecialchars($info['garment_type'] ?? 'Undefined') ?></td>
 
 </tr>
 
@@ -165,7 +165,7 @@ CUSTOMER + ORDER INFO
 
 <td>بکنگ</td>
 
-<td><?= htmlspecialchars($info['booking_no']) ?></td>
+<td><?= htmlspecialchars($info['booking_no'] ?? 'Undefined') ?></td>
 
 </tr>
 
@@ -173,7 +173,7 @@ CUSTOMER + ORDER INFO
 
 <td>آرڈر</td>
 
-<td><?= htmlspecialchars($info['order_date']) ?></td>
+<td><?= htmlspecialchars($info['order_date'] ?? 'Undefined') ?></td>
 
 </tr>
 
@@ -181,7 +181,7 @@ CUSTOMER + ORDER INFO
 
 <td>ڈیلیوری</td>
 
-<td><?= htmlspecialchars($info['delivery_date']) ?></td>
+<td><?= htmlspecialchars($info['delivery_date']?? 'not yet' ) ?></td>
 
 </tr>
 
@@ -189,7 +189,7 @@ CUSTOMER + ORDER INFO
 
 <td>حالت</td>
 
-<td><?= htmlspecialchars($info['status'] ?? '') ?></td>
+<td><?= htmlspecialchars($info['status'] ?? 'Undefined') ?></td>
 
 </tr>
 
