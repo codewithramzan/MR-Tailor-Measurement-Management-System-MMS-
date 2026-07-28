@@ -76,8 +76,6 @@ class InvoiceController extends Controller
 
         $options = $this->invoiceModel->getOptions($orderId);
 
-        $paymentStatus = $this->invoiceModel->getPaymentStatus($invoice);
-
         $this->view(
             'invoices/show',
             compact(

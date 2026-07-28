@@ -300,34 +300,6 @@ Status
 
 <tr>
 
-<th>
-
-Payment
-
-</th>
-
-<td>
-<?php
-
-$status = $invoice['status'] ?? '';
-
-$badge = "secondary";
-
-if ($status == "Pending") {
-    $badge = "warning";
-} elseif ($status == "Ready") {
-    $badge = "primary";
-} elseif ($status == "Delivered") {
-    $badge = "success";
-}
-
-?>
-
-<span class="badge bg-<?= $badge ?>">
-    <?= htmlspecialchars($status) ?>
-</span>
-
-</td>
 
 </tr>
 
