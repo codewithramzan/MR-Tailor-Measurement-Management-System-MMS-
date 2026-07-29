@@ -251,6 +251,18 @@ switch($page){
             (new BackupController())->restore();
 
             break;
+            
+    case "settings":
+
+        (new SettingController())->index();
+
+        break;
+
+    case "save-settings":
+
+        (new SettingController())->update();
+
+        break;
 
     default:
 
