@@ -75,7 +75,7 @@
 
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 mt-sm-3 mb-lg-2">
 
                         <button class="btn btn-success">
 

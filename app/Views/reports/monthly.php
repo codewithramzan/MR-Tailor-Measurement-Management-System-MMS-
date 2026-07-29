@@ -118,7 +118,7 @@
 
                     </div>
 
-                    <div class="col-md-3 d-flex align-items-end">
+                    <div class="col-md-3 d-flex align-items-end  mt-sm-3 mb-lg-2">
 
                         <button
                             class="btn btn-primary">
