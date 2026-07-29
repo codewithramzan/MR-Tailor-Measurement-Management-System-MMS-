@@ -6,7 +6,7 @@
 
 
 
-            <div class="card shadow border-0">
+            <div class="card shadow border-0 ">
 
                 <div class="card-header bg-primary text-white">
 
@@ -20,13 +20,13 @@
 
                 </div>
 
-                <div class="card-body">
+                <div class="card-body ">
   
                     <div class="row">
 
                         <!-- Backup -->
 
-                        <div class="col-md-6">
+                        <div class=" col-lg-12 col-md-6">
 
                             <div class="card border-success h-100">
 

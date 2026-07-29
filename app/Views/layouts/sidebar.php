@@ -26,7 +26,7 @@ function menuOpen($pages)
             Logo
     =========================== -->
 
-    <div class="sidebar-logo">
+    <div class="sidebar-logo text-white">
 
         <i class="fas fa-cut"></i>
 
