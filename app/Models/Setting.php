@@ -201,4 +201,26 @@ class Setting extends Model
 
             return $stmt->execute([$id]);
         }
+  /*--------------------------------------------------
+    | Duplicate check
+    --------------------------------------------------*/
+        public function measurementExists($garment, $section, $option)
+        {
+            $stmt = $this->conn->prepare("
+                SELECT id
+                FROM measurement_types
+                WHERE garment_type = ?
+                AND section = ?
+                AND option_name = ?
+                LIMIT 1
+            ");
+
+            $stmt->execute([
+                $garment,
+                $section,
+                $option
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
 }

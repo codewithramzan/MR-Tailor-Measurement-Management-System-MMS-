@@ -270,20 +270,38 @@ class SettingController extends Controller
             exit;
         }
 
-        if (empty($_POST["option_name"])) {
+            if (empty($_POST["option_name"])) {
 
-            $_SESSION["flash"] = [
+                $_SESSION["flash"] = [
 
-                "type" => "danger",
+                    "type" => "danger",
 
-                "message" => "Measurement name is required."
+                    "message" => "Measurement name is required."
 
-            ];
+                ];
 
-            header("Location: index.php?page=add-measurement-type");
+                header("Location: index.php?page=add-measurement-type");
 
-            exit;
-        }
+                exit;
+            }
+            if ($this->settingModel->measurementExists(
+            $garment,
+            trim($_POST["section"]),
+            trim($_POST["option_name"])
+            )) {
+
+                $_SESSION["flash"] = [
+
+                    "type" => "warning",
+
+                    "message" => "This measurement field already exists."
+
+                ];
+
+                header("Location: index.php?page=add-measurement-type");
+
+                exit;
+            }
 
         /*
         |--------------------------------------------------------------------------
