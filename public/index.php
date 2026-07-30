@@ -251,7 +251,7 @@ switch($page){
             (new BackupController())->restore();
 
             break;
-            
+
     case "settings":
 
         (new SettingController())->index();
@@ -262,6 +262,93 @@ switch($page){
 
         (new SettingController())->update();
 
+        break;
+
+
+        /*-----------------------------
+    | Garments
+    ------------------------------*/
+
+    case "garments":
+        (new SettingController())->garments();
+        break;
+
+    case "add-garment":
+        (new SettingController())->createGarment();
+        break;
+
+    case "save-garment":
+        (new SettingController())->storeGarment();
+        break;
+
+    case "edit-garment":
+        (new SettingController())->editGarment();
+        break;
+
+    case "update-garment":
+        (new SettingController())->updateGarment();
+        break;
+
+    case "delete-garment":
+        (new SettingController())->deleteGarment();
+        break;
+
+
+    /*-----------------------------
+    | Measurement Types
+    ------------------------------*/
+
+    case "measurement-types":
+        (new SettingController())->measurementTypes();
+        break;
+
+    case "add-measurement-type":
+        (new SettingController())->createMeasurementType();
+        break;
+
+    case "save-measurement-type":
+        (new SettingController())->storeMeasurementType();
+        break;
+
+    case "edit-measurement-type":
+        (new SettingController())->editMeasurementType();
+        break;
+
+    case "update-measurement-type":
+        (new SettingController())->updateMeasurementType();
+        break;
+
+    case "delete-measurement-type":
+        (new SettingController())->deleteMeasurementType();
+        break;
+
+
+    /*-----------------------------
+    | Stitching Options
+    ------------------------------*/
+
+    case "stitching-options":
+        (new SettingController())->stitchingOptions();
+        break;
+
+    case "add-stitching-option":
+        (new SettingController())->createStitchingOption();
+        break;
+
+    case "save-stitching-option":
+        (new SettingController())->storeStitchingOption();
+        break;
+
+    case "edit-stitching-option":
+        (new SettingController())->editStitchingOption();
+        break;
+
+    case "update-stitching-option":
+        (new SettingController())->updateStitchingOption();
+        break;
+
+    case "delete-stitching-option":
+        (new SettingController())->deleteStitchingOption();
         break;
 
     default:

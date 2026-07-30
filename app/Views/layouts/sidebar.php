@@ -498,17 +498,14 @@ function menuOpen($pages)
         </li>
 
 
-        <!-- ==========================
-                Settings
-        =========================== -->
-
+       <!-- Settings -->
         <li class="menu-item">
 
             <a href="#" class="menu-toggle">
 
                 <div>
 
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-cog"></i>
 
                     <span>Settings</span>
 
@@ -518,16 +515,13 @@ function menuOpen($pages)
 
             </a>
 
-            <ul class="submenu <?= menuOpen([
-                'settings',
-                'shop-settings',
-                'system-settings'
-            ]) ?>">
+            <ul class="submenu">
 
                 <li>
 
-                    <a href="index.php?page=settings"
-                       class="<?= active('settings') ?>">
+                    <a href="index.php?page=settings">
+
+                        <i class="fas fa-store"></i>
 
                         Shop Information
 
@@ -537,10 +531,23 @@ function menuOpen($pages)
 
                 <li>
 
-                    <a href="index.php?page=system-settings"
-                       class="<?= active('system-settings') ?>">
+                    <a href="index.php?page=measurement-types">
 
-                        System Settings
+                        <i class="fas fa-ruler-combined"></i>
+
+                        Measurement Fields
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="index.php?page=stitching-options">
+
+                        <i class="fas fa-cut"></i>
+
+                        Stitching Options
 
                     </a>
 

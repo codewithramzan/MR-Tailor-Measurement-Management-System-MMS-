@@ -31,7 +31,7 @@
                     type="text"
                     class="form-control"
                     readonly
-                    value="<?= htmlspecialchars($order['booking_no']) ?>">
+                    value="<?= htmlspecialchars($order['booking_no'] ?? '') ?>">
 
             </div>
 
@@ -43,7 +43,7 @@
                     type="text"
                     class="form-control"
                     readonly
-                    value="<?= htmlspecialchars($order['full_name']) ?>">
+                    value="<?= htmlspecialchars($order['full_name'] ?? '') ?>">
 
             </div>
 
@@ -55,7 +55,7 @@
                     type="text"
                     class="form-control"
                     readonly
-                    value="<?= htmlspecialchars($order['phone']) ?>">
+                    value="<?= htmlspecialchars($order['phone'] ?? '') ?>">
 
             </div>
 
@@ -67,7 +67,7 @@
                     type="text"
                     class="form-control"
                     readonly
-                    value="<?= htmlspecialchars($order['garment_type']) ?>">
+                    value="<?= htmlspecialchars($order['garment_type'] ?? '') ?>">
 
             </div>
 
@@ -78,7 +78,7 @@
             <input
                 type="hidden"
                 name="order_id"
-                value="<?= $order['id'] ?>">
+                value="<?= $order['id'] ?? ''?>">
 
             <!-- ========================= -->
             <!-- Dynamic Measurement Groups -->
