@@ -526,33 +526,364 @@ class SettingController extends Controller
     | Stitching Options
     --------------------------------------------------*/
 
+    /*--------------------------------------------------
+    | Stitching Options
+    --------------------------------------------------*/
+
     public function stitchingOptions()
     {
+        $options = $this->settingModel->getStitchingOptions();
 
+        $categories = $this->settingModel->getStitchingCategories();
+
+        $this->view(
+            "settings/stitching_options/index",
+            [
+
+                "title"=>"Stitching Options",
+
+                "options"=>$options,
+
+                "categories"=>$categories
+
+            ]
+        );
     }
+
+    /*--------------------------------------------------
+    | Add Stitching Option Form
+    --------------------------------------------------*/
 
     public function createStitchingOption()
     {
+        $categories = $this->settingModel->getStitchingCategories();
 
+        $this->view(
+            "settings/stitching_options/create",
+            [
+                "title" => "Add Stitching Option",
+                "categories" => $categories
+            ]
+        );
     }
+
+    /*--------------------------------------------------
+    | Save Stitching Option
+    --------------------------------------------------*/
 
     public function storeStitchingOption()
     {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
+            header("Location: index.php?page=stitching-options");
+            exit;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Category
+        |--------------------------------------------------------------------------
+        */
+
+        if ($_POST["category_select"] === "new") {
+
+            $category = trim($_POST["new_category"]);
+
+        } else {
+
+            $category = trim($_POST["category_select"]);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Validation
+        |--------------------------------------------------------------------------
+        */
+
+        $optionName = trim($_POST["option_name"]);
+        $urduName   = trim($_POST["urdu_name"]);
+
+        if (empty($category)) {
+
+            $_SESSION["flash"] = [
+
+                "type" => "danger",
+
+                "message" => "Please select or enter a category."
+
+            ];
+
+            header("Location:index.php?page=add-stitching-option");
+
+            exit;
+        }
+
+        if (empty($optionName)) {
+
+            $_SESSION["flash"] = [
+
+                "type" => "danger",
+
+                "message" => "Option name is required."
+
+            ];
+
+            header("Location:index.php?page=add-stitching-option");
+
+            exit;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Duplicate Check
+        |--------------------------------------------------------------------------
+        */
+
+        if ($this->settingModel->stitchingOptionExists($optionName,$category)) {
+
+            $_SESSION["flash"] = [
+
+                "type" => "warning",
+
+                "message" => "This stitching option already exists."
+
+            ];
+
+            header("Location:index.php?page=add-stitching-option");
+
+            exit;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Save Data
+        |--------------------------------------------------------------------------
+        */
+
+        $data = [
+
+            "option_name"     => $optionName,
+
+            "urdu_name"       => $urduName,
+
+            "category"        => $category,
+
+            "print_order"     => (int)($_POST["print_order"] ?? 1),
+
+            "selection_type"  => trim($_POST["selection_type"]),
+
+             "status" => $_POST["status"]
+
+        ];
+
+        if ($this->settingModel->addStitchingOption($data)) {
+
+            $_SESSION["flash"] = [
+
+                "type" => "success",
+
+                "message" => "Stitching option added successfully."
+
+            ];
+
+        } else {
+
+            $_SESSION["flash"] = [
+
+                "type" => "danger",
+
+                "message" => "Unable to save stitching option."
+
+            ];
+        }
+
+        header("Location:index.php?page=stitching-options");
+
+        exit;
     }
+/*--------------------------------------------------
+| Edit Stitching Option
+--------------------------------------------------*/
 
     public function editStitchingOption()
     {
+        if (!isset($_GET["id"])) {
 
+            $_SESSION["flash"] = [
+
+                "type" => "danger",
+
+                "message" => "Invalid stitching option."
+
+            ];
+
+            header("Location:index.php?page=stitching-options");
+
+            exit;
+        }
+
+        $id = (int)$_GET["id"];
+
+        $option = $this->settingModel->getStitchingOptionById($id);
+
+        if (!$option) {
+
+            $_SESSION["flash"] = [
+
+                "type" => "danger",
+
+                "message" => "Stitching option not found."
+
+            ];
+
+            header("Location:index.php?page=stitching-options");
+
+            exit;
+        }
+
+        $categories = $this->settingModel->getStitchingCategories();
+
+        $this->view(
+
+            "settings/stitching_options/edit",
+
+            [
+
+                "title" => "Edit Stitching Option",
+
+                "option" => $option,
+
+                "categories" => $categories
+
+            ]
+
+        );
     }
+
+/*--------------------------------------------------
+| Update Stitching Option
+--------------------------------------------------*/
 
     public function updateStitchingOption()
     {
+        if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
+            header("Location:index.php?page=stitching-options");
+
+            exit;
+        }
+
+        $id = (int)$_POST["id"];
+
+        if ($_POST["category_select"] == "new") {
+
+            $category = trim($_POST["new_category"]);
+
+        } else {
+
+            $category = trim($_POST["category_select"]);
+        }
+
+        $data = [
+
+            "option_name" => trim($_POST["option_name"]),
+
+            "urdu_name" => trim($_POST["urdu_name"]),
+
+            "category" => $category,
+
+            "print_order" => (int)$_POST["print_order"],
+
+            "selection_type" => trim($_POST["selection_type"]),
+             "status" => $_POST["status"]
+
+        ];
+        if ($this->settingModel->stitchingOptionExistsExcept(
+        $id,
+        $data["option_name"],
+        $data["category"]
+        )) {
+
+            $_SESSION["flash"] = [
+
+                "type" => "warning",
+
+                "message" => "A stitching option with the same name already exists in this category."
+
+            ];
+
+            header("Location:index.php?page=edit-stitching-option&id=".$id);
+
+            exit;
+        }
+
+        $this->settingModel->updateStitchingOption($id,$data);
+
+        $_SESSION["flash"] = [
+
+            "type"=>"success",
+
+            "message"=>"Stitching option updated successfully."
+
+        ];
+
+        header("Location:index.php?page=stitching-options");
+
+        exit;
     }
 
-    public function deleteStitchingOption()
-    {
+/*--------------------------------------------------
+| Toggle Stitching Option
+--------------------------------------------------*/
 
+   public function toggleStitchingOptionStatus()
+    {
+        if (!isset($_GET["id"])) {
+
+            $_SESSION["flash"] = [
+
+                "type"=>"danger",
+
+                "message"=>"Invalid request."
+
+            ];
+
+            header("Location:index.php?page=stitching-options");
+
+            exit;
+        }
+
+        $id = (int)$_GET["id"];
+
+        $option = $this->settingModel->getStitchingOptionById($id);
+
+        if (!$option) {
+
+            $_SESSION["flash"] = [
+
+                "type"=>"danger",
+
+                "message"=>"Option not found."
+
+            ];
+
+            header("Location:index.php?page=stitching-options");
+
+            exit;
+        }
+
+        $this->settingModel->toggleStitchingOptionStatus($id);
+
+        $_SESSION["flash"] = [
+
+            "type"=>"success",
+
+            "message"=>"Status updated successfully."
+
+        ];
+
+        header("Location:index.php?page=stitching-options");
+
+        exit;
     }
 }

@@ -347,8 +347,8 @@ switch($page){
         (new SettingController())->updateStitchingOption();
         break;
 
-    case "delete-stitching-option":
-        (new SettingController())->deleteStitchingOption();
+    case "toggle-stitching-option":
+        (new SettingController())->toggleStitchingOptionStatus();
         break;
 
     default:

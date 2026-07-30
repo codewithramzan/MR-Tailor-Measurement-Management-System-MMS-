@@ -223,4 +223,200 @@ class Setting extends Model
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        /*--------------------------------------------------
+        | Get All Stitching Options
+        --------------------------------------------------*/
+
+        public function getStitchingOptions()
+        {
+            $stmt = $this->conn->prepare("
+                SELECT *
+                FROM stitching_options
+                ORDER BY
+                    category,
+                    print_order,
+                    option_name
+            ");
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        //1	French Collar	فرنچ کالر	Collar	Radio*--------------------------------------------------
+         //Get Categories
+        /*--------------------------------------------------*/
+
+        public function getStitchingCategories()
+        {
+            $stmt = $this->conn->prepare("
+                SELECT DISTINCT category
+                FROM stitching_options
+                ORDER BY category
+            ");
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        /*--------------------------------------------------
+        | Find Stitching Option
+        --------------------------------------------------*/
+
+        public function getStitchingOptionById($id)
+        {
+            $stmt = $this->conn->prepare("
+                SELECT *
+                FROM stitching_options
+                WHERE id=?
+            ");
+
+            $stmt->execute([$id]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        /*--------------------------------------------------
+        | Duplicate Check
+        --------------------------------------------------*/
+
+       public function stitchingOptionExists($option,$category)
+        {
+            $stmt = $this->conn->prepare("
+                SELECT id
+                FROM stitching_options
+                WHERE LOWER(option_name)=LOWER(?)
+                AND LOWER(category)=LOWER(?)
+                LIMIT 1
+            ");
+
+            $stmt->execute([
+                trim($option),
+                trim($category)
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        /*--------------------------------------------------
+        | Add Stitching Option
+        --------------------------------------------------*/
+
+        public function addStitchingOption($data)
+        {
+            $stmt = $this->conn->prepare("
+                INSERT INTO stitching_options
+                (
+                    option_name,
+                    urdu_name,
+                    category,
+                    print_order,
+                    selection_type,
+                    status
+                )
+                VALUES
+                (
+                    ?,?,?,?,?,?
+                )
+            ");
+
+            return $stmt->execute([
+
+                $data["option_name"],
+
+                $data["urdu_name"],
+
+                $data["category"],
+
+                $data["print_order"],
+
+                $data["selection_type"],
+                $data["status"]
+
+            ]);
+        }
+
+        /*--------------------------------------------------
+        | Update Stitching Option
+        --------------------------------------------------*/
+
+        public function updateStitchingOption($id,$data)
+        {
+            $stmt = $this->conn->prepare("
+                UPDATE stitching_options
+                SET
+
+                    option_name=?,
+
+                    urdu_name=?,
+
+                    category=?,
+
+                    print_order=?,
+
+                    selection_type=?,
+                    status=?
+
+                WHERE id=?
+            ");
+
+            return $stmt->execute([
+
+                $data["option_name"],
+
+                $data["urdu_name"],
+
+                $data["category"],
+
+                $data["print_order"],
+
+                $data["selection_type"],
+
+                $data["status"],
+
+                $id
+
+            ]);
+        }
+
+        /*--------------------------------------------------
+        | Toggle Stitching Option
+        --------------------------------------------------*/
+
+        public function toggleStitchingOptionStatus($id)
+        {
+            $stmt = $this->conn->prepare("
+                UPDATE stitching_options
+                SET status =
+                    CASE
+                        WHEN status='Active'
+                        THEN 'Inactive'
+                        ELSE 'Active'
+                    END
+                WHERE id=?
+            ");
+
+            return $stmt->execute([$id]);
+        }
+
+        public function stitchingOptionExistsExcept($id, $option, $category)
+        {
+            $stmt = $this->conn->prepare("
+                SELECT id
+                FROM stitching_options
+                WHERE LOWER(option_name) = LOWER(?)
+                AND LOWER(category) = LOWER(?)
+                AND id <> ?
+                LIMIT 1
+            ");
+
+            $stmt->execute([
+                trim($option),
+                trim($category),
+                $id
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
 }
