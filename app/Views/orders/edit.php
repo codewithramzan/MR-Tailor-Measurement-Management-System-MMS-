@@ -45,6 +45,7 @@
 
       <input
       type="number"
+      id="quantity"
       name="quantity"
       class="form-control"
       value="<?= $data['quantity'] ?? 0 ?>">
@@ -95,6 +96,7 @@
 
       <input
       type="number"
+      id="total"
       name="total_amount"
       class="form-control"
       value="<?= $data['total_amount']?? 0 ?>">
@@ -109,6 +111,7 @@
 
       <input
       type="number"
+      id="advance"
       name="advance"
       class="form-control"
       value="<?= $data['advance'] ?? 0 ?>">
@@ -123,6 +126,7 @@
 
       <input
       type="number"
+      id="discount"
       name="discount"
       class="form-control"
       value="<?= $data['discount']?? 0 ?>">
@@ -137,6 +141,7 @@
 
       <input
       type="number"
+      id="balance"
       name="balance"
       class="form-control"
       value="<?= $data['balance']?? 0 ?>">
@@ -177,6 +182,6 @@
       </div>
 
       </div>
-
+  <script src="<?= BASE_URL ?>assets/js/order.js"></script>
 
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

@@ -261,38 +261,6 @@
 
 	 </div>
 
-
-<script>
-const quantity = document.getElementById("quantity");
-const total=document.getElementById("total");
-
-const advance=document.getElementById("advance");
-
-const discount=document.getElementById("discount");
-
-const balance=document.getElementById("balance");
-
-function calculate(){
-let q = parseInt(quantity.value);
-let t=parseFloat(total.value)||0;
-
-let a=parseFloat(advance.value)||0;
-
-let d=parseFloat(discount.value)||0;
-
-balance.value= q*(t-a-d);
-
-}
-
-total.addEventListener("input",calculate);
-
-advance.addEventListener("input",calculate);
-
-discount.addEventListener("input",calculate);
-
-calculate();
-
-</script>
-
+<script src="<?= BASE_URL ?>assets/js/order.js"></script>
 <?php OldInput::clear(); ?>
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

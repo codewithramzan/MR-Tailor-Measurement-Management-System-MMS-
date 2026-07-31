@@ -169,8 +169,9 @@ class Order extends Model
 
                 WHERE id=?
             ");
-
-            return $stmt->execute([
+        $this->conn->beginTransaction();
+        try{
+             return $stmt->execute([
 
                 $data['garment_type_id'],
                 $data['quantity'],
@@ -184,6 +185,14 @@ class Order extends Model
                 $id
 
             ]);
+
+        $this->conn->commit();
+
+        } catch(Exception $e) {
+            $this->conn->rollBack();
+            throw $e;
+        }
+           
         }
 
         public function delete($id)
