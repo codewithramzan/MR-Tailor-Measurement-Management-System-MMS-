@@ -31,18 +31,6 @@ class Customer extends Model
     }
 
 
-    public function generateBookingNo()
-    {
-        $query = $this->conn->query("SELECT MAX(id) as last_id FROM customers");
-
-        $row = $query->fetch(PDO::FETCH_ASSOC);
-
-        $next = ($row['last_id'] ?? 0) + 1;
-
-        return "BK-" . str_pad($next, 4, "0", STR_PAD_LEFT);
-    }
-
-
     public function find($id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM customers WHERE id=?");

@@ -83,28 +83,28 @@ class Invoice extends Model
      * Generate Invoice Number
      * -------------------------------------------------------
      */
-        public function generateInvoiceNumber()
-        {
-            $stmt = $this->conn->query("
-                SELECT invoice_no
-                FROM orders
-                WHERE invoice_no IS NOT NULL
-                ORDER BY id DESC
-                LIMIT 1
-            ");
+        // public function generateInvoiceNumber()
+        // {
+        //     $stmt = $this->conn->query("
+        //         SELECT invoice_no
+        //         FROM orders
+        //         WHERE invoice_no IS NOT NULL
+        //         ORDER BY id DESC
+        //         LIMIT 1
+        //     ");
 
-            $last = $stmt->fetch(PDO::FETCH_ASSOC);
+        //     $last = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if (!$last || empty($last['invoice_no'])) {
-                return "INV-0001";
-            }
+        //     if (!$last || empty($last['invoice_no'])) {
+        //         return "INV-0001";
+        //     }
 
-            $number = (int) preg_replace('/\D/', '', $last['invoice_no']);
+        //     $number = (int) preg_replace('/\D/', '', $last['invoice_no']);
 
-            $number++;
+        //     $number++;
 
-            return "INV-" . str_pad($number, 4, "0", STR_PAD_LEFT);
-        }
+        //     return "INV-" . str_pad($number, 4, "0", STR_PAD_LEFT);
+        // }
 
     /**
      * -------------------------------------------------------

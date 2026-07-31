@@ -15,7 +15,7 @@ class CustomerController extends Controller
       {
           $customer = new Customer();
 
-          $bookingNo = $customer->generateBookingNo();
+          $bookingNo = $customer->generateNumber('booking_no', 'BK');
 
           $this->view('customers/create', [
               'bookingNo' => $bookingNo

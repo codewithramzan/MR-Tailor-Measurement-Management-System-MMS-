@@ -19,8 +19,6 @@ class Order extends Model
         $data['notes'] = !empty($data['notes'])
                             ? trim($data['notes'])
                             : "";
-        $invoice_no = new Invoice();
-        $data['invoice_no'] = $invoice_no->generateInvoiceNumber();
 
         $stmt = $this->conn->prepare("
             INSERT INTO orders(
@@ -41,7 +39,7 @@ class Order extends Model
             VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
         ");
         $this->conn->beginTransaction();
-        $data['invoice_no'] = $invoice_no->generateInvoiceNumber();
+        $data['invoice_no'] = $this->generateNumber('invoice_no', 'INV');
         try { 
             $stmt->execute([
                 $data['customer_id'],
@@ -176,7 +174,7 @@ class Order extends Model
             ");
         $this->conn->beginTransaction();
         try{
-             return $stmt->execute([
+             $stmt->execute([
 
                 $data['garment_type_id'],
                 $data['quantity'],
@@ -192,6 +190,7 @@ class Order extends Model
             ]);
 
         $this->conn->commit();
+        return true;
 
         } catch(Exception $e) {
             $this->conn->rollBack();
