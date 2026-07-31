@@ -18,7 +18,7 @@ class Invoice extends Model
                 o.invoice_no,
                 o.order_date,
                 o.delivery_date,
-                o.garment_type,
+                o.garment_type_id,
                 o.total_amount,
                 o.advance,
                 o.discount,
@@ -83,25 +83,28 @@ class Invoice extends Model
      * Generate Invoice Number
      * -------------------------------------------------------
      */
-  public function generateInvoiceNumber()
-  {
-      $stmt = $this->conn->query("
-          SELECT booking_no
-          FROM orders
-          ORDER BY id DESC
-          LIMIT 1
-      ");
+        public function generateInvoiceNumber()
+        {
+            $stmt = $this->conn->query("
+                SELECT invoice_no
+                FROM orders
+                WHERE invoice_no IS NOT NULL
+                ORDER BY id DESC
+                LIMIT 1
+            ");
 
-      $last = $stmt->fetch(PDO::FETCH_ASSOC);
+            $last = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if (!$last) {
-          return "INV-0001";
-      }
+            if (!$last || empty($last['invoice_no'])) {
+                return "INV-0001";
+            }
 
-      $number = preg_replace('/[^0-9]/', '', $last['booking_no']);
+            $number = (int) preg_replace('/\D/', '', $last['invoice_no']);
 
-      return "INV-" . str_pad((int)$number, 4, "0", STR_PAD_LEFT);
-  }
+            $number++;
+
+            return "INV-" . str_pad($number, 4, "0", STR_PAD_LEFT);
+        }
 
     /**
      * -------------------------------------------------------
@@ -136,7 +139,7 @@ class Invoice extends Model
               mt.option_name,
               mt.urdu_name,
               mt.section,
-              mt.garment_type,
+              mt.garment_type_id,
               mt.print_order,
               m.measurement_value
 
@@ -148,6 +151,7 @@ class Invoice extends Model
           WHERE m.order_id = ?
 
           ORDER BY
+              mt.garment_type_id,
               mt.section,
               mt.print_order,
               mt.id

@@ -19,6 +19,8 @@ class Order extends Model
         $data['notes'] = !empty($data['notes'])
                             ? trim($data['notes'])
                             : "";
+        $invoice_no = new Invoice();
+        $data['invoice_no'] = $invoice_no->generateInvoiceNumber();
 
         $stmt = $this->conn->prepare("
             INSERT INTO orders(
@@ -26,6 +28,7 @@ class Order extends Model
                 garment_type_id,
                 quantity,
                 booking_no,
+                invoice_no,
                 order_date,
                 delivery_date,
                 total_amount,
@@ -35,15 +38,17 @@ class Order extends Model
                 status,
                 notes
             )
-            VALUES(?,?,?,?,?,?,?,?,?,?,?,?)
+            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
         ");
         $this->conn->beginTransaction();
+        $data['invoice_no'] = $invoice_no->generateInvoiceNumber();
         try { 
             $stmt->execute([
                 $data['customer_id'],
                 $data['garment_type_id'],
                 $data['quantity'],
                 $data['booking_no'],
+                $data['invoice_no'],
                 $data['order_date'],
                 $data['delivery_date'],
                 $data['total_amount'],
