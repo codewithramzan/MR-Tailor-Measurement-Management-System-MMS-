@@ -5,16 +5,19 @@ class Measurement extends Model
     protected $table = "measurements";
 
     // Get measurement fields by garment type
-   public function getTypes($garmentType)
+   public function getTypes($garmentTypeId)
     {
         $stmt = $this->conn->prepare("
             SELECT *
             FROM measurement_types
-            WHERE garment_type = ?
-            ORDER BY section, print_order, id
+            WHERE garment_type_id = ?
+            ORDER BY 
+            section ASC,
+            print_order ASC, 
+            id ASC
         ");
 
-        $stmt->execute([$garmentType]);
+        $stmt->execute([$garmentTypeId]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -75,7 +75,7 @@ class Setting extends Model
             ORDER BY
                 garment_type,
                 section,
-                display_order,
+                print_order,
                 option_name
         ");
 
@@ -113,7 +113,7 @@ class Setting extends Model
                 option_name,
                 urdu_name,
                 placeholder,
-                display_order,
+                print_order,
                 status
             )
             VALUES
@@ -134,7 +134,7 @@ class Setting extends Model
 
             $data["placeholder"],
 
-            $data["display_order"],
+            $data["print_order"],
 
             $data["status"]
 
@@ -160,7 +160,7 @@ class Setting extends Model
 
             placeholder=?,
 
-            display_order=?,
+            print_order=?,
 
             status=?
 
@@ -179,7 +179,7 @@ class Setting extends Model
 
             $data["placeholder"],
 
-            $data["display_order"],
+            $data["print_order"],
 
             $data["status"],
 

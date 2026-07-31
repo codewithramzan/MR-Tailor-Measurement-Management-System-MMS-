@@ -158,7 +158,7 @@
     <input
     type="number"
     class="form-control"
-    name="display_order"
+    name="print_order"
     value="<?= htmlspecialchars($measurement['display_order'] ?? '') ?>"
     value="1">
 

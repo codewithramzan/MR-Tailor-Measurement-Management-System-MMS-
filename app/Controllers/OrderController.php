@@ -24,19 +24,36 @@ class OrderController extends Controller
     public function create()
     {
         if (!isset($_GET['customer_id'])) {
-                header("Location:index.php?page=customers");
+
+            header("Location:index.php?page=customers");
             exit;
         }
 
         $customerModel = new Customer();
+        $garmentModel  = new GarmentType();
 
         $customer = $customerModel->find($_GET['customer_id']);
 
-        $this->view('orders/create', [
+        if (!$customer) {
 
-            'customer' => $customer
+            $this->redirectWithMessage(
+                "customers",
+                "danger",
+                "Customer not found."
+            );
 
-        ]);
+            return;
+        }
+
+        $garments = $garmentModel->getActive();
+
+        $this->view(
+            "orders/create",
+            [
+                "customer"  => $customer,
+                "garments"  => $garments
+            ]
+        );
     }
 
     public function store()
@@ -47,7 +64,7 @@ class OrderController extends Controller
 
             $validator
                 ->required("customer_id", $_POST['customer_id'], "Customer")
-                ->required("garment_type", $_POST['garment_type'], "Garment Type")
+                ->required("garment_type_id",$_POST['garment_type_id'],"Garment Type")
                 ->required("quantity", $_POST['quantity'], "Quantity")
                 ->required("booking_no", $_POST['booking_no'], "Booking Number")
                 ->required("order_date", $_POST['order_date'], "Order Date")
@@ -84,6 +101,8 @@ class OrderController extends Controller
                 );
             }
 
+           try {
+
             $order = new Order();
 
             $orderId = $order->create($_POST);
@@ -91,10 +110,28 @@ class OrderController extends Controller
             OldInput::clear();
 
             $this->redirectWithMessage(
-                "create-measurement&order_id=" . $orderId,
+                "create-measurement&order_id=".$orderId,
                 "success",
-                "📦 Order Created Successfully. Please take measurements."
+                "📦 Order Created Successfully."
             );
+
+            } catch (PDOException $e) {
+
+                OldInput::set($_POST);
+
+                if ($e->getCode() == 23000) {
+
+                    $this->redirectWithMessage(
+                        "create-order&customer_id=".$_POST["customer_id"],
+                        "danger",
+                        "Booking number already exists. Please create the order again."
+                    );
+
+                } else {
+
+                    throw $e;
+                }
+            }
         }
     }
 

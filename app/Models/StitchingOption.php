@@ -12,27 +12,66 @@ class StitchingOption extends Model
 
         FROM stitching_options
 
-        ORDER BY category, print_order
+        ORDER BY
+        garment_type, 
+        category, 
+        print_order,
+        id
 
         ";
 
-        $stmt = $this->conn->query($sql);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getGrouped()
+    public function getGrouped($garmentType)
     {
-        $rows = $this->getAll();
+        $sql = "
 
-        $data = [];
+        SELECT *
+
+        FROM stitching_options
+
+        WHERE
+
+            garment_type = ?
+
+        AND
+
+            status='Active'
+
+        ORDER BY
+            garment_type,
+            category,
+            print_order, 
+            id
+
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->execute([$garmentType]);
+
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $grouped=[];
 
         foreach($rows as $row){
 
-            $data[$row['category']][] = $row;
+           $category = trim($row["category"]);
+
+            if ($category === "") {
+                $category = "General";
+            }
+
+            $grouped[$category][] = $row;
 
         }
 
-        return $data;
+        return $grouped;
     }
+
+ 
 }

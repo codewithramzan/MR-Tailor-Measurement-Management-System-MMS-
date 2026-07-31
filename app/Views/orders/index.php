@@ -54,7 +54,7 @@
 
       <td><?= htmlspecialchars($row['full_name']) ?></td>
 
-      <td><?= htmlspecialchars($row['garment_type']) ?></td>
+      <td><?= htmlspecialchars($row['garment_name']) ?></td>
 
       <td><?= htmlspecialchars($row['delivery_date']) ?></td>
 

@@ -42,7 +42,7 @@ class MeasurementController extends Controller
         // -----------------------------
         // Fetch Measurement Types
         // -----------------------------
-        $types = $measurementModel->getTypes($order['garment_type']);
+        $types = $measurementModel->getTypes($order['garment_type_id']);
 
         // -----------------------------
         // Group Measurements by Section
@@ -63,7 +63,11 @@ class MeasurementController extends Controller
         // -----------------------------
         // Fetch Stitching Options
         // -----------------------------
-        $options = $stitchingModel->getGrouped();
+        $options = $stitchingModel->getGrouped(
+
+            $order["garment_type_id"]
+
+        );
 
         // -----------------------------
         // Render View
@@ -245,7 +249,7 @@ class MeasurementController extends Controller
     
 
 
-    public function update()
+    public function updateMeasurement()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {

@@ -1,6 +1,6 @@
 <?php
 
-class Order extends Database
+class Order extends Model
 {
     public function create($data)
     {
@@ -23,7 +23,7 @@ class Order extends Database
         $stmt = $this->conn->prepare("
             INSERT INTO orders(
                 customer_id,
-                garment_type,
+                garment_type_id,
                 quantity,
                 booking_no,
                 order_date,
@@ -37,37 +37,53 @@ class Order extends Database
             )
             VALUES(?,?,?,?,?,?,?,?,?,?,?,?)
         ");
+        $this->conn->beginTransaction();
+        try { 
+            $stmt->execute([
+                $data['customer_id'],
+                $data['garment_type_id'],
+                $data['quantity'],
+                $data['booking_no'],
+                $data['order_date'],
+                $data['delivery_date'],
+                $data['total_amount'],
+                $data['advance'],
+                $data['discount'],
+                $data['balance'],
+                $data['status'],
+                $data['notes']
+            ]);
 
-        $stmt->execute([
-            $data['customer_id'],
-            $data['garment_type'],
-            $data['quantity'],
-            $data['booking_no'],
-            $data['order_date'],
-            $data['delivery_date'],
-            $data['total_amount'],
-            $data['advance'],
-            $data['discount'],
-            $data['balance'],
-            $data['status'],
-            $data['notes']
-        ]);
+            $orderId = $this->conn->lastInsertId();
+            $this->conn->commit();
 
-        return $this->conn->lastInsertId();
+            return $orderId;
+        } catch (Exception $e){
+
+            $this->conn->rollBack();
+            throw $e;
+        }
+
+
     }
         public function getAll()
         {
-            $stmt = $this->conn->query("
+            $stmt = $this->conn->prepare("
                 SELECT
                     orders.*,
                     customers.full_name,
-                    customers.phone
+                    customers.phone,
+                    garment_types.name AS garment_name,
+                    garment_types.urdu_name
                 FROM orders
-                JOIN customers
+                INNER JOIN customers
                     ON customers.id = orders.customer_id
-                ORDER BY orders.id DESC
+                    INNER JOIN garment_types
+                    ON garment_types.id = orders.garment_type_id
+                ORDER BY 
+                orders.id DESC
             ");
-
+           $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
@@ -77,13 +93,19 @@ class Order extends Database
         {
             $stmt = $this->conn->prepare("
                 SELECT
-                    orders.*,
-                    customers.full_name,
-                    customers.phone
+
+                orders.*,
+                customers.full_name,
+                customers.phone,
+                garment_types.name AS garment_name,
+                garment_types.urdu_name
                 FROM orders
-                JOIN customers
-                    ON customers.id = orders.customer_id
+                INNER JOIN customers
+                ON customers.id=orders.customer_id
+                INNER JOIN garment_types
+                ON garment_types.id=orders.garment_type_id
                 WHERE orders.id = ?
+                LIMIT 1
             ");
 
             $stmt->execute([$id]);
@@ -98,16 +120,20 @@ class Order extends Database
             $stmt = $this->conn->prepare("
                 SELECT
                     orders.*,
-                    customers.booking_no,
                     customers.full_name,
                     customers.father_name,
                     customers.phone,
                     customers.mohalla,
-                    customers.village
+                    customers.village,
+                    garment_types.name AS garment_name,
+                    garment_types.urdu_name
                 FROM orders
-                JOIN customers
+                INNER JOIN customers
                     ON customers.id = orders.customer_id
+                INNER JOIN garment_types
+                ON garment_types.id = orders.garment_type_id
                 WHERE orders.id = ?
+                LIMIT 1
             ");
 
             $stmt->execute([$id]);
@@ -118,11 +144,19 @@ class Order extends Database
 
         public function update($id, $data)
         {
+
+            $advance = $data['advance'] ?? 0;
+            $discount = $data['discount'] ?? 0;
+
+            $balance =
+                $data['total_amount']
+                - $advance
+                - $discount;
             $stmt = $this->conn->prepare("
                 UPDATE orders
                 SET
 
-                garment_type=?,
+                garment_type_id=?,
                 quantity=?,
                 delivery_date=?,
                 total_amount=?,
@@ -138,13 +172,13 @@ class Order extends Database
 
             return $stmt->execute([
 
-                $data['garment_type'],
+                $data['garment_type_id'],
                 $data['quantity'],
                 $data['delivery_date'],
                 $data['total_amount'],
-                $data['advance'],
-                $data['discount'],
-                $data['balance'],
+                $advance,
+                $discount,
+                $balance,
                 $data['status'],
                 $data['notes'],
                 $id
@@ -166,10 +200,14 @@ class Order extends Database
         {
             $sql = "SELECT
                         orders.*,
-                        customers.full_name
+                        customers.full_name,
+                        garment_types.name AS garment_name,
+                        garment_types.urdu_name
                     FROM orders
                     INNER JOIN customers
                         ON customers.id = orders.customer_id
+                        INNER JOIN garment_types
+                        ON garment_types.id=orders.garment_type_id
                     WHERE orders.status = ?
                     ORDER BY orders.id DESC";
 

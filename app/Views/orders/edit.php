@@ -22,8 +22,8 @@
 
       <input
       type="hidden"
-      name="id"
-      value="<?= $data['id'] ?? '' ?>">
+      name="garment_type_id"
+      value="<?= $data['garment_type_id'] ?? '' ?>">
 
       <div class="row g-3">
 
@@ -33,9 +33,9 @@
 
       <input
       type="text"
-      name="garment_type"
       class="form-control"
-      value="<?= htmlspecialchars($data['garment_type'])  ?>">
+      value="<?= htmlspecialchars($data['garment_name'] ?? '')  ?>"
+      readonly>
 
       </div>
 

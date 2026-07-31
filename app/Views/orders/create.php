@@ -74,19 +74,27 @@
 					<span class="required">*</span>
 				</label>
 
-					<select name="garment_type" class="form-select">
+					<select
+						name="garment_type_id"
+						class="form-select"
+						required>
 
 					<option value="">Select Garment</option>
 
-					<option value="Shalwar Qamees"
-							<?= OldInput::get('garment_type') == "Shalwar Qamees" ? "selected" : "" ?>>
-							Shalwar Qamees
-					</option>
+						<?php foreach ($garments as $garment): ?>
 
-					<option value="Pant"
-							<?= OldInput::get('garment_type') == "Pant" ? "selected" : "" ?>>
-							Pant
-					</option>
+						<option
+								value="<?= $garment['id']; ?>"
+
+								<?= OldInput::get('garment_type_id') == $garment['id']
+										? 'selected'
+										: ''; ?>>
+
+						<?= htmlspecialchars($garment['name']); ?>
+
+						</option>
+
+						<?php endforeach; ?>
 
 			</select>
 
@@ -100,6 +108,7 @@
 
 				<input
 				type="number"
+				id="quantity"
 				name="quantity"
 				class="form-control"
 				value="<?= htmlspecialchars(OldInput::get('quantity')) ?? 1 ?>">
@@ -144,6 +153,7 @@
 
 				<input
 				type="number"
+				id="total"
 				name="total_amount"
 				class="form-control"
 				value="<?= htmlspecialchars(OldInput::get('total_amount')) ?? 0 ?>">
@@ -158,6 +168,7 @@
 
 					<input
 					type="number"
+					id="advance"
 					name="advance"
 					class="form-control"
 					value="<?= htmlspecialchars(OldInput::get('advance')) ?? 0?>">
@@ -172,6 +183,7 @@
 
 					<input
 					type="number"
+					id="discount"
 					name="discount"
 					class="form-control"
 					value="<?= htmlspecialchars(OldInput::get('discount'))??0 ?>">
@@ -251,7 +263,7 @@
 
 
 <script>
-
+const quantity = document.getElementById("quantity");
 const total=document.getElementById("total");
 
 const advance=document.getElementById("advance");
@@ -261,14 +273,14 @@ const discount=document.getElementById("discount");
 const balance=document.getElementById("balance");
 
 function calculate(){
-
+let q = parseInt(quantity.value);
 let t=parseFloat(total.value)||0;
 
 let a=parseFloat(advance.value)||0;
 
 let d=parseFloat(discount.value)||0;
 
-balance.value=t-a-d;
+balance.value= q*(t-a-d);
 
 }
 
