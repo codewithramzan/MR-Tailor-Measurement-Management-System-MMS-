@@ -138,7 +138,7 @@ switch($page){
 
     case "update-measurement":
 
-            (new MeasurementController())->update();
+            (new MeasurementController())->updateMeasurement();
 
     break;
 

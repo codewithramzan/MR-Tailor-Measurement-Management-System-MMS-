@@ -67,13 +67,13 @@
                     type="text"
                     class="form-control"
                     readonly
-                    value="<?= htmlspecialchars($order['garment_type'] ?? '') ?>">
+                    value="<?= htmlspecialchars($order['garment_name'] ?? '') ?>">
 
             </div>
 
         </div>
 
-        <form method="POST" action="index.php?page=save-measurements">
+        <form method="POST" action="index.php?page=update-measurement">
 
             <input
                 type="hidden"

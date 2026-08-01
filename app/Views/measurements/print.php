@@ -137,7 +137,7 @@ CUSTOMER + ORDER INFO
 
 <td>لباس</td>
 
-<td><?= htmlspecialchars($info['garment_type'] ?? 'Undefined') ?></td>
+<td><?= htmlspecialchars($info['garment_name'] ?? 'Undefined') ?></td>
 
 </tr>
 
@@ -336,7 +336,7 @@ $rightSections = array_slice($sectionNames, $leftCount);
 SPECIAL STITCHING INSTRUCTIONS
 =========================== -->
 
-<?php if(!empty($allOptions)): ?>
+<?php if(!empty($Options)): ?>
 
 <div class="section-title">
 
@@ -350,7 +350,7 @@ SPECIAL STITCHING INSTRUCTIONS
 
 <div class="options-wrapper">
 
-<?php foreach($allOptions as $category=>$items): ?>
+<?php foreach($Options as $category=>$items): ?>
 
 <?php
 

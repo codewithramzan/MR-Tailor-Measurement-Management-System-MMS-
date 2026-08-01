@@ -46,9 +46,9 @@
             <?php foreach($garments as $garment): ?>
 
                 <option
-                    value="<?= htmlspecialchars($garment['garment_type']) ?>">
+                    value="<?= htmlspecialchars($garment['garment_type_id']) ?>">
 
-                    <?= htmlspecialchars($garment['garment_type']) ?>
+                    <?= htmlspecialchars($garment['garment_name']) ?>
 
                 </option>
 
@@ -117,7 +117,7 @@ id="measurementTable">
 
   <td>
 
-  <?= htmlspecialchars($row['garment_type'] ?? 'undefined') ?>
+  <?= htmlspecialchars($row['garment_name'] ?? 'undefined') ?>
 
   </td>
 
@@ -147,7 +147,7 @@ id="measurementTable">
 
   <td>
 
-  <?= $row['display_order'] ?? '' ?>
+  <?= htmlspecialchars($row['print_order']) ?>
 
 </td>
 

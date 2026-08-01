@@ -44,9 +44,9 @@
 
   <?php foreach($garments as $garment): ?>
 
-  <option value="<?= htmlspecialchars($garment['garment_type']) ?>">
+  <option value="<?= htmlspecialchars($garment['garment_type_id']) ?>">
 
-  <?= htmlspecialchars($garment['garment_type']) ?>
+  <?= htmlspecialchars($garment['garment_name']) ?>
 
   </option>
 
@@ -143,14 +143,14 @@ placeholder="40">
 
   <label class="form-label">
 
-  Display Order
+  Print Order
 
   </label>
 
   <input
   type="number"
   class="form-control"
-  name="display_order"
+  name="print_order"
   value="1">
 
 </div>

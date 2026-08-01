@@ -82,7 +82,7 @@
 
     <th width="200">Garment</th>
 
-    <td><?= htmlspecialchars($order['garment_type']?? '') ?></td>
+    <td><?= htmlspecialchars($order['garment_name']?? '') ?></td>
 
     </tr>
 

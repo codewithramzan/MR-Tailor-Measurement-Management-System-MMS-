@@ -47,11 +47,11 @@
 
       <option
 
-      value="<?= $garment['garment_type'] ?>"
+      value="<?= $garment['garment_type_id'] ?>"
 
-      <?= $measurement['garment_type']==$garment['garment_type'] ? "selected" : "" ?>>
+      <?= $measurement['garment_name']==$garment['garment_name'] ? "selected" : "" ?>>
 
-      <?= $garment['garment_type'] ?>
+      <?= htmlspecialchars($garment['garment_name']) ?>
 
       </option>
 
@@ -151,7 +151,7 @@
 
     <label class="form-label">
 
-    Display Order
+    print Order
 
     </label>
 
@@ -159,7 +159,7 @@
     type="number"
     class="form-control"
     name="print_order"
-    value="<?= htmlspecialchars($measurement['display_order'] ?? '') ?>"
+    value="<?= htmlspecialchars($measurement['print_order'] ?? '') ?>"
     value="1">
 
   </div>

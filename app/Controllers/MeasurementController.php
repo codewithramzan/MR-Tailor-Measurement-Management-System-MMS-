@@ -210,7 +210,7 @@ class MeasurementController extends Controller
         }
 
         // Measurement fields
-        $types = $measurementModel->getTypes($order['garment_type']);
+        $types = $measurementModel->getTypes($order['garment_type_id']);
 
         // Existing measurements
         $savedMeasurements = $measurementModel->getMeasurements($orderId);
@@ -233,7 +233,9 @@ class MeasurementController extends Controller
         }
 
         // All stitching options
-        $options = $stitchingModel->getGrouped();
+            $options = $stitchingModel->getGrouped(
+                $order['garment_type_id']
+            );
 
         $this->view(
             'measurements/edit',
@@ -308,7 +310,7 @@ class MeasurementController extends Controller
 
             $measurement = new Measurement();
 
-            $measurement->update(
+            $measurement->updateMeasurements(
 
                 $_POST['order_id'],
 
@@ -316,7 +318,7 @@ class MeasurementController extends Controller
 
             );
 
-            $measurement->updateOptions(
+            $measurement->saveOptions(
 
                 $_POST['order_id'],
 

@@ -67,7 +67,7 @@
                     type="text"
                     class="form-control"
                     readonly
-                    value="<?= htmlspecialchars($order['garment_type'] ?? '') ?>">
+                    value="<?= htmlspecialchars($order['garment_name'] ?? '') ?>">
 
             </div>
 
@@ -120,8 +120,12 @@
                                         type="text"
                                         class="form-control"
                                         name="measurements[<?= $type['id'] ?>]"
-                                        value="<?= htmlspecialchars(OldInput::get('measurements')[$type['id']] ?? '') ?>"
-                                        placeholder="<?= htmlspecialchars($type['option_name']) ?>">
+
+                                        value="<?= htmlspecialchars(
+                                        OldInput::get('measurements')[$type['id']]
+                                        ??
+                                        ($savedMeasurements[$type['id']] ?? '')
+                                        ) ?>">
 
                                 </div>
 
@@ -179,11 +183,23 @@
 
                                             <?php
 
-                                            $name = $item['selection_type']=="radio"
-                                                ? "options_radio[$category]"
-                                                : "options[]";
+                                                if($item['selection_type']=="radio"){
 
-                                            ?>
+                                                    $checked =
+                                                        isset(OldInput::get('options_radio')[$category])
+                                                            ? OldInput::get('options_radio')[$category]==$item['id']
+                                                            : in_array($item['id'],$selectedOptions);
+
+                                                }else{
+
+                                                    $checked =
+                                                        !empty(OldInput::get('options'))
+                                                            ? in_array($item['id'],OldInput::get('options'))
+                                                            : in_array($item['id'],$selectedOptions);
+
+                                                }
+
+                                                ?>
 
                                             <div class="form-check mb-2">
 
@@ -191,19 +207,11 @@
                                                     class="form-check-input"
                                                     type="<?= $item['selection_type'] ?>"
                                                     id="option<?= $item['id'] ?>"
-                                                    name="<?= $name ?>"
+                                                    name="<?= $checked ?>"
                                                     value="<?= $item['id'] ?>"
 
                                                     <?=
-                                                    (
-                                                        in_array(
-                                                            $item['id'],
-                                                            OldInput::get('options',[])
-                                                        )
-                                                    )
-                                                    ? 'checked'
-                                                    : ''
-                                                    ?>>
+                                                  $checked ? 'checked' : '' ?>>
 
                                                 <label
                                                     class="form-check-label"

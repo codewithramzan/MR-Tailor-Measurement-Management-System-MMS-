@@ -13,7 +13,7 @@ class StitchingOption extends Model
         FROM stitching_options
 
         ORDER BY
-        garment_type, 
+        garment_type_id, 
         category, 
         print_order,
         id
@@ -26,7 +26,7 @@ class StitchingOption extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getGrouped($garmentType)
+    public function getGrouped($garmentTypeId)
     {
         $sql = "
 
@@ -36,14 +36,13 @@ class StitchingOption extends Model
 
         WHERE
 
-            garment_type = ?
+            garment_type_id = ?
 
         AND
 
             status='Active'
 
         ORDER BY
-            garment_type,
             category,
             print_order, 
             id
@@ -52,7 +51,7 @@ class StitchingOption extends Model
 
         $stmt = $this->conn->prepare($sql);
 
-        $stmt->execute([$garmentType]);
+        $stmt->execute([$garmentTypeId]);
 
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
