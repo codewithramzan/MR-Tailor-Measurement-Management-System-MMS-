@@ -30,7 +30,7 @@
 
     <th width="200">Booking No</th>
 
-    <td><?= $order['booking_no']?? 0 ?></td>
+    <td><?= $order['booking_no']?? ''?></td>
 
     </tr>
 
@@ -118,7 +118,7 @@
 
     <td>
 
-    <?= Config::get("currency") ?> <?= number_format($order['total_amount'])?? 0 ?>
+    <?= Config::get("currency") ?> <?= number_format($order['total_amount'] ?? 0)?>
 
     </td>
 
@@ -130,7 +130,7 @@
 
     <td>
 
-    <?= Config::get("currency") ?> <?= number_format($order['advance'])?? 0 ?>
+    <?= Config::get("currency") ?> <?= number_format($order['advance'] ?? 0) ?>
 
     </td>
 
@@ -142,7 +142,7 @@
 
     <td>
 
-    <?= Config::get("currency") ?> <?= number_format($order['discount'])?? 0 ?>
+    <?= Config::get("currency") ?> <?= number_format($order['discount'] ?? 0) ?>
 
     </td>
 
@@ -159,7 +159,7 @@
 
     <tr>
     <th>Notes</th>
-    <td><?= htmlspecialchars($order['notes'] ?: 'No Notes') ?></td>
+    <td><?= htmlspecialchars($order['notes'] ?? '') ?></td>
     </tr>
 
     </table>

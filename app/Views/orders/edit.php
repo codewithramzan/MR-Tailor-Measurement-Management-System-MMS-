@@ -17,13 +17,12 @@
       </div>
 
       <div class="card-body">
-
       <form method="POST" action="index.php?page=update-order">
 
       <input
-      type="hidden"
-      name="garment_type_id"
-      value="<?= $data['garment_type_id'] ?? '' ?>">
+          type="hidden"
+          name="id"
+          value="<?= $data['id'] ?? '' ?>">
 
       <div class="row g-3">
 
@@ -72,15 +71,15 @@
       name="status"
       class="form-select">
 
-      <option <?= $data['status']=="Pending"?"selected":"" ?>>
+      <option <?= $data['status']?? '' =="Pending"?"selected":"" ?>>
       Pending
       </option>
 
-      <option <?= $data['status']=="Ready"?"selected":"" ?>>
+      <option <?= $data['status']?? '' =="Ready"?"selected":"" ?>>
       Ready
       </option>
 
-      <option <?= $data['status']=="Delivered"?"selected":"" ?>>
+      <option <?= $data['status'] ?? ''=="Delivered"?"selected":"" ?>>
       Delivered
       </option>
 
@@ -155,7 +154,7 @@
       <textarea
       name="notes"
       class="form-control"
-      rows="3"><?= htmlspecialchars($data['notes']) ?></textarea>
+      rows="3"><?= htmlspecialchars($data['notes'] ??'') ?></textarea>
 
       </div>
 

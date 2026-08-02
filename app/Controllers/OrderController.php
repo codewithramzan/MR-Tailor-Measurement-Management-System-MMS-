@@ -163,10 +163,15 @@ class OrderController extends Controller
             compact('data')
         );
     }
+
+   
   public function update()
     {
-        $order = new Order();
+     $order = new Order();
 
+        $existing = $order->find($_POST['id']);
+
+        $_POST['garment_type_id'] = $existing['garment_type_id'];
         $order->update(
             $_POST['id'],
             $_POST

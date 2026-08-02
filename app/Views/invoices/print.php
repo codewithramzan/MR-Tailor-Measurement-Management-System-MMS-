@@ -435,7 +435,7 @@ Order Information
 
 <td>Garment</td>
 
-<td><?= htmlspecialchars($invoice['garment_type'] ?? '') ?></td>
+<td><?= htmlspecialchars($invoice['garment_name'] ?? '') ?></td>
 
 </tr>
 
@@ -665,7 +665,7 @@ foreach ($measurements as $row) {
 
                         if($label === ''){
 
-                            $label = trim((string)($item['name'] ?? ''));
+                            $label = trim((string)($item['option_name'] ?? ''));
                         }
 
                         ?>
@@ -713,7 +713,7 @@ foreach ($measurements as $row) {
                             <td class="text-end">
 
                                 <?= Config::get("currency") ?>
-                                <?= number_format($invoice['total_amount']?? '',2) ?>
+                                <?= number_format($invoice['total_amount']?? 0,2) ?>
 
                             </td>
 
@@ -726,7 +726,7 @@ foreach ($measurements as $row) {
                             <td class="text-end">
 
                                 Rs.
-                                <?= number_format($invoice['discount'] ?? '',2) ?>
+                                <?= number_format($invoice['discount'] ?? 0,2) ?>
 
                             </td>
 
@@ -739,7 +739,7 @@ foreach ($measurements as $row) {
                             <td class="text-end">
 
                                 Rs.
-                                <?= number_format($invoice['advance'] ?? '',2) ?>
+                                <?= number_format($invoice['advance'] ?? 0,2) ?>
 
                             </td>
 
@@ -752,7 +752,7 @@ foreach ($measurements as $row) {
                             <td class="text-end fw-bold">
 
                                 Rs.
-                                <?= number_format($invoice['balance']??'undefined',2) ?>
+                                <?= number_format($invoice['balance']??0,2) ?>
 
                             </td>
 
@@ -810,7 +810,7 @@ foreach ($measurements as $row) {
 
                             <td class="text-end">
 
-                                <?= htmlspecialchars($invoice['garment_type'] ?? '') ?>
+                                <?= htmlspecialchars($invoice['garment_name'] ?? '') ?>
 
                             </td>
 
@@ -822,7 +822,7 @@ foreach ($measurements as $row) {
 
                             <td class="text-end">
 
-                                <?= htmlspecialchars($invoice['quantity'] ?? '') ?>
+                                <?= htmlspecialchars($invoice['quantity'] ?? 1) ?>
 
                             </td>
 

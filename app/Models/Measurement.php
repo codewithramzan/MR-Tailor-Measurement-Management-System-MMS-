@@ -125,82 +125,101 @@ class Measurement extends Model
     public function getOptions($orderId)
     {
         $sql = "
+
             SELECT
+
                 s.id,
                 s.option_name,
                 s.urdu_name,
                 s.category,
                 s.selection_type,
                 s.print_order
+
             FROM order_stitching_options os
 
             INNER JOIN stitching_options s
                 ON s.id = os.option_id
 
-            WHERE os.order_id = ?
+            INNER JOIN orders o
+                ON o.id = os.order_id
+
+            WHERE
+                os.order_id = ?
+                AND s.garment_type_id = o.garment_type_id
 
             ORDER BY
+
                 s.category ASC,
                 s.print_order ASC,
                 s.id ASC
+
         ";
 
         $stmt = $this->conn->prepare($sql);
+
         $stmt->execute([$orderId]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-   public function getSlip($orderId)
+    public function getSlip($orderId)
     {
         $sql = "
+
         SELECT
 
             o.id,
             o.booking_no,
             o.order_date,
             o.delivery_date,
-            o.garment_type_id,
+            o.status,
+
             o.total_amount,
             o.advance,
             o.discount,
             o.balance,
 
             c.full_name,
+            c.father_name,
             c.phone,
             c.village,
+            c.mohalla,
+
+            gt.id   AS garment_type_id,
+            gt.name AS garment_name,
+            gt.urdu_name AS garment_urdu_name,
 
             mt.id AS measurement_type_id,
             mt.option_name,
-            mt.urdu_name,
+            mt.urdu_name AS measurement_urdu_name,
             mt.section,
-            mt.garment_type,
             mt.print_order,
 
-            m.measurement_value,
-            gt.name AS garment_name,
-            gt.urdu_name
+            m.measurement_value
 
         FROM orders o
 
         INNER JOIN customers c
             ON c.id = o.customer_id
 
+        INNER JOIN garment_types gt
+            ON gt.id = o.garment_type_id
+
         INNER JOIN measurement_types mt
-            ON mt.garment_type_id = o.garment_type_id
+            ON mt.garment_type_id = gt.id
 
         LEFT JOIN measurements m
-            ON m.order_id = o.id
-            AND m.measurement_type_id = mt.id
-        INNER JOIN garment_types gt
-        ON gt.id = o.garment_type_id
+            ON m.measurement_type_id = mt.id
+            AND m.order_id = o.id
 
         WHERE o.id = ?
+        AND mt.garment_type_id = o.garment_type_id
 
         ORDER BY
-            mt.section,
-            mt.print_order,
-            mt.id
+
+            mt.section ASC,
+            mt.print_order ASC,
+            mt.id ASC
+
         ";
 
         $stmt = $this->conn->prepare($sql);

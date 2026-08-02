@@ -62,7 +62,7 @@ class InvoiceController extends Controller
         // Auto Generate Invoice Number
         if (empty($invoice['invoice_no'])) {
 
-            $invoiceNo = $this->invoiceModel->generateInvoiceNumber();
+            $invoiceNo = $this->invoiceModel->generateNumber('invoice_no','INV');
 
             $this->invoiceModel->saveInvoiceNumber(
                 $orderId,
@@ -82,7 +82,6 @@ class InvoiceController extends Controller
                 'invoice',
                 'measurements',
                 'options',
-                'paymentStatus'
             )
         );
     }
@@ -112,14 +111,12 @@ class InvoiceController extends Controller
 
         if (empty($invoice['invoice_no'])) {
 
-            $invoiceNo = $this->invoiceModel->generateInvoiceNumber();
+            $invoiceNo = $this->invoiceModel->generateNumber('invoice_no', 'INV');
 
             $this->invoiceModel->saveInvoiceNumber(
                 $orderId,
                 $invoiceNo
             );
-
-            $invoice = $this->invoiceModel->find($orderId);
         }
 
         $measurements = $this->invoiceModel->getMeasurements($orderId);

@@ -318,14 +318,19 @@ class MeasurementController extends Controller
 
             );
 
-            $measurement->saveOptions(
+            $options = $_POST['options'] ?? [];
 
+            if (!empty($_POST['options_radio'])) {
+
+                foreach ($_POST['options_radio'] as $value) {
+
+                    $options[] = $value;
+                }
+   
+                $measurement->saveOptions(
                 $_POST['order_id'],
-
-                $_POST['options'] ?? []
-
+                $options
             );
-
             OldInput::clear();
 
             $this->redirectWithMessage(
@@ -338,6 +343,7 @@ class MeasurementController extends Controller
 
             );
         }
+    }
     }
 
    public function printSlip()

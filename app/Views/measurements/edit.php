@@ -73,7 +73,7 @@
 
         </div>
 
-        <form method="POST" action="index.php?page=save-measurements">
+        <form method="POST" action="index.php?page=update-measurement">
 
             <input
                 type="hidden"
@@ -139,121 +139,122 @@
 
             <?php endforeach; ?>
 
-            <!-- ========================= -->
-            <!-- Stitching Instructions -->
-            <!-- ========================= -->
+<!-- ========================= -->
+<!-- Stitching Instructions -->
+<!-- ========================= -->
 
-            <div class="card shadow-sm border-0 mb-4">
+<div class="card shadow-sm border-0 mb-4">
 
-                <div class="card-header bg-warning">
+<div class="card-header bg-warning">
 
-                    <h5 class="mb-0">
+<h5 class="mb-0">
 
-                        <i class="fas fa-cut me-2"></i>
+<i class="fas fa-cut me-2"></i>
 
-                        Special Stitching Instructions
+Special Stitching Instructions
 
-                    </h5>
+</h5>
 
-                </div>
+</div>
 
-                <div class="card-body">
+<div class="card-body">
 
-                    <div class="row">
+<div class="row">
 
-                        <?php foreach($options as $category=>$items): ?>
+<?php foreach($options as $category=>$items): ?>
 
-                            <div class="col-lg-6 mb-4">
+    <div class="col-lg-6 mb-4">
 
-                                <div class="card h-100">
+<div class="card h-100">
 
-                                    <div class="card-header bg-light">
+    <div class="card-header bg-light">
 
-                                        <strong>
+        <strong>
 
-                                            <?= htmlspecialchars($category) ?>
+            <?= htmlspecialchars($category) ?>
 
-                                        </strong>
-
-                                    </div>
-
-                                    <div class="card-body">
-
-                                        <?php foreach($items as $item): ?>
-
-                                            <?php
-
-                                                if($item['selection_type']=="radio"){
-
-                                                    $checked =
-                                                        isset(OldInput::get('options_radio')[$category])
-                                                            ? OldInput::get('options_radio')[$category]==$item['id']
-                                                            : in_array($item['id'],$selectedOptions);
-
-                                                }else{
-
-                                                    $checked =
-                                                        !empty(OldInput::get('options'))
-                                                            ? in_array($item['id'],OldInput::get('options'))
-                                                            : in_array($item['id'],$selectedOptions);
-
-                                                }
-
-                                                ?>
-
-                                            <div class="form-check mb-2">
-
-                                                <input
-                                                    class="form-check-input"
-                                                    type="<?= $item['selection_type'] ?>"
-                                                    id="option<?= $item['id'] ?>"
-                                                    name="<?= $checked ?>"
-                                                    value="<?= $item['id'] ?>"
-
-                                                    <?=
-                                                  $checked ? 'checked' : '' ?>>
-
-                                                <label
-                                                    class="form-check-label"
-                                                    for="option<?= $item['id'] ?>">
-
-                                                    <?= htmlspecialchars($item['urdu_name'] ?: $item['name']) ?>
-
-                                                </label>
-
-                                            </div>
-
-                                        <?php endforeach; ?>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        <?php endforeach; ?>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="text-end">
-
-                <button class="btn btn-success btn-lg">
-
-                    <i class="fas fa-save"></i>
-
-                    Save Measurements
-
-                </button>
-
-            </div>
-
-        </form>
+        </strong>
 
     </div>
+
+    <div class="card-body">
+
+        <?php foreach($items as $item): ?>
+
+            <?php
+
+                if($item['selection_type']=="radio"){
+
+                $name = "options_radio[$category]";
+
+
+                    $checked =
+                        isset(OldInput::get('options_radio')[$category])
+                            ? OldInput::get('options_radio')[$category]==$item['id']
+                            : in_array($item['id'],$selectedOptions);
+
+                }else{
+                    $name = "options[]";
+
+                    $checked =
+                        !empty(OldInput::get('options'))
+                            ? in_array($item['id'],OldInput::get('options'))
+                            : in_array($item['id'],$selectedOptions);
+
+                }
+
+                ?>
+
+            <div class="form-check mb-2">
+            <input
+                class="form-check-input"
+                type="<?= htmlspecialchars($item['selection_type']) ?>"
+                id="option<?= $item['id'] ?>"
+                name="<?= htmlspecialchars($name) ?>"
+                value="<?= $item['id'] ?>"
+                <?= $checked ? 'checked' : '' ?>>
+
+                <label
+                    class="form-check-label"
+                    for="option<?= $item['id'] ?>">
+
+                    <?= htmlspecialchars($item['urdu_name'] ?: $item['name']) ?>
+
+                </label>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    </div>
+
+</div>
+
+    </div>
+
+<?php endforeach; ?>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="text-end">
+
+<button class="btn btn-success btn-lg">
+
+<i class="fas fa-save"></i>
+
+Save Measurements
+
+</button>
+
+</div>
+
+</form>
+
+</div>
 
 </div>
 

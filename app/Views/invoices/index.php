@@ -152,7 +152,7 @@
 
                             <td>
 
-                                <?= htmlspecialchars($row['garment_type']) ?>
+                                <?= htmlspecialchars($row['garment_name']) ?>
 
                             </td>
 
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
             pageLength:10,
 
-            order:[[0,"desc"]],
+            order:[],
 
             responsive:true
 

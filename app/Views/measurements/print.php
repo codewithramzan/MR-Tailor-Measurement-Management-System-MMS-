@@ -350,7 +350,7 @@ SPECIAL STITCHING INSTRUCTIONS
 
 <div class="options-wrapper">
 
-<?php foreach($Options as $category=>$items): ?>
+<?php foreach($options as $category=>$items): ?>
 
 <?php
 
@@ -358,7 +358,7 @@ $selected=[];
 
 foreach($items as $item){
 
-    if(in_array($item['urdu_name'],$options) || in_array($item['name'],$options)){
+    if(in_array($item['urdu_name'],$options) || in_array($item['option_name'],$options)){
 
         $selected[]=$item;
 
@@ -386,7 +386,7 @@ if(empty($selected)){
 
 <div class="option-item">
 
-✓ <?= htmlspecialchars($item['urdu_name'] ?: $item['name']) ?>
+✓ <?= htmlspecialchars($item['urdu_name'] ?? $item['option_name']) ?>
 
 </div>
 
@@ -484,61 +484,6 @@ Payment Summary
 </table>
 
 </div>
-
-
-<!-- ===========================
-TAILOR NOTES
-=========================== -->
-
-<div class="section-title">
-
-<h2>
-
-Notes
-
-</h2>
-
-</div>
-
-<div class="notes-box">
-
-<div></div>
-
-<div></div>
-
-<div></div>
-
-</div>
-
-
-<!-- ===========================
-SIGNATURE
-=========================== -->
-
-<div class="signature-row">
-
-<div>
-
-_________________________
-
-<br>
-
-Customer Signature
-
-</div>
-
-<div>
-
-_________________________
-
-<br>
-
-Tailor Signature
-
-</div>
-
-</div>
-
 
 <!-- ===========================
 FOOTER

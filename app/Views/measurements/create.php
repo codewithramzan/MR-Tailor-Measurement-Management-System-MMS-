@@ -73,7 +73,7 @@
 
         </div>
 
-        <form method="POST" action="index.php?page=update-measurement">
+        <form method="POST" action="index.php?page=save-measurements">
 
             <input
                 type="hidden"

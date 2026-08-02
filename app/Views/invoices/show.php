@@ -272,7 +272,7 @@ Garment
 
 <td>
 
-<?= htmlspecialchars($invoice['garment_type'] ?? '') ?>
+<?= htmlspecialchars($invoice['garment_name'] ?? '') ?>
 
 </td>
 
@@ -288,10 +288,24 @@ Status
 
 <td>
 
-<span class="badge bg-primary">
+<?php
+$status = $invoice['status'] ?? '';
 
-<?= htmlspecialchars($invoice['status'] ?? '') ?>
+$badge = "secondary";
 
+if($status=="Pending"){
+    $badge="warning";
+}
+elseif($status=="Ready"){
+    $badge="primary";
+}
+elseif($status=="Delivered"){
+    $badge="success";
+}
+?>
+
+<span class="badge bg-<?= $badge ?>">
+    <?= $status ?>
 </span>
 
 </td>
@@ -385,7 +399,7 @@ Stitching Instructions
 
 <span class="badge bg-info text-dark p-2">
 
-<?= htmlspecialchars($option['urdu_name'] ?: $option['name']) ?>
+<?= htmlspecialchars($option['urdu_name'] ?: $option['option_name']) ?>
 
 </span>
 
@@ -397,7 +411,7 @@ Stitching Instructions
 
 <hr>
 
-<div class="row justify-content-end">
+<div class="row justify-content-center">
 
 <div class="col-md-5">
 
