@@ -498,52 +498,126 @@ function menuOpen($pages)
         </li>
 
 
-       <!-- Settings -->
-        <li class="menu-item">
+        <!-- Settings -->
+            <li class="menu-item">
 
-            <a href="#" class="menu-toggle">
+                <a href="#" class="menu-toggle">
 
-                <div>
+                    <div>
 
-                    <i class="fas fa-cog"></i>
+                        <i class="fas fa-cog"></i>
 
-                    <span>Settings</span>
+                        <span>Settings</span>
 
-                </div>
+                    </div>
 
-                <i class="fas fa-chevron-down arrow"></i>
+                    <i class="fas fa-chevron-down arrow"></i>
 
-            </a>
+                </a>
 
-            <ul class="submenu">
+                <ul class="submenu">
+
+                    <li>
+
+                        <a href="index.php?page=settings">
+
+                            <i class="fas fa-store"></i>
+
+                            Shop Information
+
+                        </a>
+
+                    </li>
+
+                <!-- ===========================
+                Garment Types
+                =========================== -->
 
                 <li>
 
-                    <a href="index.php?page=settings">
+                    <a class="nav-link collapsed"
+                    data-bs-toggle="collapse"
+                    href="#garmentMenu">
 
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-tshirt"></i>
 
-                        Shop Information
+                        Garment Types
 
                     </a>
 
+                    <div id="garmentMenu" class="collapse">
+
+                        <ul class="btn-toggle-nav list-unstyled fw-normal small">
+
+                            <li>
+                                <a href="index.php?page=add-garment">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Add Garment
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="index.php?page=garments">
+                                    <i class="fas fa-list"></i>
+                                    Manage Garments
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
                 </li>
+
+                <!-- ===========================
+                Measurement Types
+                =========================== -->
 
                 <li>
 
-                    <a href="index.php?page=measurement-types">
+                    <a class="nav-link collapsed"
+                    data-bs-toggle="collapse"
+                    href="#measurementMenu">
 
                         <i class="fas fa-ruler-combined"></i>
 
-                        Measurement Fields
+                        Measurement Types
 
                     </a>
 
+                    <div id="measurementMenu" class="collapse">
+
+                        <ul class="btn-toggle-nav list-unstyled fw-normal small">
+
+                            <li>
+                                <a href="index.php?page=add-measurement-type">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Add Measurement
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="index.php?page=measurement-types">
+                                    <i class="fas fa-list"></i>
+                                    Manage Measurements
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
                 </li>
+
+                <!-- ===========================
+                Stitching Options
+                =========================== -->
 
                 <li>
 
-                    <a href="index.php?page=stitching-options">
+                    <a class="nav-link collapsed"
+                    data-bs-toggle="collapse"
+                    href="#stitchingMenu">
 
                         <i class="fas fa-cut"></i>
 
@@ -551,29 +625,47 @@ function menuOpen($pages)
 
                     </a>
 
-                </li>
+                    <div id="stitchingMenu" class="collapse">
 
-            </ul>
+                        <ul class="btn-toggle-nav list-unstyled fw-normal small">
+
+                            <li>
+                                <a href="index.php?page=add-stitching-option">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Add Stitching Option
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="index.php?page=stitching-options">
+                                    <i class="fas fa-list"></i>
+                                    Manage Stitching Options
+                                </a>
+                            </li>
+
+
+                </ul>
 
         </li>
 
 
-        <!-- ==========================
-                Logout
-        =========================== -->
 
-        <li>
 
-            <a href="index.php?page=logout">
+</ul>
+    <!-- ==========================
+            Logout
+    =========================== -->
 
-                <i class="fas fa-sign-out-alt"></i>
+    <li>
 
-                <span>Logout</span>
+        <a href="index.php?page=logout">
 
-            </a>
+            <i class="fas fa-sign-out-alt"></i>
 
-        </li>
+            <span>Logout</span>
 
-    </ul>
+        </a>
+
+    </li>
 
 </aside>

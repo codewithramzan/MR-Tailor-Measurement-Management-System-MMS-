@@ -52,10 +52,13 @@ class Setting extends Model
     public function getGarments()
     {
         $stmt = $this->conn->prepare("
-            SELECT DISTINCT garment_type
-            FROM measurement_types
-            WHERE status='Active'
-            ORDER BY garment_type ASC
+            SELECT
+                id,
+                name AS garment_name,
+                urdu_name,
+                status
+            FROM garment_types
+            ORDER BY name
         ");
 
         $stmt->execute();
@@ -63,6 +66,116 @@ class Setting extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Duplicate Check
+
+    public function garmentExists($name)
+    {
+        $stmt = $this->conn->prepare("
+            SELECT id
+            FROM garment_types
+            WHERE LOWER(name)=LOWER(?)
+            LIMIT 1
+        ");
+
+        $stmt->execute([trim($name)]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function addGarment($data)
+    {
+        $stmt = $this->conn->prepare("
+            INSERT INTO garment_types
+            (
+                name,
+                urdu_name,
+                status
+            )
+            VALUES
+            (
+                ?,?,?
+            )
+        ");
+
+        return $stmt->execute([
+
+            $data["name"],
+
+            $data["urdu_name"],
+
+            $data["status"]
+
+        ]);
+    }
+
+    public function getGarmentById($id)
+    {
+        $stmt = $this->conn->prepare("
+            SELECT *
+            FROM garment_types
+            WHERE id=?
+        ");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function updateGarment($id,$data)
+    {
+        $stmt = $this->conn->prepare("
+            UPDATE garment_types
+            SET
+
+                name=?,
+                urdu_name=?,
+                status=?
+
+            WHERE id=?
+        ");
+
+        return $stmt->execute([
+
+            $data["name"],
+            $data["urdu_name"],
+            $data["status"],
+
+            $id
+
+        ]);
+    }
+
+    public function garmentExistsExcept($id,$name)
+    {
+        $stmt = $this->conn->prepare("
+            SELECT id
+            FROM garment_types
+            WHERE LOWER(name)=LOWER(?)
+            AND id<>?
+            LIMIT 1
+        ");
+
+        $stmt->execute([
+            trim($name),
+            $id
+        ]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function toggleGarmentStatus($id)
+    {
+        $stmt = $this->conn->prepare("
+            UPDATE garment_types
+            SET status=
+            CASE
+                WHEN status='Active'
+                THEN 'Inactive'
+                ELSE 'Active'
+            END
+            WHERE id=?
+        ");
+
+        return $stmt->execute([$id]);
+    }
     /*--------------------------------------------------
     | Get All Measurement Types
     --------------------------------------------------*/
@@ -70,13 +183,18 @@ class Setting extends Model
     public function getMeasurementTypes()
     {
         $stmt = $this->conn->prepare("
-            SELECT *
-            FROM measurement_types
+            SELECT
+                mt.*,
+                gt.name AS garment_name,
+                gt.urdu_name AS garment_urdu
+            FROM measurement_types mt
+            INNER JOIN garment_types gt
+                ON gt.id = mt.garment_type_id
             ORDER BY
-                garment_type,
-                section,
-                print_order,
-                option_name
+                gt.name,
+                mt.section,
+                mt.print_order,
+                mt.option_name
         ");
 
         $stmt->execute();
@@ -90,9 +208,14 @@ class Setting extends Model
     public function getMeasurementTypeById($id)
     {
         $stmt = $this->conn->prepare("
-            SELECT *
-            FROM measurement_types
-            WHERE id=?
+            SELECT
+                mt.*,
+                gt.name AS garment_name,
+                gt.urdu_name AS garment_urdu
+            FROM measurement_types mt
+            INNER JOIN garment_types gt
+                ON gt.id=mt.garment_type_id
+            WHERE mt.id=?
         ");
 
         $stmt->execute([$id]);
@@ -102,31 +225,29 @@ class Setting extends Model
     /*--------------------------------------------------
     | Add Measurement Type
     --------------------------------------------------*/
-
     public function addMeasurementType($data)
     {
         $stmt = $this->conn->prepare("
             INSERT INTO measurement_types
             (
-                garment_type,
-                section,
+                garment_type_id,
                 option_name,
                 urdu_name,
                 placeholder,
                 print_order,
+                section,
+                section_urdu,
                 status
             )
             VALUES
             (
-                ?,?,?,?,?,?,?
+                ?,?,?,?,?,?,?,?
             )
         ");
 
         return $stmt->execute([
 
-            $data["garment_type"],
-
-            $data["section"],
+            $data["garment_type_id"],
 
             $data["option_name"],
 
@@ -135,6 +256,10 @@ class Setting extends Model
             $data["placeholder"],
 
             $data["print_order"],
+
+            $data["section"],
+
+            $data["section_urdu"],
 
             $data["status"]
 
@@ -143,35 +268,34 @@ class Setting extends Model
     /*--------------------------------------------------
 | Update Measurement Type
 --------------------------------------------------*/
-
     public function updateMeasurementType($id,$data)
     {
         $stmt = $this->conn->prepare("
             UPDATE measurement_types
             SET
 
-            garment_type=?,
+                garment_type_id=?,
 
-            section=?,
+                option_name=?,
 
-            option_name=?,
+                urdu_name=?,
 
-            urdu_name=?,
+                placeholder=?,
 
-            placeholder=?,
+                print_order=?,
 
-            print_order=?,
+                section=?,
 
-            status=?
+                section_urdu=?,
+
+                status=?
 
             WHERE id=?
         ");
 
         return $stmt->execute([
 
-            $data["garment_type"],
-
-            $data["section"],
+            $data["garment_type_id"],
 
             $data["option_name"],
 
@@ -180,6 +304,10 @@ class Setting extends Model
             $data["placeholder"],
 
             $data["print_order"],
+
+            $data["section"],
+
+            $data["section_urdu"],
 
             $data["status"],
 
@@ -204,25 +332,25 @@ class Setting extends Model
   /*--------------------------------------------------
     | Duplicate check
     --------------------------------------------------*/
-        public function measurementExists($garment, $section, $option)
-        {
-            $stmt = $this->conn->prepare("
-                SELECT id
-                FROM measurement_types
-                WHERE garment_type = ?
-                AND section = ?
-                AND option_name = ?
-                LIMIT 1
-            ");
+    public function measurementExists($garmentTypeId,$section,$option)
+    {
+        $stmt = $this->conn->prepare("
+            SELECT id
+            FROM measurement_types
+            WHERE garment_type_id=?
+            AND section=?
+            AND option_name=?
+            LIMIT 1
+        ");
 
-            $stmt->execute([
-                $garment,
-                $section,
-                $option
-            ]);
+        $stmt->execute([
+            $garmentTypeId,
+            $section,
+            $option
+        ]);
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
         /*--------------------------------------------------
         | Get All Stitching Options
         --------------------------------------------------*/

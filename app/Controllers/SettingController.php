@@ -148,40 +148,163 @@ class SettingController extends Controller
         exit;
     }
 
-
-        /*--------------------------------------------------
+   /*--------------------------------------------------
     | Garment Types
     --------------------------------------------------*/
+        public function garments()
+        {
+            $garments = $this->settingModel->getGarments();
 
-    public function garments()
-    {
+            $this->view(
+                "settings/garments/index",
+                compact("garments")
+            );
+        }
 
-    }
+        public function createGarment()
+        {
+            $this->view("settings/garments/create");
+        }
 
-    public function createGarment()
-    {
+        public function storeGarment()
+        {
+            if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
-    }
+                header("Location:index.php?page=garments");
+                exit;
 
-    public function storeGarment()
-    {
+            }
 
-    }
+            if (empty(trim($_POST["name"]))) {
 
-    public function editGarment()
-    {
+                $_SESSION["flash"] = [
 
-    }
+                    "type"=>"danger",
 
-    public function updateGarment()
-    {
+                    "message"=>"Garment name is required."
 
-    }
+                ];
 
-    public function deleteGarment()
-    {
+                header("Location:index.php?page=add-garment");
 
-    }
+                exit;
+
+            }
+
+            if ($this->settingModel->garmentExists($_POST["name"])) {
+
+                $_SESSION["flash"] = [
+
+                    "type"=>"warning",
+
+                    "message"=>"Garment already exists."
+
+                ];
+
+                header("Location:index.php?page=add-garment");
+
+                exit;
+
+            }
+
+            $this->settingModel->addGarment([
+
+                "name"=>trim($_POST["name"]),
+
+                "urdu_name"=>trim($_POST["urdu_name"]),
+
+                "status"=>$_POST["status"]
+
+            ]);
+
+            $_SESSION["flash"] = [
+
+                "type"=>"success",
+
+                "message"=>"Garment added successfully."
+
+            ];
+
+            header("Location:index.php?page=garments");
+
+            exit;
+        }
+
+        public function editGarment()
+        {
+            if(!isset($_GET["id"])){
+
+                header("Location:index.php?page=garments");
+                exit;
+
+            }
+
+            $garment =
+                $this->settingModel->getGarmentById($_GET["id"]);
+
+            $this->view(
+                "settings/garments/edit",
+                compact("garment")
+            );
+        }
+        public function updateGarment()
+        {
+            $id=(int)$_POST["id"];
+
+            if($this->settingModel->garmentExistsExcept(
+                $id,
+                $_POST["name"]
+            )){
+
+                $_SESSION["flash"]=[
+                    "type"=>"warning",
+                    "message"=>"Garment already exists."
+                ];
+
+                header("Location:index.php?page=edit-garment&id=".$id);
+
+                exit;
+            }
+
+            $this->settingModel->updateGarment($id,[
+
+                "name"=>trim($_POST["name"]),
+
+                "urdu_name"=>trim($_POST["urdu_name"]),
+
+                "status"=>$_POST["status"]
+
+            ]);
+
+            $_SESSION["flash"]=[
+                "type"=>"success",
+                "message"=>"Garment Updated Successfully."
+            ];
+
+            header("Location:index.php?page=garments");
+        }
+
+        public function deleteGarment()
+        {
+            if(!isset($_GET["id"])){
+
+                header("Location:index.php?page=garments");
+                exit;
+
+            }
+
+            $this->settingModel->toggleGarmentStatus($_GET["id"]);
+
+            $_SESSION["flash"]=[
+
+                "type"=>"success",
+
+                "message"=>"Garment status updated."
+
+            ];
+
+            header("Location:index.php?page=garments");
+        }
 
     /*--------------------------------------------------
     | Measurement Types
@@ -239,23 +362,49 @@ class SettingController extends Controller
         | Garment Type
         |--------------------------------------------------------------------------
         */
+        if ($_POST["garment_select"] == "new") {
 
-        if ($_POST["garment_select"] === "new") {
+            $garmentName = trim($_POST["new_garment"]);
 
-            $garment = trim($_POST["new_garment"]);
+            if (empty($garmentName)) {
+
+                $_SESSION["flash"] = [
+                    "type" => "danger",
+                    "message" => "Please enter a garment name."
+                ];
+
+                header("Location:index.php?page=add-measurement-type");
+                exit;
+            }
+
+            // Check if garment already exists
+            $garment = $this->settingModel->findGarmentByName($garmentName);
+
+            if ($garment) {
+
+                $garmentTypeId = $garment["id"];
+
+            } else {
+
+                // Create new garment
+                $garmentTypeId = $this->settingModel->addGarment([
+                    "name" => $garmentName,
+                    "urdu_name" => $garmentName,
+                    "status" => "Active"
+                ]);
+            }
 
         } else {
 
-            $garment = trim($_POST["garment_select"]);
+            $garmentTypeId = (int)$_POST["garment_select"];
         }
-
         /*
         |--------------------------------------------------------------------------
         | Validation
         |--------------------------------------------------------------------------
         */
 
-        if (empty($garment)) {
+        if ($garmentTypeId <= 0) {
 
             $_SESSION["flash"] = [
 
@@ -285,7 +434,7 @@ class SettingController extends Controller
                 exit;
             }
             if ($this->settingModel->measurementExists(
-            $garment,
+            $garmentTypeId,
             trim($_POST["section"]),
             trim($_POST["option_name"])
             )) {
@@ -311,9 +460,11 @@ class SettingController extends Controller
 
         $data = [
 
-            "garment_type" => $garment,
+            "garment_type_id" => $garmentTypeId,
 
             "section" => trim($_POST["section"]),
+
+            "section_urdu" => trim($_POST["section_urdu"]),
 
             "option_name" => trim($_POST["option_name"]),
 
@@ -321,7 +472,7 @@ class SettingController extends Controller
 
             "placeholder" => trim($_POST["placeholder"]),
 
-            "display_order" => (int) $_POST["display_order"],
+            "print_order" => (int)$_POST["print_order"],
 
             "status" => $_POST["status"]
 
