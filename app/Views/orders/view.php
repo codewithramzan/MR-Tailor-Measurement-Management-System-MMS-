@@ -196,6 +196,61 @@
 
     </div>
 
+    <hr>
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header bg-warning">
+
+        <h5 class="mb-0">
+
+            <i class="fas fa-cut"></i>
+
+            Special Stitching Instructions
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <?php if(!empty($options)): ?>
+
+            <div class="row">
+
+                <?php foreach($options as $item): ?>
+
+                    <div class="col-md-4 mb-2">
+
+                        <span class="badge bg-light text-dark border p-2 w-100 text-start">
+
+                            ✓
+                            <?= htmlspecialchars(
+                                $item['urdu_name'] ?: $item['option_name']
+                            ) ?>
+
+                        </span>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        <?php else: ?>
+
+            <div class="alert alert-secondary mb-0">
+
+                No stitching instructions selected.
+
+            </div>
+
+        <?php endif; ?>
+
+    </div>
+
+</div>
+
     <div class="mt-4">
 
     <a

@@ -11,12 +11,14 @@ class OrderController extends Controller
         $order = $orderModel->findWithMeasurements($_GET['id']);
 
         $measurements = $measurementModel->getByOrder($_GET['id']);
+    $options = $measurementModel->getOptions($_GET['id']);
 
         $this->view(
             'orders/view',
             compact(
                 'order',
-                'measurements'
+                'measurements',
+                'options'
             )
         );
     }
