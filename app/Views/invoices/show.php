@@ -6,48 +6,48 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div>
+	<div>
 
-        <h3 class="fw-bold">
+		<h3 class="fw-bold">
 
-            <i class="fas fa-file-invoice-dollar text-success"></i>
+			<i class="fas fa-file-invoice-dollar text-success"></i>
 
-            Invoice Details
+			Invoice Details
 
-        </h3>
+		</h3>
 
-        <small class="text-muted">
+		<small class="text-muted">
 
-            Review invoice before printing.
+			Review invoice before printing.
 
-        </small>
+		</small>
 
-    </div>
+	</div>
 
-    <div>
+	<div>
 
-        <a
-            href="index.php?page=invoices"
-            class="btn btn-secondary">
+		<a
+			href="index.php?page=invoices"
+			class="btn btn-secondary">
 
-            <i class="fas fa-arrow-left"></i>
+			<i class="fas fa-arrow-left"></i>
 
-            Back
+			Back
 
-        </a>
+		</a>
 
-        <a
-            href="index.php?page=print-invoice&id=<?= $invoice['id'] ?? '' ?>"
-            target="_blank"
-            class="btn btn-success">
+		<a
+			href="index.php?page=print-invoice&id=<?= $invoice['id'] ?? '' ?>"
+			target="_blank"
+			class="btn btn-success">
 
-            <i class="fas fa-print"></i>
+			<i class="fas fa-print"></i>
 
-            Print Invoice
+			Print Invoice
 
-        </a>
+		</a>
 
-    </div>
+	</div>
 
 </div>
 
@@ -294,18 +294,18 @@ $status = $invoice['status'] ?? '';
 $badge = "secondary";
 
 if($status=="Pending"){
-    $badge="warning";
+	$badge="warning";
 }
 elseif($status=="Ready"){
-    $badge="primary";
+	$badge="primary";
 }
 elseif($status=="Delivered"){
-    $badge="success";
+	$badge="success";
 }
 ?>
 
 <span class="badge bg-<?= $badge ?>">
-    <?= $status ?>
+	<?= $status ?>
 </span>
 
 </td>
@@ -395,7 +395,7 @@ Stitching Instructions
 
 <?php foreach($options as $option): ?>
 
-<div class="col-md-3 mb-2">
+<div class="col-md-2 mb-2 d-grid col-2">
 
 <span class="badge bg-info text-dark p-2">
 

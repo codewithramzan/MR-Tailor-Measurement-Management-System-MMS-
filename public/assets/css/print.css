@@ -587,3 +587,87 @@ padding:15px;
 }
 
 }
+
+
+
+/*=========================
+Bottom Section
+=========================*/
+
+.bottom-wrapper{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+    margin-top:20px;
+}
+
+.stitching-card{
+
+    flex:1;
+
+    border:1px solid #333;
+
+    border-radius:8px;
+
+    padding:12px;
+
+    min-height:180px;
+}
+
+.payment-card{
+
+    width:280px;
+
+    border:1px solid #333;
+
+    border-radius:8px;
+
+    padding:12px;
+}
+
+.stitching-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    margin-top:10px;
+}
+
+.stitch-item{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    line-height:1.8;
+
+    text-align:right;
+}
+
+.payment-card table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+.payment-card td{
+
+    padding:8px;
+
+    border-bottom:1px dashed #999;
+
+    font-size:15px;
+}
+
+.payment-card tr:last-child td{
+
+    border-bottom:none;
+}

@@ -1,27 +1,25 @@
 <?php
-
 $info = $rows[0];
-
-/*
-|--------------------------------------------------------------------------
-| Build Measurement Array
-|--------------------------------------------------------------------------
-*/
-
 $measurements = [];
 
 foreach ($rows as $row) {
 
-    $section = trim($row['section'] ?? '');
+    // Section Name (Urdu first)
+    $section = trim($row['section_urdu'] ?? '');
 
-    if ($section == '') {
-        $section = 'General';
+    if ($section === '') {
+        $section = trim($row['section'] ?? '');
+
+        if ($section === '') {
+            $section = 'General';
+        }
     }
 
-    $label = trim($row['urdu_name'] ?? '');
+    // Measurement Name (Urdu first)
+    $label = trim($row['measurement_urdu_name'] ?? '');
 
-    if ($label == '') {
-        $label = $row['option_name'];
+    if ($label === '') {
+        $label = trim($row['option_name'] ?? '');
     }
 
     $measurements[$section][] = [
@@ -207,11 +205,11 @@ MEASUREMENTS
 
 <div class="section-title">
 
-    <h2>
+	<h2>
 
-        پیمائش
+		پیمائش
 
-    </h2>
+	</h2>
 
 </div>
 
@@ -330,161 +328,106 @@ $rightSections = array_slice($sectionNames, $leftCount);
 </div>
 
 </div>
-
-
 <!-- ===========================
-SPECIAL STITCHING INSTRUCTIONS
+STITCHING + PAYMENT SUMMARY
 =========================== -->
 
-<?php if(!empty($Options)): ?>
+<div class="bottom-wrapper">
 
-<div class="section-title">
+    <!-- Left Side -->
+    <div class="stitching-card">
 
-    <h2>
+        <div class="section-title">
+            <h2>خصوصی سلائی ہدایات</h2>
+        </div>
 
-        خصوصی سلائی ہدایات
+        <?php if(!empty($options)): ?>
 
-    </h2>
+            <div class="stitching-list">
+
+                <?php foreach($options as $item): ?>
+
+                    <div class="stitch-item">
+
+                        ✓
+                        <?= htmlspecialchars(
+                            !empty($item['urdu_name'])
+                                ? $item['urdu_name']
+                                : $item['option_name']
+                        ) ?>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        <?php else: ?>
+
+            <div class="stitch-item">
+                کوئی خصوصی ہدایت موجود نہیں
+            </div>
+
+        <?php endif; ?>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="payment-card">
+
+        <div class="section-title">
+            <h2>Payment Summary</h2>
+        </div>
+
+        <table>
+
+            <tr>
+                <td>Total</td>
+                <td>
+                    <?= Config::get("currency") ?>
+                    <?= number_format($info['total_amount']) ?>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Advance</td>
+                <td>
+                    <?= Config::get("currency") ?>
+                    <?= number_format($info['advance']) ?>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Discount</td>
+                <td>
+                    <?= Config::get("currency") ?>
+                    <?= number_format($info['discount']) ?>
+                </td>
+            </tr>
+
+            <tr>
+
+                <td><strong>Balance</strong></td>
+
+                <td>
+
+                    <strong>
+
+                        <?= Config::get("currency") ?>
+
+                        <?= number_format($info['balance']) ?>
+
+                    </strong>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
 
 </div>
-
-<div class="options-wrapper">
-
-<?php foreach($options as $category=>$items): ?>
-
-<?php
-
-$selected=[];
-
-foreach($items as $item){
-
-    if(in_array($item['urdu_name'],$options) || in_array($item['option_name'],$options)){
-
-        $selected[]=$item;
-
-    }
-
-}
-
-if(empty($selected)){
-    continue;
-}
-
-?>
-
-<div class="option-card">
-
-<div class="option-header">
-
-<?= htmlspecialchars($category) ?>
-
-</div>
-
-<div class="option-body">
-
-<?php foreach($selected as $item): ?>
-
-<div class="option-item">
-
-✓ <?= htmlspecialchars($item['urdu_name'] ?? $item['option_name']) ?>
-
-</div>
-
-<?php endforeach; ?>
-
-</div>
-
-</div>
-
-<?php endforeach; ?>
-
-</div>
-
-<?php endif; ?>
-
-
-<!-- ===========================
-PAYMENT SUMMARY
-=========================== -->
-
-<div class="section-title">
-
-<h2>
-
-Payment Summary
-
-</h2>
-
-</div>
-
-<div class="payment-card">
-
-<table>
-
-<tr>
-
-<td>Total</td>
-
-<td>
-
-<?= Config::get("currency") ?>
-
-<?= number_format($info['total_amount']) ?>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>Advance</td>
-
-<td>
-
-<?= Config::get("currency") ?>
-
-<?= number_format($info['advance']) ?>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>Discount</td>
-
-<td>
-
-<?= Config::get("currency") ?>
-
-<?= number_format($info['discount']) ?>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td><strong>Balance</strong></td>
-
-<td>
-
-<strong>
-
-<?= Config::get("currency") ?>
-
-<?= number_format($info['balance']) ?>
-
-</strong>
-
-</td>
-
-</tr>
-
-</table>
-
-</div>
-
 <!-- ===========================
 FOOTER
 =========================== -->

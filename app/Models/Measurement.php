@@ -192,6 +192,7 @@ class Measurement extends Model
             mt.option_name,
             mt.urdu_name AS measurement_urdu_name,
             mt.section,
+            mt.section_urdu,
             mt.print_order,
 
             m.measurement_value
