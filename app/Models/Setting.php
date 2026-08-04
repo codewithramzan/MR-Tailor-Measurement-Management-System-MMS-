@@ -186,7 +186,7 @@ class Setting extends Model
             SELECT
                 mt.*,
                 gt.name AS garment_name,
-                gt.urdu_name AS garment_urdu
+                gt.urdu_name AS garment_urdu_name
             FROM measurement_types mt
             INNER JOIN garment_types gt
                 ON gt.id = mt.garment_type_id
@@ -211,9 +211,9 @@ class Setting extends Model
             SELECT
                 mt.*,
                 gt.name AS garment_name,
-                gt.urdu_name AS garment_urdu
+                gt.urdu_name AS garment_urdu_name
             FROM measurement_types mt
-            INNER JOIN garment_types gt
+            LEFT JOIN garment_types gt
                 ON gt.id=mt.garment_type_id
             WHERE mt.id=?
         ");
@@ -319,39 +319,44 @@ class Setting extends Model
     | Soft Delete Measurement Type
     --------------------------------------------------*/
 
-        public function deleteMeasurementType($id)
+        public function toggleMeasurementType($id)
         {
-            $stmt = $this->conn->prepare("
-                UPDATE measurement_types
-                SET status='Inactive'
-                WHERE id=?
-            ");
+             $stmt = $this->conn->prepare("
+            UPDATE measurement_types
+            SET status=
+            CASE
+                WHEN status='Active'
+                THEN 'Inactive'
+                ELSE 'Active'
+            END
+            WHERE id=?
+        ");
 
             return $stmt->execute([$id]);
         }
   /*--------------------------------------------------
     | Duplicate check
     --------------------------------------------------*/
-    public function measurementExists($garmentTypeId,$section,$option)
+    public function measurementExists($garmentTypeId, $section, $option)
     {
         $stmt = $this->conn->prepare("
             SELECT id
             FROM measurement_types
-            WHERE garment_type_id=?
-            AND section=?
-            AND option_name=?
+            WHERE garment_type_id = ?
+            AND section = ?
+            AND option_name = ?
             LIMIT 1
         ");
 
         $stmt->execute([
             $garmentTypeId,
-            $section,
-            $option
+            trim($section),
+            trim($option)
         ]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-        /*--------------------------------------------------
+            /*--------------------------------------------------
         | Get All Stitching Options
         --------------------------------------------------*/
 

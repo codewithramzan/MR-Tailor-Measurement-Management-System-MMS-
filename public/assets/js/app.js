@@ -10,7 +10,7 @@ if (menu && sidebar) {
     });
 
 }
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
     const flash = document.getElementById("flash-message");
 
@@ -18,13 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setTimeout(() => {
 
-        flash.classList.remove("show");
+        const bsAlert = bootstrap.Alert.getOrCreateInstance(flash);
 
-        setTimeout(() => {
-
-            flash.remove();
-
-        }, 300);
+        bsAlert.close();
 
     }, 3000);
 

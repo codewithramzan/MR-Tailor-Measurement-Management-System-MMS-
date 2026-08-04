@@ -4,69 +4,69 @@
 
 <div class="container-fluid mt-4">
 
-    <div class="card shadow border-0">
+	<div class="card shadow border-0">
 
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+		<div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
 
-            <h4 class="mb-0">
+			<h4 class="mb-0">
 
-                <i class="fas fa-ruler-combined me-2"></i>
+				<i class="fas fa-ruler-combined me-2"></i>
 
-                Measurement Fields
+				Measurement Fields
 
-            </h4>
+			</h4>
 
-            <a
-                href="index.php?page=add-measurement-type"
-                class="btn btn-light">
+			<a
+				href="index.php?page=add-measurement-type"
+				class="btn btn-light">
 
-                <i class="fas fa-plus"></i>
+				<i class="fas fa-plus"></i>
 
-                Add Measurement
+				Add Measurement
 
-            </a>
+			</a>
 
-        </div>
+		</div>
 
-        <div class="card-body">
-          <div class="row mb-3">
+		<div class="card-body">
+		  <div class="row mb-3">
 
-    <div class="col-md-4">
+	<div class="col-md-4 mb-2">
 
-        <select
-            id="garmentFilter"
-            class="form-select">
+		<select
+			id="garmentFilter"
+			class="form-select">
 
-            <option value="">
+			<option value="">
 
-                All Garments
+				All Garments
 
-            </option>
+			</option>
 
-            <?php foreach($garments as $garment): ?>
+			<?php foreach($garments as $garment): ?>
 
-                <option
-                    value="<?= htmlspecialchars($garment['garment_type_id']) ?>">
+				<option
+					value="<?= htmlspecialchars($garment['id'] ?? '') ?>">
 
-                    <?= htmlspecialchars($garment['garment_name']) ?>
+					<?= htmlspecialchars($garment['garment_name'] ?? '') ?>
 
-                </option>
+				</option>
 
-            <?php endforeach; ?>
+			<?php endforeach; ?>
 
-        </select>
+		</select>
 
-    </div>
+	</div>
 
-    <div class="col-md-4">
+	<div class="col-md-4">
 
-        <input
-            type="text"
-            id="searchInput"
-            class="form-control"
-            placeholder="Search measurement...">
+		<input
+			type="text"
+			id="searchInput"
+			class="form-control"
+			placeholder="Search measurement...">
 
-    </div>
+	</div>
 
 </div>
 <table
@@ -75,7 +75,7 @@ id="measurementTable">
 
 <thead class="table-dark">
 
-<tr>
+<tr data-garment-id="<?= $row['garment_type_id'] ?? ''?>">
 
   <th>#</th>
 
@@ -107,7 +107,7 @@ id="measurementTable">
 
   <?php foreach($types as $row): ?>
 
-  <tr>
+  <tr data-garment-id="<?= $row['garment_type_id'] ?? '' ?>">
 
   <td>
 
@@ -117,37 +117,37 @@ id="measurementTable">
 
   <td>
 
-  <?= htmlspecialchars($row['garment_name'] ?? 'undefined') ?>
+  <?= htmlspecialchars($row['garment_name'] ?? '') ?>
 
   </td>
 
   <td>
 
-  <?= htmlspecialchars($row['section'] ?? 'undefined') ?>
+  <?= htmlspecialchars($row['section'] ?? '') ?>
 
   </td>
 
   <td>
 
-  <?= htmlspecialchars($row['option_name'] ?? 'undefined') ?>
+  <?= htmlspecialchars($row['option_name'] ?? '') ?>
 
   </td>
 
   <td>
 
-  <?= htmlspecialchars($row['urdu_name'] ?? 'undefined') ?>
+  <?= htmlspecialchars($row['urdu_name'] ?? '') ?>
 
   </td>
 
   <td>
 
-  <?= htmlspecialchars($row['placeholder'] ?? 'undefined') ?>
+  <?= htmlspecialchars($row['placeholder'] ?? '') ?>
 
   </td>
 
   <td>
 
-  <?= htmlspecialchars($row['print_order']) ?>
+  <?= htmlspecialchars($row['print_order'] ?? '') ?>
 
 </td>
 
@@ -186,9 +186,9 @@ id="measurementTable">
   <a
   href="index.php?page=delete-measurement-type&id=<?= $row['id'] ?>"
   class="btn btn-danger btn-sm"
-  onclick="return confirm('Delete this measurement?')">
+  onclick="return confirm('Deactivate this measurement?')">
 
-  <i class="fas fa-trash"></i>
+  <i class="fas fa-ban"></i>
 
   </a>
 
@@ -202,45 +202,38 @@ id="measurementTable">
 
 </table>
 
-<script>
+      <script>
+      const searchInput = document.getElementById("searchInput");
+      const garmentFilter = document.getElementById("garmentFilter");
+      const rows = document.querySelectorAll("#measurementTable tbody tr");
 
-const searchInput = document.getElementById("searchInput");
+      function filterTable() {
 
-const garmentFilter = document.getElementById("garmentFilter");
+          const search = searchInput.value.toLowerCase().trim();
+          const garment = garmentFilter.value;
 
-const rows = document.querySelectorAll("#measurementTable tbody tr");
+          rows.forEach(row => {
 
-function filterTable()
-{
-    const search = searchInput.value.toLowerCase();
+              const text = row.innerText.toLowerCase();
 
-    const garment = garmentFilter.value.toLowerCase();
+              const rowGarmentId = row.dataset.garmentId;
 
-    rows.forEach(row=>{
+              const matchesSearch = text.includes(search);
 
-        const text = row.innerText.toLowerCase();
+              const matchesGarment =
+                  garment === "" || rowGarmentId === garment;
 
-        const rowGarment =
-            row.cells[1].innerText.toLowerCase();
+              row.style.display =
+                  (matchesSearch && matchesGarment) ? "" : "none";
+          });
+      }
 
-        const show =
-            text.includes(search) &&
-            (garment=="" || rowGarment===garment);
+      searchInput.addEventListener("keyup", filterTable);
+      garmentFilter.addEventListener("change", filterTable);
+      </script>
+		</div>
 
-        row.style.display = show ? "" : "none";
-
-    });
-
-}
-
-searchInput.addEventListener("keyup",filterTable);
-
-garmentFilter.addEventListener("change",filterTable);
-
-</script>
-        </div>
-
-    </div>
+	</div>
 
 </div>
 

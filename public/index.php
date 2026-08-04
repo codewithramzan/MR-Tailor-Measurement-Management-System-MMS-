@@ -319,7 +319,7 @@ switch($page){
         break;
 
     case "delete-measurement-type":
-        (new SettingController())->deleteMeasurementType();
+        (new SettingController())->toggleMeasurementType();
         break;
 
 

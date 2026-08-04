@@ -357,47 +357,25 @@ class SettingController extends Controller
             exit;
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Garment Type
-        |--------------------------------------------------------------------------
-        */
-        if ($_POST["garment_select"] == "new") {
+     /*
+|--------------------------------------------------------------------------
+| Selected Garment Type
+|--------------------------------------------------------------------------
+*/
 
-            $garmentName = trim($_POST["new_garment"]);
+$garmentTypeId = (int) ($_POST['garment_type_id'] ?? 0);
 
-            if (empty($garmentName)) {
+if ($garmentTypeId <= 0) {
 
-                $_SESSION["flash"] = [
-                    "type" => "danger",
-                    "message" => "Please enter a garment name."
-                ];
+    $_SESSION["flash"] = [
+        "type" => "danger",
+        "message" => "Please select a garment type."
+    ];
 
-                header("Location:index.php?page=add-measurement-type");
-                exit;
-            }
-
-            // Check if garment already exists
-            $garment = $this->settingModel->findGarmentByName($garmentName);
-
-            if ($garment) {
-
-                $garmentTypeId = $garment["id"];
-
-            } else {
-
-                // Create new garment
-                $garmentTypeId = $this->settingModel->addGarment([
-                    "name" => $garmentName,
-                    "urdu_name" => $garmentName,
-                    "status" => "Active"
-                ]);
-            }
-
-        } else {
-
-            $garmentTypeId = (int)$_POST["garment_select"];
-        }
+    header("Location:index.php?page=add-measurement-type");
+    exit;
+}
+        
         /*
         |--------------------------------------------------------------------------
         | Validation
@@ -433,11 +411,11 @@ class SettingController extends Controller
 
                 exit;
             }
-            if ($this->settingModel->measurementExists(
-            $garmentTypeId,
-            trim($_POST["section"]),
-            trim($_POST["option_name"])
-            )) {
+                if ($this->settingModel->measurementExists(
+                $garmentTypeId,
+                trim($_POST["section"]),
+                trim($_POST["option_name"])
+                )) {
 
                 $_SESSION["flash"] = [
 
@@ -562,23 +540,15 @@ class SettingController extends Controller
             header("Location: index.php?page=measurement-types");
             exit;
         }
-
-        $id = (int)$_POST["id"];
-
-        if ($_POST["garment_select"] == "new") {
-
-            $garment = trim($_POST["new_garment"]);
-
-        } else {
-
-            $garment = trim($_POST["garment_select"]);
-        }
+         $id = (int)$_POST["id"];
+        $garmentTypeId = (int)$_POST["garment_type_id"];
 
         $data = [
 
-            "garment_type" => $garment,
+            "garment_type_id" => $garmentTypeId,
 
             "section" => trim($_POST["section"]),
+            "section_urdu" => trim($_POST["section_urdu"]),
 
             "option_name" => trim($_POST["option_name"]),
 
@@ -586,7 +556,7 @@ class SettingController extends Controller
 
             "placeholder" => trim($_POST["placeholder"]),
 
-            "display_order" => (int)$_POST["display_order"],
+            "print_order" => (int)$_POST["print_order"],
 
             "status" => $_POST["status"]
 
@@ -611,7 +581,7 @@ class SettingController extends Controller
 | Delete Measurement Type
 --------------------------------------------------*/
 
-    public function deleteMeasurementType()
+    public function toggleMeasurementType()
     {
         if (!isset($_GET["id"])) {
 
@@ -647,13 +617,13 @@ class SettingController extends Controller
             exit;
         }
 
-        if ($this->settingModel->deleteMeasurementType($id)) {
+        if ($this->settingModel->toggleMeasurementType($id)) {
 
             $_SESSION["flash"] = [
 
                 "type" => "success",
 
-                "message" => "Measurement field deleted successfully."
+                "message" => "Measurement field Upadated successfully."
 
             ];
 

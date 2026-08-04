@@ -17,7 +17,8 @@ class Flash
             $flash = $_SESSION['flash'];
 
             echo '
-            <div class="alert alert-'.$flash['type'].' alert-dismissible fade show shadow-sm" role="alert">
+            <div id="flash-message"
+             class="alert alert-'.$flash['type'].' alert-dismissible fade show shadow-sm" role="alert">
 
                 '.$flash['message'].'
 

@@ -27,64 +27,33 @@
       value="<?= $measurement['id'] ?? '' ?>">
 
     <div class="row">
-      <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3">
 
-    <label class="form-label">
+        <label class="form-label">
+            Garment Type
+        </label>
 
-    Garment Type
+        <select
+            class="form-select"
+            name="garment_type_id"
+            required>
 
-    </label>
+            <?php foreach($garments as $garment): ?>
 
-      <select
+                <option
+                    value="<?= $garment['id'] ?>"
+                    <?= $measurement['garment_type_id'] == $garment['id'] ? "selected" : "" ?>>
 
-      class="form-select"
+                    <?= htmlspecialchars($garment['garment_name']) ?>
 
-      id="garmentSelect"
+                </option>
 
-      name="garment_select">
+            <?php endforeach; ?>
 
-      <?php foreach($garments as $garment): ?>
-
-      <option
-
-      value="<?= $garment['garment_type_id'] ?>"
-
-      <?= $measurement['garment_name']==$garment['garment_name'] ? "selected" : "" ?>>
-
-      <?= htmlspecialchars($garment['garment_name']) ?>
-
-      </option>
-
-      <?php endforeach; ?>
-
-      <option value="new">
-
-      + Add New Garment
-
-      </option>
-
-      </select>
+        </select>
 
     </div>
 
-    <div
-    class="col-md-6 mb-3"
-    id="newGarmentBox"
-    style="display:none;">
-
-    <label class="form-label">
-
-    New Garment
-
-    </label>
-
-    <input
-    type="text"
-    class="form-control"
-    name="new_garment"
-    placeholder="Example: Sherwani">
-
-  </div>
   <div class="col-md-6 mb-3">
 
     <label class="form-label">
@@ -100,6 +69,15 @@
     value="<?= htmlspecialchars($measurement['section'] ?? '') ?>">
 
   </div>
+  <div class="col-md-6 mb-3">
+    <label class="form-label">Section Urdu</label>
+
+    <input
+        type="text"
+        class="form-control"
+        name="section_urdu"
+        value="<?= htmlspecialchars($measurement['section_urdu'] ?? '') ?>">
+</div>
   <div class="col-md-6 mb-3">
 
     <label class="form-label">
@@ -173,8 +151,8 @@
   <select
 
   class="form-select"
-
   name="status">
+
 
   <option
 
@@ -231,27 +209,4 @@
   </div>
 
 </div>
-<script>
-
-const garmentSelect =
-document.getElementById("garmentSelect");
-
-const newGarmentBox =
-document.getElementById("newGarmentBox");
-
-garmentSelect.addEventListener("change",function(){
-
-if(this.value==="new"){
-
-newGarmentBox.style.display="block";
-
-}else{
-
-newGarmentBox.style.display="none";
-
-}
-
-});
-
-</script>
 <?php require_once "../app/Views/layouts/footer.php"; ?>
