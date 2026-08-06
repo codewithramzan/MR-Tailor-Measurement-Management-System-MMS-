@@ -218,7 +218,7 @@ Special Stitching Instructions
                     class="form-check-label"
                     for="option<?= $item['id'] ?>">
 
-                    <?= htmlspecialchars($item['urdu_name'] ?: $item['name']) ?>
+                    <?= htmlspecialchars($item['urdu_name'] ?? $item['option_name']) ?>
 
                 </label>
 

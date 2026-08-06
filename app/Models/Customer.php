@@ -112,8 +112,11 @@ class Customer extends Model
             }
             public function getOrders($customerId)
             {
-                $sql = "SELECT *
-                        FROM orders
+                $sql = "SELECT o.*,
+                        gt.name AS garment_name
+                        FROM orders o
+                        INNER JOIN garment_types gt
+                        On gt.id = o.garment_type_id
                         WHERE customer_id=?
                         ORDER BY id DESC";
 

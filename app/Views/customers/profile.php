@@ -213,17 +213,17 @@
 
                         <td><?= htmlspecialchars($order['booking_no']) ?></td>
 
-                        <td><?= htmlspecialchars($order['garment_type']) ?></td>
+                        <td><?= htmlspecialchars($order['garment_name']) ?></td>
 
-                        <td><?= htmlspecialchars($order['order_date']) ?></td>
+                        <td><?= htmlspecialchars($order['order_date'] ?? '') ?></td>
 
-                        <td><?= htmlspecialchars($order['delivery_date']) ?></td>
+                        <td><?= htmlspecialchars($order['delivery_date'] ?? '') ?></td>
 
                         <td>
 
                             <span class="badge <?= $badge ?>">
 
-                                <?= htmlspecialchars($order['status']) ?>
+                                <?= htmlspecialchars($order['status'] ?? '') ?>
 
                             </span>
 

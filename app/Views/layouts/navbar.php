@@ -6,7 +6,7 @@
             <i class="fas fa-bars"></i>
         </button>
 
-        <h4><?= Config::get("shop_name") ?></h4>
+        <h4 class="text-success fw-bold mt-2"><?=  htmlspecialchars($shop["shop_name"] ?? '') ?></h4>
 
     </div>
 
@@ -48,7 +48,7 @@
         <!-- Profile -->
         <div class="profile">
 
-            <img src="<?= BASE_URL ?>assets/images/profile-logo.png" alt="Admin">
+        <img src="<?= BASE_URL ?>uploads/logo/<?= htmlspecialchars($shop["logo"] ?? '') ?>">
 
             <span>Admin</span>
 

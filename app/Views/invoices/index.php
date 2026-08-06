@@ -28,9 +28,6 @@
 
     </div>
 
-    <!-- Flash Message -->
-
-    <?php Flash::display(); ?>
 
     <!-- Invoice Table -->
 

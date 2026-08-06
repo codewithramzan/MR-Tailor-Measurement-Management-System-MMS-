@@ -30,7 +30,7 @@ function menuOpen($pages)
 
         <i class="fas fa-cut"></i>
 
-        <span><?= htmlspecialchars(Config::get("shop_name")) ?></span>
+        <span><?= htmlspecialchars($shop["shop_name"] ?? '') ?></span>
 
     </div>
 
@@ -218,64 +218,6 @@ function menuOpen($pages)
                         class="<?= active('delivered-report') ?>">
 
                         Delivered Orders
-
-                    </a>
-
-                </li>
-
-            </ul>
-
-        </li>
-
-
-        <!-- ==========================
-                Measurements
-        =========================== -->
-
-        <li class="menu-item">
-
-            <a href="#" class="menu-toggle">
-
-                <div>
-
-                    <i class="fas fa-ruler-combined"></i>
-
-                    <span>Measurements</span>
-
-                </div>
-
-                <i class="fas fa-chevron-down arrow"></i>
-
-            </a>
-
-            <ul class="submenu <?= menuOpen([
-                'measurement-types',
-                'stitching-options',
-                'measurements',
-                'create-measurement',
-                'edit-measurement',
-                'print-measurement'
-            ]) ?>">
-
-                <li>
-
-                    <a
-                        href="index.php?page=measurement-types"
-                        class="<?= active('measurement-types') ?>">
-
-                        Measurement Types
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <a
-                        href="index.php?page=stitching-options"
-                        class="<?= active('stitching-options') ?>">
-
-                        Stitching Options
 
                     </a>
 

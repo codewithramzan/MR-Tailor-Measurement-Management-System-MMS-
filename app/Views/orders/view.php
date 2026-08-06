@@ -118,7 +118,7 @@
 
     <td>
 
-    <?= Config::get("currency") ?> <?= number_format($order['total_amount'] ?? 0)?>
+    <?= htmlspecialchars($shop["currency"] ?? '') ?> <?= number_format($order['total_amount'] ?? 0)?>
 
     </td>
 
@@ -130,7 +130,7 @@
 
     <td>
 
-    <?= Config::get("currency") ?> <?= number_format($order['advance'] ?? 0) ?>
+    <?= htmlspecialchars($shop["currency"] ?? '') ?> <?= number_format($order['advance'] ?? 0) ?>
 
     </td>
 
@@ -142,7 +142,7 @@
 
     <td>
 
-    <?= Config::get("currency") ?> <?= number_format($order['discount'] ?? 0) ?>
+    <?= htmlspecialchars($shop["currency"] ?? '') ?> <?= number_format($order['discount'] ?? 0) ?>
 
     </td>
 

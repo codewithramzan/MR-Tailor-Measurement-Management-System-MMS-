@@ -9,7 +9,7 @@
 
 <title>
 
-Invoice - <?= htmlspecialchars($invoice['invoice_no']) ?>
+Invoice - <?= htmlspecialchars($invoice['invoice_no'] ?? '') ?>
 
 </title>
 
@@ -96,7 +96,9 @@ body{
     color:#198754;
 
 }
-
+#shop_logo {
+    border-radius: 50%;
+}
 .shop{
 
     flex:1;
@@ -289,17 +291,13 @@ body{
 
 <div class="logo">
 
-<i class="fas fa-cut"></i>
+<img width="90" style="border-radius: inherit;" src="<?= BASE_URL ?>uploads/logo/<?= htmlspecialchars($shop["logo"] ?? '') ?>">
 
 </div>
 
 <div class="shop">
 
-<h2>
-
-MR TAILOR
-
-</h2>
+<h2><?= htmlspecialchars($shop["shop_name"] ?? '') ?></h2>
 
 <p>
 
@@ -309,19 +307,19 @@ Professional Tailoring & Boutique
 
 <p>
 
-Address: Your Shop Address
+<?= htmlspecialchars($shop["address"] ?? '') ?>
 
 </p>
 
 <p>
 
-Phone: +92-3XX-XXXXXXX
+<?= htmlspecialchars(('phone') ?? '' ) ?>
 
 </p>
 
 <p>
 
-Email: mrtailor@gmail.com
+<?= htmlspecialchars(('email')?? '')  ?>
 
 </p>
 
@@ -369,7 +367,7 @@ Customer Information
 
 <td>Name</td>
 
-<td><?= htmlspecialchars($invoice['full_name'] ?? 'undefined') ?></td>
+<td><?= htmlspecialchars($invoice['full_name'] ?? '') ?></td>
 
 </tr>
 
@@ -377,7 +375,7 @@ Customer Information
 
 <td>Father</td>
 
-<td><?= htmlspecialchars($invoice['father_name'] ?? 'undefined') ?></td>
+<td><?= htmlspecialchars($invoice['father_name'] ?? '') ?></td>
 
 </tr>
 
@@ -385,7 +383,7 @@ Customer Information
 
 <td>Phone</td>
 
-<td><?= htmlspecialchars($invoice['phone'] ?? 'undefined') ?></td>
+<td><?= htmlspecialchars($invoice['phone'] ?? '') ?></td>
 
 </tr>
 
@@ -393,7 +391,7 @@ Customer Information
 
 <td>Village</td>
 
-<td><?= htmlspecialchars($invoice['village'] ?? 'undefined') ?></td>
+<td><?= htmlspecialchars($invoice['village'] ?? '') ?></td>
 
 </tr>
 
@@ -401,7 +399,7 @@ Customer Information
 
 <td>Mohalla</td>
 
-<td><?= htmlspecialchars($invoice['mohalla'] ?? 'undefined') ?></td>
+<td><?= htmlspecialchars($invoice['mohalla'] ?? '') ?></td>
 
 </tr>
 
@@ -896,21 +894,9 @@ foreach ($measurements as $row) {
 
     <h5 class="text-success fw-bold">
 
-        Thank You For Choosing MR Tailor
+       <?= htmlspecialchars($shop['invoice_footer'] ?? '') ?>
 
     </h5>
-
-    <p class="text-muted mb-1">
-
-        We appreciate your trust and look forward to serving you again.
-
-    </p>
-
-    <small class="text-secondary">
-
-        This invoice is computer generated and does not require a physical stamp.
-
-    </small>
 
 </div>
 

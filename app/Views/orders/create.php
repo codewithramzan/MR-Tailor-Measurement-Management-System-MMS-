@@ -147,7 +147,7 @@
 				<div class="col-md-3 mb-3">
 
 					<label class="form-label">Total Amount
-						(<?= Config::get("currency") ?>)
+						(<?= htmlspecialchars($shop["currency"] ?? '') ?>)
 						<span class="required">*</span>
 					</label>
 
@@ -163,7 +163,7 @@
 				<div class="col-md-3 mb-3">
 
 					<label class="form-label">Advance
-						(<?= Config::get("currency") ?>)
+						(<?= htmlspecialchars($shop["currency"] ?? '') ?>)
 					</label>
 
 					<input
@@ -178,7 +178,7 @@
 				<div class="col-md-3 mb-3">
 
 					<label class="form-label">Discount(
-						<?= Config::get("currency") ?>)
+						<?= htmlspecialchars($shop["currency"] ?? '') ?>)
 					</label>
 
 					<input
@@ -193,7 +193,7 @@
 				<div class="col-md-3 mb-3">
 
 					<label class="form-label">Remaining
-						(<?= Config::get("currency") ?>)
+						(<?= htmlspecialchars($shop["currency"] ?? '') ?>)
 					</label>
 
 					<input

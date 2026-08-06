@@ -2,523 +2,523 @@
 <?php require dirname(__DIR__)."/layouts/navbar.php"; ?>
 <?php require dirname(__DIR__)."/layouts/sidebar.php"; ?>
 
-<div class="container-fluid">
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+		<div class="d-flex justify-content-between align-items-center mb-4">
 
-	<div>
+			<div>
 
-		<h3 class="fw-bold">
+				<h3 class="fw-bold">
 
-			<i class="fas fa-file-invoice-dollar text-success"></i>
+					<i class="fas fa-file-invoice-dollar text-success"></i>
 
-			Invoice Details
+					Invoice Details
 
-		</h3>
+				</h3>
 
-		<small class="text-muted">
+				<small class="text-muted">
 
-			Review invoice before printing.
+					Review invoice before printing.
 
-		</small>
+				</small>
 
-	</div>
+			</div>
 
-	<div>
+			<div>
 
-		<a
-			href="index.php?page=invoices"
-			class="btn btn-secondary">
+				<a
+					href="index.php?page=invoices"
+					class="btn btn-secondary mb-2">
 
-			<i class="fas fa-arrow-left"></i>
+					<i class="fas fa-arrow-left"></i>
 
-			Back
+					Back
 
-		</a>
+				</a>
 
-		<a
-			href="index.php?page=print-invoice&id=<?= $invoice['id'] ?? '' ?>"
-			target="_blank"
-			class="btn btn-success">
+				<a
+					href="index.php?page=print-invoice&id=<?= $invoice['id'] ?? '' ?>"
+					target="_blank"
+					class="btn btn-success mb-2 ">
 
-			<i class="fas fa-print"></i>
+					<i class="fas fa-print"></i>
 
-			Print Invoice
+					Print Invoice
 
-		</a>
+				</a>
 
-	</div>
+			</div>
 
-</div>
+		</div>
 
-<div class="card shadow border-0">
+		<div class="card shadow border-0">
 
-<div class="card-body">
+		<div class="card-body">
 
-<div class="row">
+		<div class="row">
 
-<div class="col-md-6">
+		<div class="col-md-6">
 
-<h4 class="fw-bold text-success">
+		<h4 class="fw-bold text-success">
 
-MR Tailor
+		<?=  Config::get('shop_name') ?>
 
-</h4>
+		</h4>
 
-<p class="mb-1">
+		<p class="mb-1">
 
-Tailoring & Boutique
+		Tailoring & Boutique
 
-</p>
+		</p>
 
-<p class="mb-1">
+		<p class="mb-1">
 
-Phone:
-<?= htmlspecialchars($invoice['phone'] ?? '') ?>
+		Phone:
+		<?= htmlspecialchars($invoice['phone'] ?? '') ?>
 
-</p>
+		</p>
 
-</div>
+		</div>
 
-<div class="col-md-6 text-end">
+		<div class="col-md-6 text-end">
 
-<h4>
+		<h4>
 
-Invoice
+		Invoice
 
-</h4>
+		</h4>
 
-<table class="table table-borderless table-sm">
+		<table class="table table-borderless table-sm">
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Invoice No
+		Invoice No
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['invoice_no'] ?? '') ?>
+		<?= htmlspecialchars($invoice['invoice_no'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Booking No
+		Booking No
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['booking_no'] ?? '') ?>
+		<?= htmlspecialchars($invoice['booking_no'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Order Date
+		Order Date
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= date("d M Y",strtotime($invoice['order_date'] ?? '')) ?>
+		<?= date("d M Y",strtotime($invoice['order_date'] ?? '')) ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Delivery
+		Delivery
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= date("d M Y",strtotime($invoice['delivery_date'] ?? '')) ?>
+		<?= date("d M Y",strtotime($invoice['delivery_date'] ?? '')) ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-</table>
+		</table>
 
-</div>
+		</div>
 
-</div>
+		</div>
 
-<hr>
+		<hr>
 
-<h5 class="fw-bold">
+		<h5 class="fw-bold">
 
-Customer Information
+		Customer Information
 
-</h5>
+		</h5>
 
-<div class="row">
+		<div class="row">
 
-<div class="col-md-6">
+		<div class="col-md-6">
 
-<table class="table table-bordered">
+		<table class="table table-bordered">
 
-<tr>
+		<tr>
 
-<th width="35%">
+		<th width="35%">
 
-Customer
+		Customer
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['full_name'] ?? '') ?>
+		<?= htmlspecialchars($invoice['full_name'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Father
+		Father
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['father_name'] ?? '') ?>
+		<?= htmlspecialchars($invoice['father_name'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Phone
+		Phone
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['phone'] ?? '') ?>
+		<?= htmlspecialchars($invoice['phone'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Village
+		Village
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['village'] ?? '') ?>
+		<?= htmlspecialchars($invoice['village'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Mohalla
+		Mohalla
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['mohalla'] ?? '') ?>
+		<?= htmlspecialchars($invoice['mohalla'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-</table>
+		</table>
 
-</div>
+		</div>
 
-<div class="col-md-6">
+		<div class="col-md-6">
 
-<table class="table table-bordered">
+		<table class="table table-bordered">
 
-<tr>
+		<tr>
 
-<th width="35%">
+		<th width="35%">
 
-Garment
+		Garment
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($invoice['garment_name'] ?? '') ?>
+		<?= htmlspecialchars($invoice['garment_name'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Status
+		Status
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?php
-$status = $invoice['status'] ?? '';
+		<?php
+		$status = $invoice['status'] ?? '';
 
-$badge = "secondary";
+		$badge = "secondary";
 
-if($status=="Pending"){
-	$badge="warning";
-}
-elseif($status=="Ready"){
-	$badge="primary";
-}
-elseif($status=="Delivered"){
-	$badge="success";
-}
-?>
+		if($status=="Pending"){
+			$badge="warning";
+		}
+		elseif($status=="Ready"){
+			$badge="primary";
+		}
+		elseif($status=="Delivered"){
+			$badge="success";
+		}
+		?>
 
-<span class="badge bg-<?= $badge ?>">
-	<?= $status ?>
-</span>
+		<span class="badge bg-<?= $badge ?>">
+			<?= $status ?>
+		</span>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
 
-</tr>
+		</tr>
 
-</table>
+		</table>
 
-</div>
+		</div>
 
-</div>
+		</div>
 
-<hr>
+		<hr>
 
-<h5 class="fw-bold">
+		<h5 class="fw-bold">
 
-Measurements
+		Measurements
 
-</h5>
+		</h5>
 
-<div class="table-responsive">
+		<div class="table-responsive">
 
-<table class="table table-bordered">
+		<table class="table table-bordered">
 
-<thead class="table-light">
+		<thead class="table-light">
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Measurement
+		Measurement
 
-</th>
+		</th>
 
-<th>
+		<th>
 
-Value
+		Value
 
-</th>
+		</th>
 
-</tr>
+		</tr>
 
-</thead>
+		</thead>
 
-<tbody>
+		<tbody>
 
-<?php foreach($measurements as $row): ?>
+		<?php foreach($measurements as $row): ?>
 
-<tr>
+		<tr>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($row['urdu_name'] ?: $row['option_name']) ?>
+		<?= htmlspecialchars($row['urdu_name'] ?: $row['option_name']) ?>
 
-</td>
+		</td>
 
-<td>
+		<td>
 
-<?= htmlspecialchars($row['measurement_value'] ?? '') ?>
+		<?= htmlspecialchars($row['measurement_value'] ?? '') ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<?php endforeach; ?>
+		<?php endforeach; ?>
 
-</tbody>
+		</tbody>
 
-</table>
+		</table>
 
-</div>
+		</div>
 
-<hr>
+		<hr>
 
-<h5 class="fw-bold">
+		<h5 class="fw-bold">
 
-Stitching Instructions
+		Stitching Instructions
 
-</h5>
+		</h5>
 
-<div class="row">
+		<div class="row">
 
-<?php foreach($options as $option): ?>
+		<?php foreach($options as $option): ?>
 
-<div class="col-md-2 mb-2 d-grid col-2">
+		<div class="col-md-2 mb-2 d-grid col-3 ">
 
-<span class="badge bg-info text-dark p-2">
+		<span class="badge bg-info text-dark p-2">
 
-<?= htmlspecialchars($option['urdu_name'] ?: $option['option_name']) ?>
+		<?= htmlspecialchars($option['urdu_name'] ?: $option['option_name']) ?>
 
-</span>
+		</span>
 
-</div>
+		</div>
 
-<?php endforeach; ?>
+		<?php endforeach; ?>
 
-</div>
+		</div>
 
-<hr>
+		<hr>
 
-<div class="row justify-content-center">
+		<div class="row justify-content-center">
 
-<div class="col-md-5">
+		<div class="col-md-5">
 
-<table class="table table-bordered">
+		<table class="table table-bordered">
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Total Amount
+		Total Amount
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= number_format($invoice['total_amount'] ?? '',2) ?>
+		<?= number_format($invoice['total_amount'] ?? '',2) ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Discount
+		Discount
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= number_format($invoice['discount']?? 0 ,2) ?>
+		<?= number_format($invoice['discount']?? 0 ,2) ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr>
+		<tr>
 
-<th>
+		<th>
 
-Advance
+		Advance
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<?= number_format($invoice['advance'] ?? 0,2) ?>
+		<?= number_format($invoice['advance'] ?? 0,2) ?>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-<tr class="table-warning">
+		<tr class="table-warning">
 
-<th>
+		<th>
 
-Balance
+		Balance
 
-</th>
+		</th>
 
-<td>
+		<td>
 
-<strong>
+		<strong>
 
-<?= number_format($invoice['balance']?? 0,2) ?>
+		<?= number_format($invoice['balance']?? 0,2) ?>
 
-</strong>
+		</strong>
 
-</td>
+		</td>
 
-</tr>
+		</tr>
 
-</table>
+		</table>
 
-</div>
+		</div>
 
-</div>
+		</div>
 
-<div class="row mt-5">
+		<div class="row mt-5">
 
-<div class="col-md-6 text-center">
+		<div class="col-md-6 text-center">
 
-_____________________
+		_____________________
 
-<br>
+		<br>
 
-Customer Signature
+		Customer Signature
 
-</div>
+		</div>
 
-<div class="col-md-6 text-center">
+		<div class="col-md-6 text-center">
 
-_____________________
+		_____________________
 
-<br>
+		<br>
 
-Authorized Signature
+		Authorized Signature
 
-</div>
+		</div>
+		<div class="text-success text-center py-4 fw-bold">
+    <?= htmlspecialchars($shop['invoice_footer'] ?? '') ?>
+		</div>
+		</div>
 
-</div>
+		</div>
 
-</div>
+		</div>
 
-</div>
-
-</div>
 
 <?php require dirname(__DIR__)."/layouts/footer.php"; ?>

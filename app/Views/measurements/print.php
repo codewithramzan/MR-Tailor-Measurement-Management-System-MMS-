@@ -58,8 +58,7 @@ HEADER
 <div class="header">
 
 <div class="logo">
-
-✂
+<img width="90" style="border-radius: inherit;" src="<?= BASE_URL ?>uploads/logo/<?= Config::get('logo') ?>">
 
 </div>
 
@@ -257,13 +256,13 @@ $rightSections = array_slice($sectionNames, $leftCount);
 
 <td class="label">
 
-<?= htmlspecialchars($item['label']) ?>
+<?= htmlspecialchars($item['label'] ?? '') ?>
 
 </td>
 
 <td class="value">
 
-<?= htmlspecialchars($item['value']) ?>
+<?= htmlspecialchars($item['value'] ?? '') ?>
 
 </td>
 
@@ -384,7 +383,7 @@ STITCHING + PAYMENT SUMMARY
             <tr>
                 <td>Total</td>
                 <td>
-                    <?= Config::get("currency") ?>
+                    <?= htmlspecialchars($shop['currency'] ?? '') ?>
                     <?= number_format($info['total_amount']) ?>
                 </td>
             </tr>
@@ -392,7 +391,7 @@ STITCHING + PAYMENT SUMMARY
             <tr>
                 <td>Advance</td>
                 <td>
-                    <?= Config::get("currency") ?>
+                    <?= htmlspecialchars($shop['currency'] ?? '')?>
                     <?= number_format($info['advance']) ?>
                 </td>
             </tr>
@@ -400,7 +399,7 @@ STITCHING + PAYMENT SUMMARY
             <tr>
                 <td>Discount</td>
                 <td>
-                    <?= Config::get("currency") ?>
+                    <?= htmlspecialchars($shop["currency"] ?? '')?>
                     <?= number_format($info['discount']) ?>
                 </td>
             </tr>
@@ -413,7 +412,7 @@ STITCHING + PAYMENT SUMMARY
 
                     <strong>
 
-                        <?= Config::get("currency") ?>
+                        <?= htmlspecialchars($shop['currency'] ?? '') ?>
 
                         <?= number_format($info['balance']) ?>
 
@@ -436,25 +435,25 @@ FOOTER
 
 <h3>
 
-<?= htmlspecialchars(Config::get("shop_name") ?? '') ?>
+<?= htmlspecialchars($shop["shop_name"] ?? '') ?>
 
 </h3>
 
 <div>
 
-<?= htmlspecialchars(Config::get("village") ?? '') ?>
+<?= htmlspecialchars($shop["village"] ?? '') ?>
 
 </div>
 
 <div>
 
-<?= htmlspecialchars(Config::get("phone") ?? '') ?>
+<?= htmlspecialchars($shop["phone"] ?? '') ?>
 
 </div>
 
 <div>
 
-Thank You For Visiting
+<?= htmlspecialchars($shop['invoice_footer'] ?? '') ?>
 
 </div>
 
