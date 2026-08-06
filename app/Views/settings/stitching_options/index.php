@@ -29,8 +29,42 @@
         </div>
 
         <div class="card-body">
+            <form method="GET" class="row g-2 mb-3">
+
+            <input type="hidden" name="page" value="stitching-options">
+
+            <div class="col-md-3">
+
+                <select
+                    name="garment_type_id"
+                    class="form-select"
+                    onchange="this.form.submit()">
+
+                    <option value="0">
+
+                        All Garments
+
+                    </option>
+
+                    <?php foreach($garments as $garment): ?>
+
+                        <option
+                            value="<?= $garment['id']?? '' ?>"
+                            <?= ($garmentTypeId == $garment['id']) ? 'selected' : '' ?>>
+
+                            <?= htmlspecialchars($garment['garment_name'] ?? '') ?>
+
+                        </option>
+
+                    <?php endforeach; ?>
+
+                </select>
+
+            </div>
+
+        </form>
           <div class="row mb-3 gy-3">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <select id="statusFilter" class="form-select">
 
                 <option value="">
@@ -54,7 +88,7 @@
             </select>
         </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
 
         <input
             type="text"
@@ -64,7 +98,7 @@
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
 
         <select
             id="categoryFilter"
@@ -78,11 +112,11 @@
 
             <?php foreach($categories as $category): ?>
 
-                <option value="<?= htmlspecialchars($category['category']) ?>">
+            <option value="<?= htmlspecialchars($category) ?>">
 
-                    <?= htmlspecialchars($category['category']) ?>
+                <?= htmlspecialchars($category) ?>
 
-                </option>
+            </option>
 
             <?php endforeach; ?>
 
@@ -100,6 +134,7 @@ id="optionTable">
         <tr>
 
         <th width="70">ID</th>
+        <th>Garment</th>
 
         <th>Option</th>
 
@@ -131,6 +166,11 @@ id="optionTable">
 
         </td>
 
+        <td>
+
+        <?= htmlspecialchars($row["garment_name"]) ?>
+
+        </td>
         <td>
 
         <?= htmlspecialchars($row["option_name"]) ?>
@@ -271,9 +311,9 @@ function filterOptions(){
 
         const text = row.innerText.toLowerCase();
 
-        const rowCategory = row.cells[3].innerText.toLowerCase().trim();
+        const rowCategory = row.cells[4].innerText.toLowerCase().trim();
 
-        const rowStatus = row.cells[6].innerText.toLowerCase().trim();
+        const rowStatus = row.cells[7].innerText.toLowerCase().trim();
 
         const searchMatch = text.includes(search);
 

@@ -651,39 +651,53 @@ if ($garmentTypeId <= 0) {
     | Stitching Options
     --------------------------------------------------*/
 
-    public function stitchingOptions()
+        public function stitchingOptions()
     {
-        $options = $this->settingModel->getStitchingOptions();
+        $garmentTypeId = isset($_GET['garment_type_id'])
+            ? (int)$_GET['garment_type_id']
+            : 0;
 
-        $categories = $this->settingModel->getStitchingCategories();
+        $options = $this->settingModel->getStitchingOptions($garmentTypeId);
+
+        $categories = $this->settingModel->getStitchingCategories($garmentTypeId);
+
+        $garments = $this->settingModel->getGarments();
 
         $this->view(
             "settings/stitching_options/index",
             [
 
-                "title"=>"Stitching Options",
+                "title" => "Stitching Options",
 
-                "options"=>$options,
+                "options" => $options,
 
-                "categories"=>$categories
+                "categories" => $categories,
+
+                "garments" => $garments,
+
+                "garmentTypeId" => $garmentTypeId
 
             ]
         );
     }
-
     /*--------------------------------------------------
     | Add Stitching Option Form
     --------------------------------------------------*/
 
     public function createStitchingOption()
     {
-        $categories = $this->settingModel->getStitchingCategories();
+           $garmentTypeId = isset($_GET['garment_type_id'])
+            ? (int)$_GET['garment_type_id']
+            : 0;
+        $categories = $this->settingModel->getStitchingCategories($garmentTypeId);
+        $garments = $this->settingModel->getGarments();
 
         $this->view(
             "settings/stitching_options/create",
             [
                 "title" => "Add Stitching Option",
-                "categories" => $categories
+                "categories" => $categories,
+                "garments"  => $garments
             ]
         );
     }
@@ -706,6 +720,8 @@ if ($garmentTypeId <= 0) {
         |--------------------------------------------------------------------------
         */
 
+
+
         if ($_POST["category_select"] === "new") {
 
             $category = trim($_POST["new_category"]);
@@ -720,9 +736,27 @@ if ($garmentTypeId <= 0) {
         | Validation
         |--------------------------------------------------------------------------
         */
-
+        $garmentTypeId = $_POST["garment_type_id"];
         $optionName = trim($_POST["option_name"]);
         $urduName   = trim($_POST["urdu_name"]);
+
+
+        if(empty($garmentTypeId) && $garmentTypeId <= 0) {
+
+            
+            $_SESSION["flash"] = [
+
+                "type" => "danger",
+
+                "message" => "Please select garment."
+
+            ];
+
+            header("Location:index.php?page=add-stitching-option");
+
+            exit;
+
+        }
 
         if (empty($category)) {
 
@@ -760,7 +794,7 @@ if ($garmentTypeId <= 0) {
         |--------------------------------------------------------------------------
         */
 
-        if ($this->settingModel->stitchingOptionExists($optionName,$category)) {
+        if ($this->settingModel->stitchingOptionExists($garmentTypeId,$optionName,$category)) {
 
             $_SESSION["flash"] = [
 
@@ -782,12 +816,11 @@ if ($garmentTypeId <= 0) {
         */
 
         $data = [
-
+            "garment_type_id" => (int)$_POST['garment_type_id'],
+            "category" => $category,
             "option_name"     => $optionName,
 
             "urdu_name"       => $urduName,
-
-            "category"        => $category,
 
             "print_order"     => (int)($_POST["print_order"] ?? 1),
 
@@ -828,6 +861,9 @@ if ($garmentTypeId <= 0) {
 
     public function editStitchingOption()
     {
+           $garmentTypeId = isset($_GET['garment_type_id'])
+            ? (int)$_GET['garment_type_id']
+            : 0;
         if (!isset($_GET["id"])) {
 
             $_SESSION["flash"] = [
@@ -862,7 +898,7 @@ if ($garmentTypeId <= 0) {
             exit;
         }
 
-        $categories = $this->settingModel->getStitchingCategories();
+        $categories = $this->settingModel->getStitchingCategories($garmentTypeId);
 
         $this->view(
 
@@ -1007,4 +1043,19 @@ if ($garmentTypeId <= 0) {
 
         exit;
     }
+           public function getStitchingCategoriesAjax()
+        {
+            $garmentTypeId = isset($_GET['garment_type_id'])
+                ? (int)$_GET['garment_type_id']
+                : 0;
+
+            $categories = $this->settingModel
+                ->getStitchingCategories($garmentTypeId);
+
+            header('Content-Type: application/json');
+
+            echo json_encode($categories);
+
+            exit;
+        }
 }

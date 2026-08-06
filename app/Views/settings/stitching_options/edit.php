@@ -27,7 +27,43 @@
       value="<?= $option['id'] ?? '' ?>">
 
   <div class="row">
-      <div class="col-md-6 mb-3">
+
+    <div class="col-md-6 mb-3">
+
+    <label class="form-label">
+
+    Garment Type
+
+    <span class="text-danger">*</span>
+
+    </label>
+
+    <select
+        name="garment_type_id"
+        class="form-select"
+        required>
+
+    <option value="">
+
+    Select Garment
+
+    </option>
+
+    <?php foreach($garments as $garment): ?>
+
+    <option
+    value="<?= $garment['id'] ?>">
+
+    <?= htmlspecialchars($garment['name']) ?>
+
+    </option>
+
+    <?php endforeach; ?>
+
+    </select>
+
+    </div>
+  <div class="col-md-6 mb-3">
 
   <label class="form-label">
 

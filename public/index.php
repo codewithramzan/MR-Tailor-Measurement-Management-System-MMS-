@@ -351,6 +351,12 @@ switch($page){
         (new SettingController())->toggleStitchingOptionStatus();
         break;
 
+    case 'get-stitching-categories':
+
+        (new SettingController())->getStitchingCategoriesAjax();
+
+        break;
+
     default:
 
         $controller = new AuthController();

@@ -359,40 +359,84 @@ class Setting extends Model
             /*--------------------------------------------------
         | Get All Stitching Options
         --------------------------------------------------*/
-
-        public function getStitchingOptions()
+        public function getStitchingOptions($garmentTypeId = 0)
         {
-            $stmt = $this->conn->prepare("
-                SELECT *
-                FROM stitching_options
-                ORDER BY
-                    category,
-                    print_order,
-                    option_name
-            ");
+            $sql = "
 
-            $stmt->execute();
+                SELECT
+
+                    s.*,
+
+                    g.name AS garment_name,
+                    g.urdu_name AS garment_urdu_name
+
+                FROM stitching_options s
+
+                INNER JOIN garment_types g
+                    ON g.id = s.garment_type_id
+
+            ";
+
+            $params = [];
+
+            if ($garmentTypeId > 0) {
+
+                $sql .= " WHERE s.garment_type_id = ? ";
+
+                $params[] = $garmentTypeId;
+            }
+
+            $sql .= "
+
+                ORDER BY
+
+                    g.print_order,
+                    s.category,
+                    s.print_order,
+                    s.id
+
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute($params);
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+    
 
-        //1	French Collar	فرنچ کالر	Collar	Radio*--------------------------------------------------
+        	/*--------------------------------------------------
          //Get Categories
         /*--------------------------------------------------*/
-
-        public function getStitchingCategories()
+        public function getStitchingCategories($garmentTypeId = 0)
         {
-            $stmt = $this->conn->prepare("
+            $sql = "
+
                 SELECT DISTINCT category
+
                 FROM stitching_options
-                ORDER BY category
-            ");
 
-            $stmt->execute();
+            ";
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $params = [];
+
+            if ($garmentTypeId > 0) {
+
+                $sql .= " WHERE garment_type_id = ? ";
+
+                $params[] = $garmentTypeId;
+            }
+
+            $sql .= " ORDER BY category ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute($params);
+
+            return $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
 
+ 
         /*--------------------------------------------------
         | Find Stitching Option
         --------------------------------------------------*/
@@ -414,17 +458,20 @@ class Setting extends Model
         | Duplicate Check
         --------------------------------------------------*/
 
-       public function stitchingOptionExists($option,$category)
+       public function stitchingOptionExists($garmentTypeId,$option,$category)
         {
             $stmt = $this->conn->prepare("
                 SELECT id
                 FROM stitching_options
-                WHERE LOWER(option_name)=LOWER(?)
+                WHERE 
+                  garment_type_id = ? AND
+                 LOWER(option_name)=LOWER(?)
                 AND LOWER(category)=LOWER(?)
                 LIMIT 1
             ");
 
             $stmt->execute([
+                $garmentTypeId,
                 trim($option),
                 trim($category)
             ]);
@@ -440,7 +487,8 @@ class Setting extends Model
         {
             $stmt = $this->conn->prepare("
                 INSERT INTO stitching_options
-                (
+                ( 
+                    garment_type_id,
                     option_name,
                     urdu_name,
                     category,
@@ -450,11 +498,13 @@ class Setting extends Model
                 )
                 VALUES
                 (
-                    ?,?,?,?,?,?
+                    ?,?,?,?,?,?,?
                 )
             ");
 
             return $stmt->execute([
+
+                $data['garment_type_id'],
 
                 $data["option_name"],
 
@@ -479,7 +529,7 @@ class Setting extends Model
             $stmt = $this->conn->prepare("
                 UPDATE stitching_options
                 SET
-
+                    garment_type_id=?,
                     option_name=?,
 
                     urdu_name=?,
@@ -495,6 +545,7 @@ class Setting extends Model
             ");
 
             return $stmt->execute([
+                $data['garment_type_id'],
 
                 $data["option_name"],
 

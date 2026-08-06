@@ -23,6 +23,42 @@
   <form action="index.php?page=save-stitching-option" method="POST">
 
   <div class="row">
+    <div class="col-md-6 mb-3">
+
+    <label class="form-label">
+
+    Garment Type
+
+    <span class="text-danger">*</span>
+
+    </label>
+
+    <select
+        id="garmentSelect"
+        name="garment_type_id"
+        class="form-select"
+        required>
+
+    <option value="">
+
+    Select Garment
+
+    </option>
+
+    <?php foreach($garments as $garment): ?>
+
+    <option
+    value="<?= $garment['id'] ?>">
+
+    <?= htmlspecialchars($garment['garment_name']) ?>
+
+    </option>
+
+    <?php endforeach; ?>
+
+    </select>
+
+    </div>
       <div class="col-md-6 mb-3">
 
   <label class="form-label">
@@ -31,145 +67,130 @@
 
   </label>
 
-  <select
+ <select
+    id="categorySelect"
+    name="category_select"
+    class="form-select">
 
-  class="form-select"
+    <option value="">
 
-  name="category_select"
+        Select Category
 
-  id="categorySelect">
+    </option>
 
-  <option value="">
+    <option value="new">
 
-  Select Category
+        + Add New Category
 
-  </option>
+    </option>
 
-  <?php foreach($categories as $category): ?>
+</select>
 
-  <option
+    </div>
+    <div
 
-  value="<?= htmlspecialchars($category['category']) ?>">
+    class="col-md-6 mb-3"
 
-  <?= htmlspecialchars($category['category']) ?>
+    id="newCategoryBox"
 
-  </option>
+    style="display:none;">
 
-  <?php endforeach; ?>
+    <label>
 
-  <option value="new">
+    New Category
 
-  + Add New Category
+    </label>
 
-  </option>
+    <input
 
-  </select>
+    type="text"
 
-  </div>
-  <div
+    class="form-control"
 
-class="col-md-6 mb-3"
+    name="new_category"
 
-id="newCategoryBox"
+    placeholder="Example: Collar">
 
-style="display:none;">
+    </div>
+    <div class="col-md-6 mb-3">
 
-<label>
+    <label>
 
-New Category
+    Option Name
 
-</label>
+    </label>
 
-<input
+    <input
 
-type="text"
+    type="text"
 
-class="form-control"
+    class="form-control"
 
-name="new_category"
+    name="option_name"
 
-placeholder="Example: Collar">
+    required>
 
-</div>
-<div class="col-md-6 mb-3">
+    </div>
+    <div class="col-md-6 mb-3">
 
-<label>
+    <label>
 
-Option Name
+    Urdu Name
 
-</label>
+    </label>
 
-<input
+    <input
 
-type="text"
+    type="text"
 
-class="form-control"
+    class="form-control"
 
-name="option_name"
+    name="urdu_name">
 
-required>
+    </div>
 
-</div>
-<div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3">
 
-<label>
+    <label>
 
-Urdu Name
+    Selection Type
 
-</label>
+    </label>
 
-<input
+    <select
 
-type="text"
+    class="form-select"
 
-class="form-control"
+    name="selection_type">
 
-name="urdu_name">
+    <option value="radio">
 
-</div>
+    Radio Button
 
-<div class="col-md-6 mb-3">
+    </option>
 
-<label>
+    <option value="checkbox">
 
-Selection Type
+    Checkbox
 
-</label>
+    </option>
 
-<select
+    <option value="dropdown">
 
-class="form-select"
-
-name="selection_type">
-
-<option value="radio">
-
-Radio Button
-
-</option>
-
-<option value="checkbox">
-
-Checkbox
-
-</option>
-
-<option value="dropdown">
-
-Dropdown
+    Dropdown
 
 </option>
 
 </select>
 
-</div>
-<div class="col-md-6 mb-3">
+    </div>
+    <div class="col-md-6 mb-3">
 
-    <label class="form-label">
+        <label class="form-label">
 
-        Status
+            Status
 
-    </label>
+        </label>
 
     <select
         class="form-select"
@@ -246,26 +267,59 @@ Cancel
 </div>
 <script>
 
-const categorySelect =
-document.getElementById("categorySelect");
+        const garmentSelect = document.getElementById("garmentSelect");
+        const categorySelect = document.getElementById("categorySelect");
+        const newCategoryBox = document.getElementById("newCategoryBox");
 
-const newCategoryBox =
-document.getElementById("newCategoryBox");
+        garmentSelect.addEventListener("change", function () {
 
-categorySelect.addEventListener("change",function(){
+            const garmentId = this.value;
 
-    if(this.value==="new"){
+            categorySelect.innerHTML =
+                '<option value="">Loading...</option>';
 
-        newCategoryBox.style.display="block";
+            fetch(
+                "index.php?page=get-stitching-categories&garment_type_id=" + garmentId
+            )
+            .then(response => response.json())
+            .then(categories => {
 
-    }else{
+                categorySelect.innerHTML =
+                    '<option value="">Select Category</option>';
 
-        newCategoryBox.style.display="none";
+                categories.forEach(function(category){
 
-    }
+                    categorySelect.innerHTML +=
 
-});
+                    `<option value="${category}">
+                        ${category}
+                    </option>`;
 
+                });
+
+                categorySelect.innerHTML +=
+
+                `<option value="new">
+                    + Add New Category
+                </option>`;
+
+            });
+
+        });
+
+        categorySelect.addEventListener("change", function(){
+
+            if(this.value==="new"){
+
+                newCategoryBox.style.display="block";
+
+            }else{
+
+                newCategoryBox.style.display="none";
+
+            }
+
+        });
 </script>
 
 <?php require_once "../app/Views/layouts/footer.php"; ?>
