@@ -50,7 +50,7 @@
 
         <img src="<?= BASE_URL ?>uploads/logo/<?= htmlspecialchars($shop["logo"] ?? '') ?>">
 
-            <span>Admin</span>
+            <span><?= htmlspecialchars($shop['owner_name'] ?? '') ?></span>
 
         </div>
 

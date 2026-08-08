@@ -6,10 +6,28 @@ class Config
 
     public static function get($key)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Load Configuration Once
+        |--------------------------------------------------------------------------
+        */
+
         if (self::$config === null) {
 
-            // Load default configuration
-            self::$config = require dirname(__DIR__, 2) . "/config/app.php";
+            /*
+            |--------------------------------------------------------------------------
+            | Load Default Configuration
+            |--------------------------------------------------------------------------
+            */
+
+            self::$config = require dirname(__DIR__, 2)
+                . "/config/app.php";
+
+            /*
+            |--------------------------------------------------------------------------
+            | Load Database Settings
+            |--------------------------------------------------------------------------
+            */
 
             try {
 
@@ -32,6 +50,7 @@ class Config
                         if ($value !== null && $value !== '') {
 
                             self::$config[$settingKey] = $value;
+
                         }
 
                     }
@@ -40,12 +59,17 @@ class Config
 
             } catch (Exception $e) {
 
-                // Ignore database errors and continue using app.php defaults
+                /*
+                |--------------------------------------------------------------------------
+                | Database unavailable
+                |--------------------------------------------------------------------------
+                | Keep default app.php values.
+                |--------------------------------------------------------------------------
+                */
 
             }
-
         }
 
         return self::$config[$key] ?? null;
     }
-}  
+}

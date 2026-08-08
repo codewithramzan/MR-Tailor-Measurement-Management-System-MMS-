@@ -190,7 +190,10 @@ class Report extends Model
 
                 o.*,
 
-                c.full_name
+                c.full_name,
+
+                c.phone,
+
                 gt.name AS garment_name
 
             FROM orders o

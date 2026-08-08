@@ -22,17 +22,35 @@ return [
 
     'phone' => '0319-9516475',
 
-    'email' => 'codewithramzan@gamil.com',
+    'email' => 'codewithramzan@gmail.com',
 
     'website' => '',
 
-    'address' => 'Village Hisartang , Jehangira, Nowshera, kpk , pakistan',
+    'address' => 'Village Hisartang, Jehangira, Nowshera, KPK, Pakistan',
 
     'currency' => 'Rs.',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Default Timezone
+    |--------------------------------------------------------------------------
+    */
+
     'timezone' => 'Asia/Karachi',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Invoice
+    |--------------------------------------------------------------------------
+    */
+
     'invoice_footer' => 'Thank you for visiting.',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logo
+    |--------------------------------------------------------------------------
+    */
 
     'logo' => 'default.png',
 
