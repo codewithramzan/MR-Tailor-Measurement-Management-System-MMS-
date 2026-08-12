@@ -161,11 +161,15 @@ class Measurement extends Model
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getSlip($orderId)
-    {
-        $sql = "
+ public function getSlip($orderId)
+{
+    $sql = "
 
         SELECT
+
+            /* ==========================
+               ORDER
+            ========================== */
 
             o.id,
             o.booking_no,
@@ -178,15 +182,27 @@ class Measurement extends Model
             o.discount,
             o.balance,
 
+            /* ==========================
+               CUSTOMER
+            ========================== */
+
             c.full_name,
             c.father_name,
             c.phone,
             c.village,
             c.mohalla,
 
-            gt.id   AS garment_type_id,
+            /* ==========================
+               GARMENT
+            ========================== */
+
+            gt.id AS garment_type_id,
             gt.name AS garment_name,
             gt.urdu_name AS garment_urdu_name,
+
+            /* ==========================
+               MEASUREMENT TYPE
+            ========================== */
 
             mt.id AS measurement_type_id,
             mt.option_name,
@@ -194,6 +210,10 @@ class Measurement extends Model
             mt.section,
             mt.section_urdu,
             mt.print_order,
+
+            /* ==========================
+               SAVED MEASUREMENT
+            ========================== */
 
             m.measurement_value
 
@@ -205,15 +225,19 @@ class Measurement extends Model
         INNER JOIN garment_types gt
             ON gt.id = o.garment_type_id
 
-        INNER JOIN measurement_types mt
-            ON mt.garment_type_id = gt.id
+        /*
+        IMPORTANT:
+        Only measurement records actually
+        saved for this order are returned.
+        */
 
-        LEFT JOIN measurements m
-            ON m.measurement_type_id = mt.id
-            AND m.order_id = o.id
+        INNER JOIN measurements m
+            ON m.order_id = o.id
+
+        INNER JOIN measurement_types mt
+            ON mt.id = m.measurement_type_id
 
         WHERE o.id = ?
-        AND mt.garment_type_id = o.garment_type_id
 
         ORDER BY
 
@@ -221,60 +245,12 @@ class Measurement extends Model
             mt.print_order ASC,
             mt.id ASC
 
-        ";
+    ";
 
-        $stmt = $this->conn->prepare($sql);
+    $stmt = $this->conn->prepare($sql);
 
-        $stmt->execute([$orderId]);
+    $stmt->execute([$orderId]);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function saveOptions($orderId,$options)
-    {
-        $delete=$this->conn->prepare(
-
-            "DELETE FROM order_stitching_options
-            WHERE order_id=?"
-
-        );
-
-        $delete->execute([$orderId]);
-
-        if(empty($options))
-        {
-            return;
-        }
-
-        $insert=$this->conn->prepare(
-
-            "INSERT INTO order_stitching_options
-            (order_id,option_id)
-
-            VALUES(?,?)"
-
-        );
-
-        foreach($options as $id)
-        {
-            $insert->execute([
-
-                $orderId,
-
-                $id
-
-            ]);
-        }
-    }
-    public function getSelectedOptionIds($orderId)
-    {
-        $stmt = $this->conn->prepare("
-            SELECT option_id
-            FROM order_stitching_options
-            WHERE order_id = ?
-        ");
-
-        $stmt->execute([$orderId]);
-
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

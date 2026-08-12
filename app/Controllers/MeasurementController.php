@@ -346,24 +346,30 @@ class MeasurementController extends Controller
     }
     }
 
-   public function printSlip()
-    {
-        $measurement = new Measurement();
+ public function printSlip()
+{
+    $orderId = (int)($_GET['id'] ?? 0);
 
-        $rows = $measurement->getSlip($_GET['id']);
-
-        if (empty($rows)) {
-            die("No data found.");
-        }
-
-        $options = $measurement->getOptions($_GET['id']);
-
-        $this->view(
-            'measurements/print',
-            compact(
-                'rows',
-                'options'
-            )
-        );
+    if ($orderId <= 0) {
+        die("Invalid order ID.");
     }
+
+    $measurement = new Measurement();
+
+    $rows = $measurement->getSlip($orderId);
+
+    if (empty($rows)) {
+        die("No measurement data found for this order.");
+    }
+
+    $options = $measurement->getOptions($orderId);
+
+    $this->view(
+        "measurements/print",
+        [
+            "rows" => $rows,
+            "options" => $options
+        ]
+    );
+}
 }
