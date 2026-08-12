@@ -35,7 +35,7 @@ class Setting extends Model
             $data['shop_name'],
             $data['owner_name'],
             $data['phone'],
-            $data['email'],
+            $data['email'], 
             $data['website'],
             $data['address'],
             $data['currency'],

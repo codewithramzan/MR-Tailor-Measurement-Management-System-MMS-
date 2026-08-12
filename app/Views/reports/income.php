@@ -335,7 +335,7 @@ foreach($reports as $row){
 
 														<td><?= htmlspecialchars($row['full_name']) ?></td>
 
-														<td><?= htmlspecialchars($row['garment_type']) ?></td>
+														<td><?= htmlspecialchars($row['garment_name']) ?></td>
 
 														<td>
                              <?php  $badge = $this->getStatusColor($row['status'])  ?>

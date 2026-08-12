@@ -247,7 +247,7 @@ foreach($reports as $row){
 
                             <td><?= htmlspecialchars($row['phone']) ?></td>
 
-                            <td><?= htmlspecialchars($row['garment_type']) ?></td>
+                            <td><?= htmlspecialchars($row['garment_name']) ?></td>
 
                             <td><?= date("d M Y", strtotime($row['order_date'])) ?></td>
 

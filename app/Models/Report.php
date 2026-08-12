@@ -112,7 +112,7 @@ class Report extends Model
 
                 c.full_name,
 
-                c.phone
+                c.phone,
                 gt.name AS garment_name
 
             FROM orders o
@@ -292,12 +292,15 @@ class Report extends Model
 
                 c.full_name,
 
-                c.phone
+                c.phone,
+                gt.name AS garment_name
 
             FROM orders o
 
             INNER JOIN customers c
                     ON c.id=o.customer_id
+            INNER JOIN garment_types gt
+                   ON gt.id = o.garment_type_id
 
             WHERE o.status=?
 
