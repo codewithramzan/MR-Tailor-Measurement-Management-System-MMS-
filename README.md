@@ -1,209 +1,97 @@
-# MR Tailor - Tailoring Management System
+# 🧵 MR Tailor — Tailor Management System
 
-> A professional PHP & MySQL-based Tailoring Management System for managing customers, orders, measurements, stitching options, payments, reports, and printable measurement slips.
+> A full-stack web-based management system designed to digitize and simplify the daily operations of a tailoring business.
 
-MR Tailor is a web-based **Tailor Shop Management System** designed to simplify daily tailoring operations. It provides a structured dashboard for managing customers, orders, garment types, dynamic measurement fields, stitching options, payments, reports, and printable customer measurement slips.
+## 📌 Overview
 
-The system follows a clean **MVC (Model-View-Controller) architecture** and uses a MySQL database for persistent data management.
+MR Tailor is a tailor management system developed to manage customers, bookings, measurements, garments, stitching options, and orders from a centralized platform.
 
----
+The project was designed around a real-world tailoring workflow rather than a simple demonstration CRUD application.
 
-## Features
+## ✨ Features
 
-### Dashboard
-
-- Total Customers
-- Total Orders
-- Pending Orders
-- Ready Orders
-- Delivered Orders
-- Today's Income
-- Monthly Income
-- Outstanding Balance
-- Quick access to major modules
-
----
-
-### Customer Management
-
-Manage complete customer information from a centralized interface.
-
+### 👤 Customer Management
 - Add customers
-- Edit customers
-- Delete/manage customers
-- Customer search
-- Customer phone number
-- Father name
-- Village
-- Mohalla
-- Booking number
-- Customer order history
+- Update customer information
+- Search customers
+- Manage customer details
 
----
+### 📋 Booking & Order Management
+- Create bookings
+- Track order status
+- Manage pending, ready, and delivered orders
+- View customer order history
 
-### Order Management
+### 📏 Measurement Management
+- Store customer measurements
+- Support different garment types
+- Manage measurement types dynamically
+- Organize measurements for individual orders
 
-Create and manage tailoring orders efficiently.
+### 👕 Garment Type Management
+- Store garment types in the database
+- Support English and Urdu garment names
+- Activate/deactivate garment types
 
-- Create new orders
-- Assign customer to order
-- Select garment type
-- Order date
-- Delivery date
-- Order status
-- Total amount
-- Advance payment
-- Discount
-- Remaining balance
+### 🧵 Stitching Options
+- Manage stitching options
+- Categorize stitching options
+- Store printable ordering information
+
+### 📊 Dashboard
+- Total customers
+- Total bookings
 - Pending orders
 - Ready orders
 - Delivered orders
+- Income overview
 
-### Order Status
-
-- Pending
-- Ready
-- Delivered
-
----
-
-## Dynamic Measurement Management
-
-One of the main features of MR Tailor is its **database-driven measurement system**.
-
-Measurement fields are not hard-coded into the customer measurement page.
-
-Administrators can manage measurement types dynamically.
-
-### Measurement Type Management
-
-- Add measurement type
-- Edit measurement type
-- Activate/deactivate measurement type
-- Delete/soft-delete functionality
-- Garment-specific measurements
-- English measurement name
-- Urdu measurement name
-- Measurement section
-- Urdu section name
-- Placeholder
-- Print order
-- Measurement status
-
-For example:
-
-- Chest
-- Length
-- Shoulder
-- Sleeve
-- Waist
-- Collar
-- Cuff
-- Shalwar
-- Trouser
-- etc.
-
-Only **active measurement types assigned to the selected garment** are displayed in the measurement interface and printed measurement slip.
+### 🧾 Measurement Receipt
+- Search customer/order
+- Display measurement information
+- Generate a printable measurement receipt
 
 ---
 
-## Dynamic Stitching Options
+## 🛠️ Technologies
 
-Stitching options are also database-driven.
-
-Administrators can create and manage stitching options for different garments.
-
-### Stitching Option Features
-
-- Add stitching option
-- Edit stitching option
-- Activate/deactivate option
-- Garment-specific options
-- English name
-- Urdu name
-- Category
-- Print order
-- Selection type
-- Duplicate validation
-
-Examples:
-
-- Simple stitching
-- Double stitching
-- Pocket styles
-- Collar styles
-- Cuff styles
-- Button styles
-- Special stitching instructions
-
-Only the **selected stitching options saved for the customer's order** are displayed on the measurement slip.
+| Technology | Purpose |
+|---|---|
+| PHP | Backend development |
+| MySQL | Database |
+| JavaScript | Client-side functionality |
+| HTML5 | Structure |
+| CSS3 | Styling |
+| Bootstrap | Responsive UI |
+| MVC Architecture | Application architecture |
+| Git & GitHub | Version control |
 
 ---
 
-# Measurement Slip
+## 🏗️ Architecture
 
-MR Tailor includes a compact, print-friendly customer measurement slip.
+The application follows the **MVC (Model-View-Controller)** architecture.
 
-The measurement slip is designed for **single-page printing** and contains:
-
-### Customer & Order Information
-
-Displayed in a two-column layout:
-
-- Customer name
-- Phone
-- Village
-- Garment
-- Booking number
-- Order date
-- Delivery date
-- Order status
-
-### Measurements
-
-The measurement section uses a compact two-column layout.
-
-Only measurements actually saved for the order are displayed.
-
-### Stitching Options
-
-Only stitching options selected for the specific order are displayed.
-
-### Payment Summary
-
-Payment information is displayed horizontally:
-
-- Total
-- Advance
-- Discount
-- Balance
-
-The print layout is optimized to minimize unnecessary whitespace and keep the measurement slip on a single page.
-
----
-
-# Shop Settings
-
-The system provides a dynamic shop settings module.
-
-Administrators can update shop information from the UI without changing source code.
-
-### Configurable Settings
-
-- Shop name
-- Owner name
-- Phone number
-- Email
-- Website
-- Address
-- Currency
-- Timezone
-- Invoice footer
-- Shop logo
-
-Settings are stored in the database and dynamically used throughout the application.
-
-For example:
-
-```php
-Config::get("shop_name")
+```text
+MR Tailor
+│
+├── Models
+│   └── Database & Business Logic
+│
+├── Views
+│   └── User Interface
+│
+├── Controllers
+│   └── Request & Application Flow
+│
+├── Public
+│   ├── CSS
+│   ├── JavaScript
+│   └── Assets
+│
+└── Database
+    ├── Customers
+    ├── Orders
+    ├── Measurements
+    ├── Garment Types
+    └── Stitching Options
