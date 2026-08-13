@@ -95,3 +95,167 @@ MR Tailor
     ├── Measurements
     ├── Garment Types
     └── Stitching Options
+
+
+                    MR TAILOR
+                       │
+          ┌────────────┼────────────┐
+          │            │            │
+       Model       Controller      View
+          │            │            │
+          └────────────┼────────────┘
+                       │
+                    MySQL
+```
+---
+Customer Management
+        ↓
+Booking / Order
+        ↓
+Garment Type
+        ↓
+Measurement Types
+        ↓
+Measurements
+        ↓
+Stitching Options
+        ↓
+Order Tracking
+        ↓
+Printable Receipt
+---
+## 💡 Why I Built This Project
+
+Traditional tailoring businesses often rely on handwritten records for customer
+information, measurements, bookings, and order tracking.
+
+I built MR Tailor to convert this manual workflow into a centralized digital
+management system that makes customer information, measurements, garment types,
+stitching options, and orders easier to manage and retrieve.
+---
+
+
+---
+
+# 7. Database
+
+Since you've spent significant effort designing the database, **show it**.
+
+```markdown
+## 🗄️ Database
+
+The system uses MySQL as the primary database.
+
+Major database components include:
+
+- Customers
+- Orders
+- Measurements
+- Measurement Types
+- Garment Types
+- Stitching Options
+
+The database-driven design allows garment types, measurement types,
+and stitching options to be managed dynamically instead of being hardcoded.
+```
+### Entity Relationship Diagram
+
+![MR Tailor ER Diagram](docs/images/er-diagram.png)
+
+---## 📸 Screenshots
+
+### Dashboard
+![Dashboard](docs/images/dashboard.png)
+
+### Customer Management
+![Customers](docs/images/customers.png)
+
+### Measurement Management
+![Measurements](docs/images/measurements.png)
+
+### Garment Type Management
+![Garment Types](docs/images/garment-types.png)
+
+### Order Management
+![Orders](docs/images/orders.png)
+
+### Measurement Receipt
+![Receipt](docs/images/measurement-receipt.png)
+---
+
+## 🚀 Installation
+
+### Requirements
+
+- PHP 8+
+- MySQL
+- Apache
+- Git
+- XAMPP or Laragon
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/codewithramzan/mr-tailor-management-system.git
+2. Move into your web server directory
+
+For Laragon:
+
+C:/laragon/www/
+
+For XAMPP:
+
+C:/xampp/htdocs/
+3. Create the database
+
+Create a MySQL database:
+
+tailor_management
+4. Import the database
+
+Import the project's SQL file into the database.
+
+5. Configure the database connection
+
+Update the database configuration according to your local environment.
+
+6. Run the application
+
+Start Apache and MySQL, then open the project through your local server.
+
+# 10. Project Goals
+
+Keep this short:
+
+```markdown
+## 🎯 Project Goals
+
+- Digitize traditional tailoring workflows
+- Reduce manual record keeping
+- Organize customer measurements
+- Improve order tracking
+- Make customer information easier to retrieve
+- Provide a scalable foundation for future features
+
+## 🔮 Future Improvements
+
+- Role-based authentication
+- Advanced sales and expense reporting
+- SMS/WhatsApp order notifications
+- Online customer booking
+- REST API
+- Cloud deployment
+- Mobile application
+- Automated backup system
+```
+## 👨‍💻 Developer
+
+### Ramzan Khan
+
+Full-Stack Developer | Computer Science Student | Future AI Engineer
+
+GitHub: [@codewithramzan](https://github.com/codewithramzan)
+
+---
+
+⭐ If you find this project useful, consider giving the repository a star.
