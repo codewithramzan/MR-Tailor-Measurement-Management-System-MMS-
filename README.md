@@ -158,9 +158,6 @@ Major database components include:
 The database-driven design allows garment types, measurement types,
 and stitching options to be managed dynamically instead of being hardcoded.
 ```
-### Entity Relationship Diagram
-
-![MR Tailor ER Diagram](docs/images/er-diagram.png)
 
 ---## 📸 Screenshots
 
@@ -168,19 +165,19 @@ and stitching options to be managed dynamically instead of being hardcoded.
 ![Dashboard](docs/images/dashboard.png)
 
 ### Customer Management
-![Customers](docs/images/customers.png)
+![Customers](docs/images/add%20customer.png)
 
 ### Measurement Management
-![Measurements](docs/images/measurements.png)
+![Measurements](docs/images/measurement.png)
 
 ### Garment Type Management
-![Garment Types](docs/images/garment-types.png)
+![Garment Types](docs/images/garment_type)
 
 ### Order Management
-![Orders](docs/images/orders.png)
+![Orders](docs/images/placed%20order.png)
 
 ### Measurement Receipt
-![Receipt](docs/images/measurement-receipt.png)
+![Receipt](docs/images/measurement-slip.png)
 ---
 
 ## 🚀 Installation
