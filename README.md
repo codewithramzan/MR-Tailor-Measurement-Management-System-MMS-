@@ -165,16 +165,16 @@ and stitching options to be managed dynamically instead of being hardcoded.
 ![Dashboard](docs/images/dashboard.png)
 
 ### Customer Management
-![Customers](docs/images/customers.png)
+![Customers](docs/images/customer.png)
 
 ### Measurement Management
-![Measurements](docs/images/measurements.png)
+![Measurements](docs/images/measurement.png)
 
 ### Garment Type Management
-![Garment Types](docs/images/garment-types.png)
+![Garment Types](docs/images/garment-type.png)
 
 ### Order Management
-![Orders](docs/images/orders.png)
+![Orders](docs/images/order.png)
 
 ### Measurement Slip
 
