@@ -165,19 +165,22 @@ and stitching options to be managed dynamically instead of being hardcoded.
 ![Dashboard](docs/images/dashboard.png)
 
 ### Customer Management
-![Customers](docs/images/add%20customer.png)
+![Customer](docs/images/add%20customer.png)
 
 ### Measurement Management
-![Measurements](docs/images/measurement.png)
+![Measurement](docs/images/measurement.png)
 
 ### Garment Type Management
-![Garment Types](docs/images/garment_type)
+![Garment Type](docs/images/garment_type)
 
 ### Order Management
-![Orders](docs/images/placed%20order.png)
+![Order](docs/images/placed%20order.png)
 
 ### Measurement Receipt
-![Receipt](docs/images/measurement-slip.png)
+![Measurement Slip](docs/images/measurement-slip.png)
+### Reports & Analytics
+
+![Reports Dashboard](docs/images/dashboard-report.png)
 ---
 
 ## 🚀 Installation
