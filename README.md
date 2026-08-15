@@ -171,7 +171,7 @@ and stitching options to be managed dynamically instead of being hardcoded.
 ![Measurement](docs/images/measurement.png)
 
 ### Garment Type Management
-![Garment Type](docs/images/garment_type)
+![Garment Type](docs/images/garment_type.png)
 
 ### Order Management
 ![Order](docs/images/placed%20order.png)
