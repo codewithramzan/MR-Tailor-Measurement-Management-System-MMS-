@@ -253,4 +253,51 @@ class Measurement extends Model
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+public function saveOptions($orderId, $options)
+{
+    $delete = $this->conn->prepare("
+        DELETE FROM order_stitching_options
+        WHERE order_id = ?
+    ");
+
+    $delete->execute([$orderId]);
+
+    if (empty($options)) {
+        return true;
+    }
+
+    $insert = $this->conn->prepare("
+        INSERT INTO order_stitching_options
+        (
+            order_id,
+            option_id
+        )
+        VALUES (?, ?)
+    ");
+
+    foreach ($options as $id) {
+
+        $insert->execute([
+            $orderId,
+            $id
+        ]);
+    }
+
+    return true;
+}
+
+
+public function getSelectedOptionIds($orderId)
+{
+    $stmt = $this->conn->prepare("
+        SELECT option_id
+        FROM order_stitching_options
+        WHERE order_id = ?
+    ");
+
+    $stmt->execute([$orderId]);
+
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
+
 }
